@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d22wwfkhauryu"]
+[gd_scene load_steps=6 format=3 uid="uid://d22wwfkhauryu"]
 
+[ext_resource type="Texture2D" uid="uid://cpbgl2l51rc1s" path="res://Resource/Texture/Interface/Empty.png" id="2_vlpyb"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="4_5lv4r"]
 
 [sub_resource type="GDScript" id="GDScript_7prhb"]
@@ -19,14 +20,14 @@ func _ready() -> void:
 	if (_option._Update_On_Release): $\"HBox/Margin2/Decoration/Margin/Slider\".value_changed.connect(Change_Deferred)
 	else: $\"HBox/Margin2/Decoration/Margin/Slider\".value_changed.connect(Change)
 	$\"HBox/Margin2/Decoration/Margin/Slider\".value_changed.connect(Change_Display)
-#
-#func _process(_delta : float) -> void:
-	#if (_Focused): $\"HBox/Margin2\".modulate = s_Global.Get_Color()
-	#else: $\"HBox/Margin2\".modulate = Color.WHITE
+
+func _process(_delta : float) -> void:
+	if (_Focused): $\"HBox/Margin2\".modulate = s_Global.Get_Highlight_Color()
+	else: $\"HBox/Margin2\".modulate = Color.WHITE
 
 func Change_Display(_value : float) -> void:
 	$\"HBox/Margin2/Control/Label\".text = s_Options._Options[_Option]._Function_Display.call($\"HBox/Margin2/Decoration/Margin/Slider\".value)
-	#s_Sound.Play_Sound(\"Scroll\")
+	s_Sound.Play_Sound(\"Slider\")
 
 func Change_Deferred(_value : float) -> void: call_deferred(\"Change\", 0.0)
 func Change(_value : float) -> void: if (!_Dragging or !s_Options._Options[_Option]._Update_On_Release): s_Options._Options[_Option].Set($\"HBox/Margin2/Decoration/Margin/Slider\".value)
@@ -41,11 +42,22 @@ func Drag_End(_changed : bool) -> void:
 	Change(0.0)
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv2y0"]
-content_margin_top = 30.0
-content_margin_bottom = 30.0
-bg_color = Color(1, 1, 1, 0)
-draw_center = false
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jgm2b"]
+content_margin_top = 29.0
+content_margin_bottom = 29.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ro30i"]
+content_margin_left = 0.0
+content_margin_top = 29.0
+content_margin_right = 0.0
+content_margin_bottom = 29.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.254902)
+border_blend = true
 
 [node name="Widget_Slider" type="MarginContainer"]
 script = SubResource("GDScript_7prhb")
@@ -101,7 +113,12 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_constants/center_grabber = 1
 theme_override_constants/grabber_offset = 0
-theme_override_styles/slider = SubResource("StyleBoxFlat_hv2y0")
+theme_override_icons/grabber = ExtResource("2_vlpyb")
+theme_override_icons/grabber_highlight = ExtResource("2_vlpyb")
+theme_override_icons/grabber_disabled = ExtResource("2_vlpyb")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_jgm2b")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ro30i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ro30i")
 scrollable = false
 
 [node name="Control" type="Control" parent="HBox/Margin2"]

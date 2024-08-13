@@ -9,7 +9,7 @@ script/source = "extends Button
 
 @export var _Background_Color : Color = Color(\"66666680\")
 @export var _Font_Size : int = 45
-@export var _Sound : String = \"Menu\"
+@export var _Sound : String = \"Button\"
 var _Focused : bool = false
 
 func _ready() -> void:
@@ -22,8 +22,8 @@ func _ready() -> void:
 
 func _process(_delta : float) -> void:
 	#$\"Decoration\".pivot_offset = $\"Decoration\".size / 2
-	#if (_Focused): modulate = s_Global.Get_Color()
-	#else: modulate = Color.WHITE
+	if (_Focused): modulate = s_Global.Get_Highlight_Color()
+	else: modulate = Color.WHITE
 	match get_draw_mode():
 		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
@@ -34,7 +34,7 @@ func Set_Color(_color : Color) -> void: $\"Decoration/Margin/Color\".color = _co
 func Resize() -> void: custom_minimum_size.x = $\"Control/Label\".size.x + 35
 func Focus() -> void: _Focused = true
 func Unfocus() -> void: _Focused = false
-func Press() -> void: pass #s_Sound.Play_Sound(_Sound)
+func Press() -> void: s_Sound.Play_Sound(_Sound)
 "
 
 [node name="Button" type="Button"]

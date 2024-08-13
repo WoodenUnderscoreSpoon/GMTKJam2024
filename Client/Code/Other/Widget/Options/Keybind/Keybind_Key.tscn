@@ -14,7 +14,7 @@ func Setup(_node : Node) -> void: _Node = _node
 func Press() -> void:
 	s_Interface.Add(\"Options Keybind\", false)
 	s_Interface.Get_Current().Setup(self)
-	#s_Sound.Play_Sound(\"Menu\")
+	s_Sound.Play_Sound(\"Button\")
 
 func Set_Key(_event : InputEvent, _initial : bool = false) -> void:
 	#OPTIONS
@@ -61,8 +61,8 @@ func _ready() -> void:
 
 func _process(_delta : float) -> void:
 	#$\"Decoration\".pivot_offset = $\"Decoration\".size / 2
-	#if (_Focused): modulate = s_Global.Get_Color()
-	#else: modulate = Color.WHITE
+	if (_Focused): modulate = s_Global.Get_Highlight_Color()
+	else: modulate = Color.WHITE
 	match get_draw_mode():
 		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE

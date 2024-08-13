@@ -50,10 +50,8 @@ var c_Dictionary_Ambient := { #Audio
 	#"Computer_Loop" : "003_Ambient/Legacy/DriveBootLoop.ogg",
 }
 var c_Dictionary_Sound := { #Array of audio
-	#"Indigoblin" : ["002_Sound/Legacy/Indigoblin.ogg"],
-	#"Girl_Laugh" : ["002_Sound/Legacy/Girl_Laugh.ogg"],
-	#"Menu" : ["002_Sound/Legacy/Menu.ogg"],
-	#"Scroll" : ["002_Sound/Legacy/Scroll.ogg"],
+	"Button" : ["Sound/Button.ogg"],
+	"Slider" : ["Sound/Slider.ogg"],
 	#"Keyboard" : ["002_Sound/Legacy/Keyboard1.ogg", "002_Sound/Legacy/Keyboard2.ogg", "002_Sound/Legacy/Keyboard3.ogg", "002_Sound/Legacy/Keyboard4.ogg"],
 	#"Patio_Door" : ["002_Sound/Legacy/PatioDoor1.ogg", "002_Sound/Legacy/PatioDoor2.ogg", "002_Sound/Legacy/PatioDoor3.ogg", "002_Sound/Legacy/PatioDoor4.ogg"],
 	#"Door" : ["002_Sound/Legacy/Door1.ogg", "002_Sound/Legacy/Door2.ogg", "002_Sound/Legacy/Door3.ogg", "002_Sound/Legacy/Door4.ogg", "002_Sound/Legacy/Door5.ogg", "002_Sound/Legacy/Door6.ogg", "002_Sound/Legacy/Door7.ogg", "002_Sound/Legacy/Door8.ogg"],
@@ -113,7 +111,7 @@ func _ready() -> void:
 	#STREAM
 	for _i in c_Dictionary_Sound.keys():
 		var _randomizer = AudioStreamRandomizer.new()
-		for _u in c_Dictionary_Sound[_i]: _randomizer.add_stream(-1, load("res://002_Resource/003_Audio/" + _u))
+		for _u in c_Dictionary_Sound[_i]: _randomizer.add_stream(-1, load("res://Resource/Audio/" + _u))
 		_randomizer.playback_mode = AudioStreamRandomizer.PLAYBACK_RANDOM_NO_REPEATS
 		_randomizer.random_pitch = 1.1
 		_randomizer.random_volume_offset_db = 1.0
@@ -149,7 +147,7 @@ func Play_Music(p_Music : String, p_Interval : float = 0.5) -> void:
 			v_Current_Music.name = "Music1"
 			v_Current_Music.bus = "Music"
 			v_Current_Music.volume_db = -80.0
-			v_Current_Music.stream = load("res://002_Resource/003_Audio/" + c_Dictionary_Music[p_Music][2])
+			v_Current_Music.stream = load("res://Resource/Audio/" + c_Dictionary_Music[p_Music][2])
 			$"Music".add_child(v_Current_Music)
 			v_Current_Music.play(_Timestamp)
 
@@ -163,13 +161,13 @@ func Play_Ambient(p_Ambient : String, p_Interval : float = 0.5) -> void:
 			v_Current_Ambient.name = "Ambient1"
 			v_Current_Ambient.bus = "Ambient"
 			v_Current_Ambient.volume_db = -80.0
-			v_Current_Ambient.stream = load("res://002_Resource/003_Audio/" + c_Dictionary_Ambient[p_Ambient])
+			v_Current_Ambient.stream = load("res://Resource/Audio/" + c_Dictionary_Ambient[p_Ambient])
 			$"Ambient".add_child(v_Current_Ambient)
 			v_Current_Ambient.play()
 
 func Play_Sound(p_Sound : String, p_Volume : float = 1.0) -> void:
 	var _Stream_Player = AudioStreamPlayer.new()
-	_Stream_Player.stream = _Randomizer_Sound[p_Sound] #load("res://002_Resource/003_Audio/" + c_Dictionary_Sound[p_Sound][randi() % c_Dictionary_Sound[p_Sound].size()])
+	_Stream_Player.stream = _Randomizer_Sound[p_Sound] #load("res://Resource/Audio/" + c_Dictionary_Sound[p_Sound][randi() % c_Dictionary_Sound[p_Sound].size()])
 	_Stream_Player.name = "Sound1"
 	_Stream_Player.bus = "Sound"
 	_Stream_Player.volume_db = linear_to_db(p_Volume)

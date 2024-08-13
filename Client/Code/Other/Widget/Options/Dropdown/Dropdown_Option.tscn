@@ -16,8 +16,8 @@ func Setup(_node : Node, _choice : String) -> void:
 	$\"Control/Label\".text = _choice
 
 func _process(_delta : float) -> void:
-	#if (_Focused): modulate = s_Global.Get_Color()
-	#else: modulate = Color.WHITE
+	if (_Focused): modulate = s_Global.Get_Highlight_Color()
+	else: modulate = Color.WHITE
 	match get_draw_mode():
 		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
@@ -27,7 +27,7 @@ func Press() -> void:
 	s_Options._Options[_Node._Option].Set($\"Control/Label\".text)
 	_Node.Change($\"Control/Label\".text)
 	$\"../../../../..\".Unfocus()
-	#s_Sound.Play_Sound(\"Menu\")
+	s_Sound.Play_Sound(\"Button\")
 
 func Resize() -> void: custom_minimum_size.x = $\"Control/Label\".size.x + 35
 func Focus() -> void: _Focused = true

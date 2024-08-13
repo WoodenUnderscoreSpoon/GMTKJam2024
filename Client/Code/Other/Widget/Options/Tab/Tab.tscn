@@ -18,7 +18,7 @@ func Press(_sound : bool = true) -> void:
 		_child._Node.visible = false
 	modulate = Color.WHITE
 	_Node.visible = true
-	#if (_sound): s_Sound.Play_Sound(\"Menu\")
+	if (_sound): s_Sound.Play_Sound(\"Button\")
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_byjy0"]
@@ -33,14 +33,14 @@ func _ready() -> void:
 	#$\"../Control/VBox\".pivot_offset = $\"..\".size / 2
 	#$\"../Control/VBox\".rotation_degrees = randf_range(-2, 2)
 
-#func _process(_delta : float) -> void:
-	##$\"../Control/VBox\".pivot_offset = $\"../Control/VBox\".size / 2
-	#if (_Focused): $\"../Control/VBox\".modulate = CE_Global.Get_Color()
-	#else: $\"../Control/VBox\".modulate = Color.WHITE
-	##match get_draw_mode():
-		##DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
-		##DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
-		##DRAW_PRESSED: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+func _process(_delta : float) -> void:
+	#$\"../Control/VBox\".pivot_offset = $\"../Control/VBox\".size / 2
+	if (_Focused): $\"../Control/VBox\".modulate = s_Global.Get_Highlight_Color()
+	else: $\"../Control/VBox\".modulate = Color.WHITE
+	#match get_draw_mode():
+		#DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
+		#DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+		#DRAW_PRESSED: $\"Decoration/Margin/Color\".modulate = Color.WHITE
 
 func Focus() -> void: _Focused = true#$\"Focus\".visible = true
 func Unfocus() -> void: _Focused = false#$\"Focus\".visible = false

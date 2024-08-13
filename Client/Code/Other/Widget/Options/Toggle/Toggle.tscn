@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6qdk5ux8fbb1"]
+[gd_scene load_steps=7 format=3 uid="uid://b6qdk5ux8fbb1"]
 
+[ext_resource type="StyleBox" uid="uid://btv8mswlbju8r" path="res://Resource/Other/Theme_Interface.tres" id="2_my2o8"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="2_y03px"]
 
 [sub_resource type="GDScript" id="GDScript_7prhb"]
@@ -17,13 +18,13 @@ func On() -> void:
 	s_Options._Options[_Option].Set(true)
 	$\"HBox/On/Decoration/Margin/Panel\".visible = true
 	$\"HBox/Off/Decoration/Margin/Panel\".visible = false
-	#s_Sound.Play_Sound(\"Menu\")
+	s_Sound.Play_Sound(\"Button\")
 
 func Off() -> void:
 	s_Options._Options[_Option].Set(false)
 	$\"HBox/On/Decoration/Margin/Panel\".visible = false
 	$\"HBox/Off/Decoration/Margin/Panel\".visible = true
-	#s_Sound.Play_Sound(\"Menu\")
+	s_Sound.Play_Sound(\"Button\")
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7rn53"]
@@ -34,8 +35,8 @@ script/source = "extends Button
 var _Focused : bool = false
 
 func _process(_delta : float) -> void:
-	#if (_Focused): modulate = s_Global.Get_Color()
-	#else: modulate = Color.WHITE
+	if (_Focused): modulate = s_Global.Get_Highlight_Color()
+	else: modulate = Color.WHITE
 	match get_draw_mode():
 		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
@@ -52,8 +53,8 @@ script/source = "extends Button
 var _Focused : bool = false
 
 func _process(_delta : float) -> void:
-	#if (_Focused): modulate = s_Global.Get_Color()
-	#else: modulate = Color.WHITE
+	if (_Focused): modulate = s_Global.Get_Highlight_Color()
+	else: modulate = Color.WHITE
 	match get_draw_mode():
 		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
@@ -120,6 +121,7 @@ color = Color(0.4, 0.4, 0.4, 0.501961)
 [node name="Panel" type="Panel" parent="HBox/On/Decoration/Margin"]
 visible = false
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_my2o8")
 
 [node name="Control" type="Control" parent="HBox/On"]
 layout_mode = 1
@@ -184,6 +186,7 @@ color = Color(0.4, 0.4, 0.4, 0.501961)
 
 [node name="Panel" type="Panel" parent="HBox/Off/Decoration/Margin"]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("2_my2o8")
 
 [node name="Control" type="Control" parent="HBox/Off"]
 layout_mode = 1

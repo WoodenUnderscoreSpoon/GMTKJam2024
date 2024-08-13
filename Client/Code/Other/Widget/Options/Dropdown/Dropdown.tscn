@@ -15,8 +15,8 @@ func _ready() -> void:
 	$\"HBox/Dropdown/Label/Label\".text = s_Options._Options[_Option].Get()
 
 func _process(_delta : float) -> void:
-	#if (_Focused): $\"HBox/Dropdown\".modulate = s_Global.Get_Color()
-	#else: $\"HBox/Dropdown\".modulate = Color.WHITE
+	if (_Focused): $\"HBox/Dropdown\".modulate = s_Global.Get_Highlight_Color()
+	else: $\"HBox/Dropdown\".modulate = Color.WHITE
 	match $\"HBox/Dropdown/Button\".get_draw_mode():
 		Button.DRAW_NORMAL: $\"HBox/Dropdown/Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		Button.DRAW_HOVER: $\"HBox/Dropdown/Decoration/Margin/Color\".modulate = Color.WHITE
@@ -25,7 +25,7 @@ func _process(_delta : float) -> void:
 func Press() -> void:
 	s_Interface.Add(\"Options Dropdown\", false)
 	s_Interface.Get_Current().Setup(self, _Choices, $\"HBox/Dropdown/Control\".get_global_rect().position)
-	#s_Sound.Play_Sound(\"Menu\")
+	s_Sound.Play_Sound(\"Button\")
 
 func Change(_text : String) -> void: $\"HBox/Dropdown/Label/Label\".text = _text
 func Focus() -> void: _Focused = true

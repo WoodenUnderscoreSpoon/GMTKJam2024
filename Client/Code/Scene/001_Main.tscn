@@ -3,7 +3,20 @@
 [sub_resource type="GDScript" id="GDScript_2brpq"]
 script/source = "extends Node3D
 
-func _ready() -> void: s_Scene.call_deferred(\"Switch_Instantly\", \"Menu\")
+func _ready() -> void:
+	#DEBUG
+	s_Debug.Add_Static(\"Game\", s_Game.Get_Full_Name())
+	s_Debug.Add_Static(\"Mode\", s_Game.Get_Mode())
+	s_Debug.Add_Static(\"OS\", OS.get_name())
+	s_Debug.Add_Static(\"Processor\", OS.get_processor_name())
+	s_Debug.Add_Method(\"Date\", s_Time.Get_String_Date)
+	s_Debug.Add_Method(\"Time\", s_Time.Get_String_Time)
+	s_Debug.Add_Method(\"Framerate\", Engine.get_frames_per_second, s_Debug.Framerate_To_String)
+	s_Debug.Add_Method(\"Keyboard\", s_Control.Get_Keyboard_Layout_Name)
+	#s_Debug.Add(\"Control Mode\", s_Control, \"Get_Control_Mode_String\")
+	if (s_Game.Is_Debug()): s_Debug.Add_Method(\"Static Memory\", OS.get_static_memory_usage, s_Debug.Memory_To_String)
+	#SWITCH SCENE
+	s_Scene.call_deferred(\"Switch_Instantly\", \"Menu\")
 "
 
 [node name="Main" type="Node"]
