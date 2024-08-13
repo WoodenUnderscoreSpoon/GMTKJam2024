@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://fbpfaovgd7a4"]
+
+[ext_resource type="PackedScene" uid="uid://bmnjw58a1uvad" path="res://Code/Other/Widget/Credit/Title.tscn" id="1_dtklt"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_q3p64"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right  = _anchor
+		_child.anchor_bottom = _anchor
+
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): Return()
+func Return() -> void: s_Interface.Return()
+"
+
+[node name="Menu" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="VBox2" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Margin1" type="MarginContainer" parent="VBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBox" type="VBoxContainer" parent="VBox2/Margin1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Programming" parent="VBox2/Margin1/VBox" instance=ExtResource("1_dtklt")]
+layout_mode = 2
+_Name = "Programming"
+
+[node name="Sooshiko" type="Label" parent="VBox2/Margin1/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Sooshiko"
+horizontal_alignment = 1
+
+[node name="WoodenSpoon" type="Label" parent="VBox2/Margin1/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "WoodenSpoon"
+horizontal_alignment = 1
+
+[node name="Deep Deep Dish Pizza" type="Label" parent="VBox2/Margin1/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Deep Deep Dish Pizza"
+horizontal_alignment = 1
+
+[node name="Art" parent="VBox2/Margin1/VBox" instance=ExtResource("1_dtklt")]
+layout_mode = 2
+_Name = "Art"
+
+[node name="KhemBug" type="Label" parent="VBox2/Margin1/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "KhemBug"
+horizontal_alignment = 1
+
+[node name="Music" parent="VBox2/Margin1/VBox" instance=ExtResource("1_dtklt")]
+layout_mode = 2
+_Name = "Music"
+
+[node name="Saxaurus" type="Label" parent="VBox2/Margin1/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Saxaurus"
+horizontal_alignment = 1
+
+[node name="Margin2" type="MarginContainer" parent="VBox2"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 25
+
+[node name="Return" parent="VBox2/Margin2" instance=ExtResource("1_q3p64")]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return"
+
+[connection signal="pressed" from="VBox2/Margin2/Return" to="." method="Return"]

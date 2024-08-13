@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://w5e4kaxdnxmi"]
+
+[ext_resource type="PackedScene" uid="uid://b58y37w4s1ky1" path="res://Code/Other/Widget/Options/Keybind/Keybind_Key.tscn" id="2_16att"]
+
+[sub_resource type="GDScript" id="GDScript_7prhb"]
+script/source = "extends MarginContainer
+
+@export var _Option : String = \"\"
+
+func _ready() -> void:
+	$\"HBox/Margin/Name\".text = name
+	var _option = s_Options._Keybinds[_Option]
+	$\"HBox/Keybind1\".Set_Key(s_Control.Array_To_Event(_option[0]), true)
+	$\"HBox/Keybind2\".Set_Key(s_Control.Array_To_Event(_option[1]), true)
+	$\"HBox/Keybind3\".Set_Key(s_Control.Array_To_Event(_option[2]), true)
+"
+
+[node name="Widget_Keybind" type="MarginContainer"]
+script = SubResource("GDScript_7prhb")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Name" type="Label" parent="HBox/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+
+[node name="Keybind1" parent="HBox" instance=ExtResource("2_16att")]
+layout_mode = 2
+
+[node name="Button" parent="HBox/Keybind1" index="0"]
+focus_neighbor_left = NodePath("../../Keybind3/Button")
+
+[node name="Keybind2" parent="HBox" instance=ExtResource("2_16att")]
+layout_mode = 2
+
+[node name="Keybind3" parent="HBox" instance=ExtResource("2_16att")]
+layout_mode = 2
+
+[node name="Button" parent="HBox/Keybind3" index="0"]
+focus_neighbor_right = NodePath("../../Keybind1/Button")
+
+[editable path="HBox/Keybind1"]
+[editable path="HBox/Keybind2"]
+[editable path="HBox/Keybind3"]

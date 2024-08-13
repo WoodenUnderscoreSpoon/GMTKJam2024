@@ -22,8 +22,8 @@ signal LANGUAGE_CHANGED
 	#"TAUNT_VOLUME" : CE_Int.Create(50, 0, 100, Change_Taunt_Volume, Display_Volume),
 	#GENERAL
 	"UI_SCALE" : CE_Int.Create(50, 0, 150, Change_UI_Scale, Display_UI_Scale, true),
-	"CAMERA_SENSITIVITY" : CE_Int.Create(100, 1, 200, Change_Camera_Sensitivity, Display_Camera_Sensitivity),
-	"LANGUAGE" : CE_Enum.Create("English", ["English"], Change_Language), #CE_Language.v_Languages.keys(),
+	#"CAMERA_SENSITIVITY" : CE_Int.Create(100, 1, 200, Change_Camera_Sensitivity, Display_Camera_Sensitivity),
+	#"LANGUAGE" : CE_Enum.Create("English", ["English"], Change_Language), #CE_Language.v_Languages.keys(),
 	"CONTROLLER" : CE_Enum.Create("XBox", ["XBox", "Playstation", "Nintendo"], Change_Controller),
 }
 @onready var _Keybinds : Dictionary = {
@@ -36,8 +36,8 @@ signal LANGUAGE_CHANGED
 	"OPEN_MENU" : [[0, 4194306], null, null],
 #	"ZOOM_IN" : [null, null, null],
 #	"ZOOM_OUT" : [null, null, null],
-	"SHORTCUT_INVENTORY" : [[0, 73], null, null],
-	"SHORTCUT_MAP" : [[0, 77], null, null],
+	#"SHORTCUT_INVENTORY" : [[0, 73], null, null],
+	#"SHORTCUT_MAP" : [[0, 77], null, null],
 }
 
 func _ready() -> void:

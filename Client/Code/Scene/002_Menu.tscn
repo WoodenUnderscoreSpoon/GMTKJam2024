@@ -4,28 +4,9 @@
 script/source = "extends Node3D
 
 func _ready() -> void:
-	CE_Sound.Play_Music(\"Menu\", 4.0)
-	CE_Sound.Play_Ambient(\"\", 0.5)
-	CE_Interface.Switch(\"Menu\")
-
-#func _input(_event : InputEvent) -> void:
-	#if (_event.is_action_pressed(\"PAUSE\")):
-		#pass
-		##CE_Game.Get_Name()
-		##CE_Window.Get()
-		##CE_Filesystem._Prefix = CE_Filesystem._Prefix
-		##CE_Storefront.Get_Name()
-		##CE_Debug.Is_Visible()
-		##CE_Time.Get_Easter()
-		##CE_Random._Test = CE_Random._Test
-		##CE_Sound._Test = CE_Sound._Test
-		##CE_Scene.Get()
-		##CE_Pause._Test = CE_Pause._Test
-		##CE_Mouse.Get_Position()
-		##CE_Interface.Switch_Interface(\"Menu\")
-		##CE_UUID.Generate()
-		##CE_Bitflag.Set(0, 0)
-		##CE_Raycast.Nothing()
+	#s_Sound.Play_Music(\"Menu\", 4.0)
+	#s_Sound.Play_Ambient(\"\", 0.5)
+	s_Interface.Switch(\"Menu\")
 "
 
 [sub_resource type="Shader" id="Shader_5toig"]

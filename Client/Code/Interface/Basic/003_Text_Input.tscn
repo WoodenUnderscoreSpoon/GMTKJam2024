@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://chm5v8ay30whj"]
+[gd_scene load_steps=7 format=3 uid="uid://chm5v8ay30whj"]
 
-[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_55ehd"]
-[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="1_ljay3"]
-[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn" id="3_ccrqc"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_55ehd"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="3_ccrqc"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -45,8 +44,8 @@ func _ready() -> void:
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
@@ -85,7 +84,7 @@ func Return() -> void:
 	for _i in _Events_Right: InputMap.action_add_event(\"ui_right\", _i)
 	for _i in _Events_Up: InputMap.action_add_event(\"ui_up\", _i)
 	for _i in _Events_Down: InputMap.action_add_event(\"ui_down\", _i)
-	CE_Interface.Return()
+	s_Interface.Return()
 
 func Set_Text(_text : String) -> void: $\"Margin/Margin/Margin/VBox/Name\".text = _text
 func Set_Function(_function : Callable) -> void: _Function = _function
@@ -219,7 +218,6 @@ layout_mode = 2
 theme_override_colors/font_selected_color = Color(0.388235, 0.643137, 1, 1)
 theme_override_colors/selection_color = Color(0.0705882, 0.458824, 1, 0.658824)
 theme_override_constants/caret_width = 2
-theme_override_fonts/font = ExtResource("1_ljay3")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_b2ggp")
 theme_override_styles/focus = SubResource("StyleBoxFlat_16kn2")
@@ -231,7 +229,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_ljay3")
 theme_override_font_sizes/font_size = 45
 horizontal_alignment = 1
 vertical_alignment = 1

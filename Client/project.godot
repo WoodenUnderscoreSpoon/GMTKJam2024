@@ -15,7 +15,7 @@ config/description="GMTKJam2024"
 config/version="1.0.0.0"
 run/main_scene="res://Code/Scene/001_Main.tscn"
 config/use_custom_user_dir=true
-config/custom_user_dir_name="Indigoblin/DreamCatcher"
+config/custom_user_dir_name="Indigoblin/GMTKjam2024"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/flush_stdout_on_print=true
@@ -56,7 +56,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
 [file_customization]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxv2kgxpfdamt"]
 
-[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_l4kyg"]
-[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_q2xa2"]
-[ext_resource type="PackedScene" uid="uid://bq2331dg8igxo" path="res://003_Code/002_Object/001_Widget/010_Conclusion/Conclusion_Stat.tscn" id="3_bkejf"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_l4kyg"]
+[ext_resource type="FontFile" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_q2xa2"]
+[ext_resource type="PackedScene" path="res://003_Code/002_Object/001_Widget/010_Conclusion/Conclusion_Stat.tscn" id="3_bkejf"]
 
 [sub_resource type="GDScript" id="GDScript_qq7n8"]
 script/source = "extends MarginContainer

@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://b0kgk7wgxng2k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8lng"]
+content_margin_top = 50.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.25098)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmr3y"]
+content_margin_top = 50.0
+bg_color = Color(0.392157, 0.392157, 0.392157, 0.25098)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qu6t"]
+content_margin_top = 50.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.25098)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4y41"]
+content_margin_top = 50.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86f2"]
+content_margin_top = 50.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1un3u"]
+content_margin_left = 50.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.25098)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71mvc"]
+content_margin_left = 50.0
+bg_color = Color(0.392157, 0.392157, 0.392157, 0.25098)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wo4ia"]
+content_margin_left = 50.0
+draw_center = false
+
+[sub_resource type="Theme" id="Theme_atlif"]
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_r8lng")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_pmr3y")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_3qu6t")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_g4y41")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_l86f2")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_1un3u")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_71mvc")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_1un3u")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_wo4ia")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_wo4ia")
+
+[sub_resource type="GDScript" id="GDScript_476s4"]
+script/source = "extends ScrollContainer
+
+@export var _Padding : int = 10
+
+func _ready() -> void:
+	get_v_scroll_bar().visibility_changed.connect(Update_Padding_Vertical)
+	get_h_scroll_bar().visibility_changed.connect(Update_Padding_Horizontal)
+	Update_Padding_Vertical()
+	Update_Padding_Horizontal()
+
+func Update_Padding_Vertical() -> void: $\"Margin\".set(\"theme_override_constants/margin_right\", [[0, -50][int(!CE_Bitflag.Get($\"Margin\".size_flags_horizontal, SIZE_EXPAND))], _Padding][int(get_v_scroll_bar().visible)])
+func Update_Padding_Horizontal() -> void: $\"Margin\".set(\"theme_override_constants/margin_bottom\", [[0, -50][int(!CE_Bitflag.Get($\"Margin\".size_flags_vertical, SIZE_EXPAND))], _Padding][int(get_h_scroll_bar().visible)])
+"
+
+[node name="Scroll" type="ScrollContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_atlif")
+follow_focus = true
+horizontal_scroll_mode = 0
+script = SubResource("GDScript_476s4")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0

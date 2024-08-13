@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://p07ltlmmf8d2"]
-
-[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="1_y7ann"]
+[gd_scene load_steps=2 format=3 uid="uid://p07ltlmmf8d2"]
 
 [sub_resource type="GDScript" id="GDScript_o1pbx"]
 script/source = "extends CanvasLayer
@@ -9,12 +7,12 @@ var _Node : Node
 
 func _ready() -> void: $\"Color/Button\".grab_focus()
 func Setup(_node : Node) -> void: _Node = _node
-func Unfocus() -> void: CE_Interface.Return()
+func Unfocus() -> void: s_Interface.Return()
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
@@ -62,7 +60,6 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("1_y7ann")
 theme_override_font_sizes/font_size = 60
 text = "Press any key"
 horizontal_alignment = 1

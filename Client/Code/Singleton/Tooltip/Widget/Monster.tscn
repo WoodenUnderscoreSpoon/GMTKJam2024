@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://b50rq1spvo6m3"]
 
-[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_f2cdl"]
-[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_swkvt"]
-[ext_resource type="PackedScene" uid="uid://cambp7q873toy" path="res://003_Code/002_Object/001_Widget/003_Pause/Bestiary_Stat.tscn" id="2_vjvgv"]
-[ext_resource type="Texture2D" uid="uid://hvm282od1ejv" path="res://002_Resource/001_Texture/008_Element/Logo/Fire.png" id="3_h4346"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_f2cdl"]
+[ext_resource type="FontFile" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_swkvt"]
+[ext_resource type="PackedScene" path="res://003_Code/002_Object/001_Widget/003_Pause/Bestiary_Stat.tscn" id="2_vjvgv"]
+[ext_resource type="Texture2D" path="res://002_Resource/001_Texture/008_Element/Logo/Fire.png" id="3_h4346"]
 
 [sub_resource type="GDScript" id="GDScript_qq7n8"]
 script/source = "extends MarginContainer

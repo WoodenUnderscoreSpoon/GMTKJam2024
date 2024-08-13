@@ -1,0 +1,143 @@
+[gd_scene load_steps=6 format=3 uid="uid://b58y37w4s1ky1"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_6mpiv"]
+[ext_resource type="Texture2D" uid="uid://b34o12drg00na" path="res://Resource/Texture/Interface/Controls/Mouse.png" id="3_wcb2q"]
+
+[sub_resource type="GDScript" id="GDScript_tdbry"]
+script/source = "extends MarginContainer
+
+var _Event = null
+var _Node : Node
+
+func Setup(_node : Node) -> void: _Node = _node
+
+func Press() -> void:
+	s_Interface.Add(\"Options Keybind\", false)
+	s_Interface.Get_Current().Setup(self)
+	#s_Sound.Play_Sound(\"Menu\")
+
+func Set_Key(_event : InputEvent, _initial : bool = false) -> void:
+	#OPTIONS
+	_Event = _event
+	if (!_initial):
+		var _option = $\"../..\"._Option
+		var _events = [null, null, null]
+		var _siblings = $\"..\".get_children()
+		_siblings = [_siblings[1], _siblings[2], _siblings[3]]
+		InputMap.action_erase_events(_option)
+		for _i in _siblings.size():
+			_events[_i] = s_Control.Event_To_Array(_siblings[_i]._Event)
+			if (_events[_i] != null): InputMap.action_add_event(_option, _siblings[_i]._Event)
+		s_Options._Keybinds[_option] = _events
+	#BUTTON
+	if (s_Options.CONTROLLER_CHANGED.is_connected(Change_Text)): s_Options.CONTROLLER_CHANGED.disconnect(Change_Text)
+	if (_event != null):
+		s_Options.CONTROLLER_CHANGED.connect(Change_Text.bind(_event))
+		Change_Text(_event)
+	else:
+		$\"Button\".Set_Text(\"\")
+		$\"Button/Margin/HBox/Logo\".texture = null
+
+func Change_Text(_event : InputEvent) -> void:
+	var _array = s_Control.Get_Text_And_Icon(_event)
+	$\"Button\".Set_Text(_array[0])
+	$\"Button/Margin/HBox/Logo\".texture = _array[1]
+
+func Resize(): pass
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mt5ut"]
+
+[sub_resource type="GDScript" id="GDScript_41mrd"]
+script/source = "extends Button
+
+var _Focused : bool = false
+
+func _ready() -> void:
+	Set_Text(text)
+	text = \"\"
+	#$\"Decoration\".pivot_offset = $\"Decoration\".size / 2
+	#$\"Decoration\".rotation_degrees = randf_range(-0.6, 0.6)
+
+func _process(_delta : float) -> void:
+	#$\"Decoration\".pivot_offset = $\"Decoration\".size / 2
+	#if (_Focused): modulate = s_Global.Get_Color()
+	#else: modulate = Color.WHITE
+	match get_draw_mode():
+		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
+		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+		DRAW_PRESSED: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+
+func Set_Text(_text : String) -> void: $\"Margin/HBox/Label\".text = _text
+func Resize() -> void: custom_minimum_size.x = $\"Margin/HBox/Label\".size.x + 35
+func Focus() -> void: _Focused = true
+func Unfocus() -> void: _Focused = false
+"
+
+[node name="Keybind" type="MarginContainer"]
+size_flags_horizontal = 3
+script = SubResource("GDScript_tdbry")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mt5ut")
+flat = true
+script = SubResource("GDScript_41mrd")
+
+[node name="Decoration" parent="Button" instance=ExtResource("1_6mpiv")]
+layout_mode = 1
+
+[node name="Margin" type="MarginContainer" parent="Button/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Button/Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.4, 0.4, 0.501961)
+
+[node name="Margin" type="MarginContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBox" type="HBoxContainer" parent="Button/Margin"]
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="Button/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+texture = ExtResource("3_wcb2q")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Button/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 45
+text_overrun_behavior = 3
+
+[connection signal="focus_entered" from="Button" to="Button" method="Focus"]
+[connection signal="focus_exited" from="Button" to="Button" method="Unfocus"]
+[connection signal="pressed" from="Button" to="." method="Press"]
+[connection signal="item_rect_changed" from="Button/Margin/HBox/Label" to="." method="Resize"]

@@ -1,0 +1,101 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpme635fos0xw"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="2_vaovb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_57peg"]
+
+[sub_resource type="GDScript" id="GDScript_2notk"]
+script/source = "extends Button
+
+var _Focused : bool = false
+
+var _Node : Node
+
+func Setup(_node : Node, _choice : String) -> void:
+	_Node = _node
+	$\"Control/Label\".text = _choice
+
+func _process(_delta : float) -> void:
+	#if (_Focused): modulate = s_Global.Get_Color()
+	#else: modulate = Color.WHITE
+	match get_draw_mode():
+		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
+		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+		DRAW_PRESSED: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+
+func Press() -> void:
+	s_Options._Options[_Node._Option].Set($\"Control/Label\".text)
+	_Node.Change($\"Control/Label\".text)
+	$\"../../../../..\".Unfocus()
+	#s_Sound.Play_Sound(\"Menu\")
+
+func Resize() -> void: custom_minimum_size.x = $\"Control/Label\".size.x + 35
+func Focus() -> void: _Focused = true
+func Unfocus() -> void: _Focused = false
+"
+
+[node name="Dropdown_Option" type="Button"]
+custom_minimum_size = Vector2(0, 70)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_57peg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_57peg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_57peg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_57peg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_57peg")
+flat = true
+script = SubResource("GDScript_2notk")
+
+[node name="Decoration" parent="." instance=ExtResource("2_vaovb")]
+layout_mode = 1
+
+[node name="Margin" type="MarginContainer" parent="Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.4, 0.4, 0.501961)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -21.0
+offset_right = 0.5
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 45
+
+[connection signal="focus_entered" from="." to="." method="Focus"]
+[connection signal="focus_exited" from="." to="." method="Unfocus"]
+[connection signal="pressed" from="." to="." method="Press"]
+[connection signal="item_rect_changed" from="Control/Label" to="." method="Resize"]

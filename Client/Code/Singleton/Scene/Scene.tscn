@@ -5,9 +5,8 @@ script/source = "extends CanvasLayer
 #class_name CE_Scene
 
 const _Scenes := {
-	\"Intro\" : \"res://003_Code/004_Scene/002_Intro.tscn\",
-	\"Menu\" : \"res://003_Code/004_Scene/003_Menu.tscn\",
-	\"Game\" : \"res://003_Code/004_Scene/004_Game.tscn\",
+	\"Menu\" : \"res://Code/Scene/002_Menu.tscn\",
+	\"Game\" : \"res://Code/Scene/003_Game.tscn\",
 }
 const _Masks := {
 	\"Bottom_To_Top\" : preload(\"res://Resource/Texture/Shader/Transition/Bottom_To_Top.png\"),
@@ -40,33 +39,33 @@ func Switch(_scene : String, _arguments : Array = [], _mask : String = \"Spiral\
 		_Tween.tween_callback(set_visible.bind(true))
 		_Tween.tween_property(_color.material, \"shader_parameter/_Cutoff\", 0.0, _time)
 		#SECOND HALF
-		_Tween.tween_callback(PRIVATE_Switch_Scene.bind(_scene, _arguments))
+		_Tween.tween_callback(Switch_Scene.bind(_scene, _arguments))
 		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Cutoff\", 0.0))
 		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Reversed\", true))
 		_Tween.tween_property(_color.material, \"shader_parameter/_Cutoff\", 1.0, _time)
 		_Tween.tween_callback(set_visible.bind(false))
-		_Tween.tween_callback(PRIVATE_Switch_Cleanup)
+		_Tween.tween_callback(Switch_Cleanup)
 
 func Switch_Second_Half(_scene : String, _arguments : Array = [], _mask : String = \"Spiral\", _time : float = 1.0) -> void:
 	if (!Is_In_Transition()):
 		var _color = $\"Color\"
 		_Tween = get_tree().create_tween()
 		#SECOND HALF
-		_Tween.tween_callback(PRIVATE_Switch_Scene.bind(_scene, _arguments))
+		_Tween.tween_callback(Switch_Scene.bind(_scene, _arguments))
 		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Mask\", _Masks[_mask]))
 		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Cutoff\", 0.0))
 		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Reversed\", true))
 		_Tween.tween_callback(set_visible.bind(true))
 		_Tween.tween_property(_color.material, \"shader_parameter/_Cutoff\", 1.0, _time)
 		_Tween.tween_callback(set_visible.bind(false))
-		_Tween.tween_callback(PRIVATE_Switch_Cleanup)
+		_Tween.tween_callback(Switch_Cleanup)
 
 func Switch_Instantly(_scene : String, _arguments : Array = []) -> void:
 	if (!Is_In_Transition()):
-		PRIVATE_Switch_Scene(_scene, _arguments)
-		PRIVATE_Switch_Cleanup()
+		Switch_Scene(_scene, _arguments)
+		Switch_Cleanup()
 
-func PRIVATE_Switch_Scene(_scene : String, _arguments : Array = []) -> void:
+func Switch_Scene(_scene : String, _arguments : Array = []) -> void:
 	#DELETE
 	var _game = $\"/root/Main\"
 	for _child in _game.get_children():
@@ -78,7 +77,7 @@ func PRIVATE_Switch_Scene(_scene : String, _arguments : Array = []) -> void:
 	_Scene = _scene_node
 	if (_Scene.has_method(\"Setup\")): _Scene.Setup(_arguments)
 
-func PRIVATE_Switch_Cleanup() -> void:
+func Switch_Cleanup() -> void:
 	visible = false
 	_Tween = null
 "

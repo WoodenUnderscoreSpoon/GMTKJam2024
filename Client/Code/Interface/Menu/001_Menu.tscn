@@ -1,15 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgkk5c83bi4kd"]
+[gd_scene load_steps=3 format=3 uid="uid://cgkk5c83bi4kd"]
 
-[ext_resource type="Texture2D" uid="uid://blhpk4pvc54qc" path="res://002_Resource/001_Texture/003_Splashscreen/Spiral.png" id="1_g7wam"]
-[ext_resource type="Texture2D" uid="uid://d3iyiacmuxrn2" path="res://002_Resource/001_Texture/003_Splashscreen/Clouds1.png" id="2_32aav"]
-[ext_resource type="Texture2D" uid="uid://dprrb5s3k4qyv" path="res://002_Resource/001_Texture/003_Splashscreen/Dream.png" id="3_1ti7f"]
-[ext_resource type="Texture2D" uid="uid://chx7nnqh8w1pm" path="res://002_Resource/001_Texture/003_Splashscreen/Clouds2.png" id="4_wq0l1"]
-[ext_resource type="Texture2D" uid="uid://ca0lob1pksvn0" path="res://002_Resource/001_Texture/003_Splashscreen/Catcher_White.png" id="5_edfor"]
-[ext_resource type="Texture2D" uid="uid://bocs7xmiwab7r" path="res://002_Resource/001_Texture/003_Splashscreen/Feathers.png" id="6_j4hr6"]
-[ext_resource type="Texture2D" uid="uid://ch3jem2p3ac1e" path="res://002_Resource/001_Texture/003_Splashscreen/Feathers_Small.png" id="7_rmysq"]
-[ext_resource type="Texture2D" uid="uid://0nys5p0u1oaq" path="res://002_Resource/001_Texture/003_Splashscreen/Catcher.png" id="8_x7pjj"]
-[ext_resource type="Texture2D" uid="uid://ckegbktbyj1gl" path="res://002_Resource/001_Texture/003_Splashscreen/Clouds3.png" id="9_allhw"]
-[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn" id="10_4dcjw"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="10_4dcjw"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -18,43 +9,19 @@ func _ready() -> void: $\"VBox/VBox/Play\".grab_focus()
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
 		_child.anchor_right  = _anchor
 		_child.anchor_bottom = _anchor
-	#PORTAL
-	$\"VBox/Center/Control/Scale/Portal\".rotation += _delta / 3
-	$\"VBox/Center/Control/Scale/Portal/Dimension\".rotation -= _delta / 3
-	#FEATHERS
-	var _angle_1 = sin(float(Time.get_ticks_msec()) / 999) / 15.0
-	var _angle_2 = sin(float(Time.get_ticks_msec()) / 999 + 0.5) / 15.0
-	var _angle_3 = sin(float(Time.get_ticks_msec()) / 999 + 1.0) / 15.0
-	$\"VBox/Center/Control/Scale/Feather_3\".rotation = _angle_1
-	$\"VBox/Center/Control/Scale/Feather_1\".rotation = _angle_2
-	$\"VBox/Center/Control/Scale/Feather_2\".rotation = _angle_3
-	#CLOUDS
-	var _position = -337 + sin(float(Time.get_ticks_msec()) / 666) * 5
-	$\"VBox/Center/Control/Scale/Clouds_Back\".position.y = _position
-	$\"VBox/Center/Control/Scale/Clouds_Middle\".position.y = _position
-	$\"VBox/Center/Control/Scale/Clouds_Front\".position.y = _position
 
-func Play() -> void: CE_Interface.Switch(\"Save Select\")
-func Options() -> void: CE_Interface.Add(\"Options\")
-func Achievements() -> void: CE_Interface.Add(\"Achievements\")
-func Credits() -> void: CE_Interface.Add(\"Credits\")
-func Quit() -> void: CE_Game.Quit()
+func Play() -> void: s_Scene.Switch(\"Game\")
+func Options() -> void: s_Interface.Add(\"Options\")
+func Credits() -> void: s_Interface.Add(\"Credits\")
+func Quit() -> void: s_Game.Quit()
 "
-
-[sub_resource type="Gradient" id="Gradient_kyn16"]
-colors = PackedColorArray(1, 0.521569, 0.490196, 1, 1, 0.980392, 0.819608, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k0spq"]
-gradient = SubResource("Gradient_kyn16")
-fill_from = Vector2(0.816092, 0.885057)
-fill_to = Vector2(0.155172, 0.16092)
 
 [node name="Menu" type="CanvasLayer"]
 script = SubResource("GDScript_ub5eq")
@@ -74,161 +41,6 @@ custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="VBox/Center"]
-layout_mode = 2
-
-[node name="Scale" type="Control" parent="VBox/Center/Control"]
-layout_mode = 2
-anchors_preset = 0
-scale = Vector2(0.9, 0.9)
-
-[node name="Portal" type="TextureRect" parent="VBox/Center/Control/Scale"]
-clip_children = 1
-texture_filter = 4
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 0
-offset_left = -250.0
-offset_top = -250.0
-offset_right = 250.0
-offset_bottom = 250.0
-scale = Vector2(0.95, 0.95)
-pivot_offset = Vector2(250, 250)
-texture = ExtResource("1_g7wam")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Dimension" type="TextureRect" parent="VBox/Center/Control/Scale/Portal"]
-texture_filter = 2
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 0
-offset_right = 500.0
-offset_bottom = 500.0
-pivot_offset = Vector2(250, 250)
-texture = SubResource("GradientTexture2D_k0spq")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Clouds_Back" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 0
-offset_left = -400.0
-offset_top = -337.0
-offset_right = 100.0
-offset_bottom = 163.0
-scale = Vector2(1.55, 1.55)
-texture = ExtResource("2_32aav")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Dream" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(1024, 282)
-layout_mode = 2
-offset_left = -282.0
-offset_top = -160.0
-offset_right = 742.0
-offset_bottom = 122.0
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("3_1ti7f")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Clouds_Middle" type="TextureRect" parent="VBox/Center/Control/Scale"]
-modulate = Color(1, 1, 1, 0.5)
-texture_filter = 4
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 0
-offset_left = -400.0
-offset_top = -337.0
-offset_right = 100.0
-offset_bottom = 163.0
-scale = Vector2(1.55, 1.55)
-texture = ExtResource("4_wq0l1")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Catcher_White" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-offset_left = -276.48
-offset_right = 747.52
-offset_bottom = 240.0
-scale = Vector2(0.54, 0.54)
-texture = ExtResource("5_edfor")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Feather_1" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 2
-offset_left = -258.0
-offset_top = 118.0
-offset_right = 242.0
-offset_bottom = 618.0
-scale = Vector2(0.4, 0.4)
-pivot_offset = Vector2(250, 0)
-texture = ExtResource("6_j4hr6")
-expand_mode = 1
-stretch_mode = 5
-flip_h = true
-
-[node name="Feather_2" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-offset_left = -145.0
-offset_top = 118.0
-offset_right = 255.0
-offset_bottom = 518.0
-scale = Vector2(0.4, 0.4)
-pivot_offset = Vector2(200, 0)
-texture = ExtResource("7_rmysq")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Feather_3" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-offset_left = -270.0
-offset_top = 118.0
-offset_right = 130.0
-offset_bottom = 518.0
-scale = Vector2(0.4, 0.4)
-pivot_offset = Vector2(200, 0)
-texture = ExtResource("7_rmysq")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Catcher" type="TextureRect" parent="VBox/Center/Control/Scale"]
-texture_filter = 4
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-offset_left = -276.48
-offset_right = 747.52
-offset_bottom = 240.0
-scale = Vector2(0.54, 0.54)
-texture = ExtResource("8_x7pjj")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Clouds_Front" type="TextureRect" parent="VBox/Center/Control/Scale"]
-modulate = Color(1, 1, 1, 0.5)
-texture_filter = 4
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 0
-offset_left = -400.0
-offset_top = -337.0
-offset_right = 100.0
-offset_bottom = 163.0
-scale = Vector2(1.55, 1.55)
-texture = ExtResource("9_allhw")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="VBox" type="VBoxContainer" parent="VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -236,7 +48,6 @@ size_flags_vertical = 6
 theme_override_constants/separation = 8
 
 [node name="Play" parent="VBox/VBox" instance=ExtResource("10_4dcjw")]
-visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("../Quit")
 text = "Play"
@@ -245,6 +56,10 @@ text = "Play"
 layout_mode = 2
 text = "Options"
 
+[node name="Credits" parent="VBox/VBox" instance=ExtResource("10_4dcjw")]
+layout_mode = 2
+text = "Credits"
+
 [node name="Quit" parent="VBox/VBox" instance=ExtResource("10_4dcjw")]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Play")
@@ -252,4 +67,5 @@ text = "Quit"
 
 [connection signal="pressed" from="VBox/VBox/Play" to="." method="Play"]
 [connection signal="pressed" from="VBox/VBox/Options" to="." method="Options"]
+[connection signal="pressed" from="VBox/VBox/Credits" to="." method="Credits"]
 [connection signal="pressed" from="VBox/VBox/Quit" to="." method="Quit"]

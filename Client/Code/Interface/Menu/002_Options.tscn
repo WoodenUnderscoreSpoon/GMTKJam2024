@@ -1,17 +1,17 @@
 [gd_scene load_steps=14 format=3 uid="uid://pu1fqvb3iy7d"]
 
-[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_jl7hq"]
-[ext_resource type="PackedScene" uid="uid://ct528gxxyi2ay" path="res://003_Code/002_Object/001_Widget/002_Options/005_Tab/Tab.tscn" id="1_xoa5h"]
-[ext_resource type="Texture2D" uid="uid://cp6fl5rjcc0vk" path="res://002_Resource/001_Texture/006_Interface/Options/Video.png" id="2_asbhv"]
-[ext_resource type="Texture2D" uid="uid://cd8q61whxc1jh" path="res://002_Resource/001_Texture/006_Interface/Options/Audio.png" id="3_lom6r"]
-[ext_resource type="Texture2D" uid="uid://c5u21a3g1sq5q" path="res://002_Resource/001_Texture/006_Interface/Options/General.png" id="4_v3s34"]
-[ext_resource type="Texture2D" uid="uid://dve5m02c7gg0l" path="res://002_Resource/001_Texture/006_Interface/Options/Controls.png" id="5_s3ggy"]
-[ext_resource type="PackedScene" uid="uid://d22wwfkhauryu" path="res://003_Code/002_Object/001_Widget/002_Options/002_Slider/Slider.tscn" id="6_2q1vl"]
-[ext_resource type="PackedScene" uid="uid://b0kgk7wgxng2k" path="res://003_Code/002_Object/001_Widget/001_Basic/002_Scroll/002_Scroll.tscn" id="6_w0hbi"]
-[ext_resource type="PackedScene" uid="uid://b6qdk5ux8fbb1" path="res://003_Code/002_Object/001_Widget/002_Options/001_Toggle/Toggle.tscn" id="7_c3nqc"]
-[ext_resource type="PackedScene" uid="uid://cerxwrx5mtyw3" path="res://003_Code/002_Object/001_Widget/002_Options/003_Dropdown/Dropdown.tscn" id="8_dgnvh"]
-[ext_resource type="PackedScene" uid="uid://w5e4kaxdnxmi" path="res://003_Code/002_Object/001_Widget/002_Options/004_Keybind/Keybind.tscn" id="9_5d5vo"]
-[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn" id="11_fg5fb"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_jl7hq"]
+[ext_resource type="PackedScene" uid="uid://ct528gxxyi2ay" path="res://Code/Other/Widget/Options/Tab/Tab.tscn" id="1_xoa5h"]
+[ext_resource type="Texture2D" uid="uid://cp6fl5rjcc0vk" path="res://Resource/Texture/Interface/Options/Video.png" id="2_asbhv"]
+[ext_resource type="Texture2D" uid="uid://cd8q61whxc1jh" path="res://Resource/Texture/Interface/Options/Audio.png" id="3_lom6r"]
+[ext_resource type="Texture2D" uid="uid://c5u21a3g1sq5q" path="res://Resource/Texture/Interface/Options/General.png" id="4_v3s34"]
+[ext_resource type="Texture2D" uid="uid://dve5m02c7gg0l" path="res://Resource/Texture/Interface/Options/Controls.png" id="5_s3ggy"]
+[ext_resource type="PackedScene" uid="uid://d22wwfkhauryu" path="res://Code/Other/Widget/Options/Slider/Slider.tscn" id="6_2q1vl"]
+[ext_resource type="PackedScene" uid="uid://b0kgk7wgxng2k" path="res://Code/Other/Widget/Basic/Scroll/Scroll.tscn" id="6_w0hbi"]
+[ext_resource type="PackedScene" uid="uid://b6qdk5ux8fbb1" path="res://Code/Other/Widget/Options/Toggle/Toggle.tscn" id="7_c3nqc"]
+[ext_resource type="PackedScene" uid="uid://cerxwrx5mtyw3" path="res://Code/Other/Widget/Options/Dropdown/Dropdown.tscn" id="8_dgnvh"]
+[ext_resource type="PackedScene" uid="uid://w5e4kaxdnxmi" path="res://Code/Other/Widget/Options/Keybind/Keybind.tscn" id="9_5d5vo"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="11_fg5fb"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -31,8 +31,8 @@ func Resize(_node : Node) -> void:
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
@@ -40,8 +40,8 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 
 func Return() -> void:
-	CE_Options.Save()
-	CE_Interface.Return()
+	s_Options.Save()
+	s_Interface.Return()
 "
 
 [node name="Options" type="CanvasLayer"]
@@ -189,17 +189,6 @@ theme_override_constants/separation = 8
 layout_mode = 2
 _Option = "UI_SCALE"
 
-[node name="Camera Sensitivity" parent="VBox/Margin2/Scroll/Margin/General" instance=ExtResource("6_2q1vl")]
-visible = false
-layout_mode = 2
-_Option = "CAMERA_SENSITIVITY"
-
-[node name="Language" parent="VBox/Margin2/Scroll/Margin/General" instance=ExtResource("8_dgnvh")]
-visible = false
-layout_mode = 2
-_Option = "LANGUAGE"
-_Choices = Array[String](["English"])
-
 [node name="Controller" parent="VBox/Margin2/Scroll/Margin/General" instance=ExtResource("8_dgnvh")]
 layout_mode = 2
 _Option = "CONTROLLER"
@@ -238,14 +227,6 @@ _Option = "INTERACT"
 [node name="Open Menu" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
 layout_mode = 2
 _Option = "OPEN_MENU"
-
-[node name="Shortcut Inventory" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
-layout_mode = 2
-_Option = "SHORTCUT_INVENTORY"
-
-[node name="Shortcut Map" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
-layout_mode = 2
-_Option = "SHORTCUT_MAP"
 
 [node name="Margin3" type="MarginContainer" parent="VBox"]
 layout_mode = 2

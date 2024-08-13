@@ -3,18 +3,19 @@ extends Node
 
 const _Interfaces := {
 	#BASIC
-	"Popup" : "res://003_Code/003_Interface/001_Basic/001_Popup.tscn",
-	"Consent" : "res://003_Code/003_Interface/001_Basic/002_Consent.tscn",
-	"Text Input" : "res://003_Code/003_Interface/001_Basic/003_Text_Input.tscn",
-	"Color Input" : "res://003_Code/003_Interface/001_Basic/004_Color_Input.tscn",
+	"Popup" : "res://Code/Interface/Basic/001_Popup.tscn",
+	"Consent" : "res://Code/Interface/Basic/002_Consent.tscn",
+	"Text Input" : "res://Code/Interface/Basic/003_Text_Input.tscn",
+	"Color Input" : "res://Code/Interface/Basic/004_Color_Input.tscn",
 	#MENU
-	"Menu" : "res://003_Code/003_Interface/002_Menu/001_Menu.tscn",
-	"Options" : "res://003_Code/003_Interface/002_Menu/002_Options.tscn",
-	"Options Dropdown" : "res://003_Code/003_Interface/002_Menu/003_Options_Dropdown.tscn",
-	"Options Keybind" : "res://003_Code/003_Interface/002_Menu/004_Options_Keybind.tscn",
+	"Menu" : "res://Code/Interface/Menu/001_Menu.tscn",
+	"Options" : "res://Code/Interface/Menu/002_Options.tscn",
+	"Options Dropdown" : "res://Code/Interface/Menu/003_Options_Dropdown.tscn",
+	"Options Keybind" : "res://Code/Interface/Menu/004_Options_Keybind.tscn",
+	"Credits" : "res://Code/Interface/Menu/005_Credits.tscn",
 	#GAME
-	"Nothing" : "res://003_Code/003_Interface/003_Game/001_Nothing.tscn",
-	"Pause" : "res://003_Code/003_Interface/003_Game/002_Pause.tscn",
+	"Nothing" : "res://Code/Interface/Game/001_Nothing.tscn",
+	"Pause" : "res://Code/Interface/Game/002_Pause.tscn",
 }
 var _Scale : float = 1.0
 var _Scale_Option : float = 1.0

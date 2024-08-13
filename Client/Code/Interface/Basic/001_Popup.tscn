@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://nv25i6detcs1"]
+[gd_scene load_steps=4 format=3 uid="uid://nv25i6detcs1"]
 
-[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_lcyo6"]
-[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_i3m8i"]
-[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn" id="3_m5cc1"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_lcyo6"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="3_m5cc1"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -13,8 +12,8 @@ func Setup(_text : String) -> void:
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
@@ -22,7 +21,7 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): Return()
-func Return() -> void: CE_Interface.Return()
+func Return() -> void: s_Interface.Return()
 "
 
 [node name="Popup" type="CanvasLayer"]
@@ -104,7 +103,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_i3m8i")
 theme_override_font_sizes/font_size = 45
 horizontal_alignment = 1
 vertical_alignment = 1

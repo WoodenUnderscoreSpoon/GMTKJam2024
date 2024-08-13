@@ -1,0 +1,137 @@
+[gd_scene load_steps=5 format=3 uid="uid://cerxwrx5mtyw3"]
+
+[ext_resource type="Texture2D" uid="uid://d041ufr2h480c" path="res://Resource/Texture/Interface/Options/Arrow.png" id="2_nsldw"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="3_g3ye0"]
+
+[sub_resource type="GDScript" id="GDScript_7prhb"]
+script/source = "extends MarginContainer
+
+@export var _Option : String = \"\"
+@export var _Choices : Array[String] = []
+var _Focused : bool = false
+
+func _ready() -> void:
+	$\"HBox/Margin/Name\".text = name
+	$\"HBox/Dropdown/Label/Label\".text = s_Options._Options[_Option].Get()
+
+func _process(_delta : float) -> void:
+	#if (_Focused): $\"HBox/Dropdown\".modulate = s_Global.Get_Color()
+	#else: $\"HBox/Dropdown\".modulate = Color.WHITE
+	match $\"HBox/Dropdown/Button\".get_draw_mode():
+		Button.DRAW_NORMAL: $\"HBox/Dropdown/Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
+		Button.DRAW_HOVER: $\"HBox/Dropdown/Decoration/Margin/Color\".modulate = Color.WHITE
+		Button.DRAW_PRESSED: $\"HBox/Dropdown/Decoration/Margin/Color\".modulate = Color.WHITE
+
+func Press() -> void:
+	s_Interface.Add(\"Options Dropdown\", false)
+	s_Interface.Get_Current().Setup(self, _Choices, $\"HBox/Dropdown/Control\".get_global_rect().position)
+	#s_Sound.Play_Sound(\"Menu\")
+
+func Change(_text : String) -> void: $\"HBox/Dropdown/Label/Label\".text = _text
+func Focus() -> void: _Focused = true
+func Unfocus() -> void: _Focused = false
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5yu78"]
+
+[node name="Widget_Dropdown" type="MarginContainer"]
+script = SubResource("GDScript_7prhb")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Name" type="Label" parent="HBox/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+
+[node name="Dropdown" type="MarginContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBox/Dropdown"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5yu78")
+flat = true
+
+[node name="Decoration" parent="HBox/Dropdown" instance=ExtResource("3_g3ye0")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="HBox/Dropdown/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="HBox/Dropdown/Decoration/Margin"]
+modulate = Color(0.66, 0.66, 0.66, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.4, 0.4, 0.501961)
+
+[node name="Margin" type="MarginContainer" parent="HBox/Dropdown"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_right = 20
+
+[node name="Texture" type="TextureRect" parent="HBox/Dropdown/Margin"]
+texture_filter = 4
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_nsldw")
+stretch_mode = 4
+
+[node name="Label" type="Control" parent="HBox/Dropdown"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HBox/Dropdown/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -21.0
+offset_right = 0.5
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 45
+
+[node name="Control" type="Control" parent="HBox/Dropdown"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[connection signal="focus_entered" from="HBox/Dropdown/Button" to="." method="Focus"]
+[connection signal="focus_exited" from="HBox/Dropdown/Button" to="." method="Unfocus"]
+[connection signal="pressed" from="HBox/Dropdown/Button" to="." method="Press"]

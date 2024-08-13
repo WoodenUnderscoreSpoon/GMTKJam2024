@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4ubrils1i4j7"]
+
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_ncgxq"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func _ready() -> void:
+	$\"Margin/VBox/Resume\".grab_focus()
+	s_Pause.Pause_Tree(s_Scene.Get_Current(), true)
+	#s_Global._Paused = true
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right = _anchor
+		_child.anchor_bottom = _anchor
+
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")): Return()
+	elif (_event.is_action_pressed(\"OPEN_MENU\")): Return()
+
+func Return() -> void:
+	s_Interface.Return()
+	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
+	#s_Global._Paused = false
+
+func Options() -> void:
+	s_Interface.Add(\"Options\")
+	s_Interface.Get_Current().Setup()
+
+func Quit() -> void:
+	Return()
+	s_Scene.Switch(\"Menu\")
+"
+
+[node name="Pause" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="Margin"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.52549)
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="Resume" parent="Margin/VBox" instance=ExtResource("1_ncgxq")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+text = "Resume"
+
+[node name="Options" parent="Margin/VBox" instance=ExtResource("1_ncgxq")]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" parent="Margin/VBox" instance=ExtResource("1_ncgxq")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Resume")
+text = "Quit"
+
+[connection signal="pressed" from="Margin/VBox/Resume" to="." method="Return"]
+[connection signal="pressed" from="Margin/VBox/Options" to="." method="Options"]
+[connection signal="pressed" from="Margin/VBox/Quit" to="." method="Quit"]

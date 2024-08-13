@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvsc45jx2kbyw"]
 
-[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_4cdkd"]
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_4cdkd"]
 
 [sub_resource type="GDScript" id="GDScript_o1pbx"]
 script/source = "extends CanvasLayer
@@ -9,29 +9,29 @@ var _Node = null
 
 func Setup(_node : Node, _choices : Array[String], _position : Vector2i) -> void:
 	_Node = _node
-	var _option = load(\"res://003_Code/002_Object/001_Widget/002_Options/003_Dropdown/Dropdown_Option.tscn\")
+	var _option = load(\"res://Code/Other/Widget/Options/Dropdown/Dropdown_Option.tscn\")
 	for _choice in _choices:
 		var _option_node = _option.instantiate()
 		_option_node.Setup(_node, _choice)
 		$\"Color/Margin/Margin/VBox\".add_child(_option_node)
-		if (_choice == CE_Options._Options[_node._Option].Get()): _option_node.grab_focus()
+		if (_choice == s_Options._Options[_node._Option].Get()): _option_node.grab_focus()
 	$\"Color/Margin\".position = _position
 	$\"Color/Margin\".custom_minimum_size.x = _Node.get_node(\"HBox/Dropdown\").size.x# * (1.0 - _scale)
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
 		_child.anchor_right  = _anchor
 		_child.anchor_bottom = _anchor
 	#SIZE
-	$\"Color/Margin\".custom_minimum_size.x = _Node.get_node(\"HBox/Dropdown\").size.x# * (1.0 - _scale)
+	if (is_instance_valid(_Node)): $\"Color/Margin\".custom_minimum_size.x = _Node.get_node(\"HBox/Dropdown\").size.x# * (1.0 - _scale)
 
-func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): CE_Interface.Return()
-func Unfocus() -> void: CE_Interface.Return()
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Return()
+func Unfocus() -> void: s_Interface.Return()
 "
 
 [node name="Dropdown_Overlay" type="CanvasLayer"]

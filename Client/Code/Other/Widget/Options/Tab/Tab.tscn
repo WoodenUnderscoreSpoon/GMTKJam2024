@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct528gxxyi2ay"]
+
+[sub_resource type="GDScript" id="GDScript_em3s6"]
+script/source = "extends MarginContainer
+
+@export var _Texture : Texture = null
+@export var _Name : String = \"\"
+@export var _Node : Node = null
+
+func _ready() -> void:
+	$\"Control/VBox/Texture\".texture = _Texture
+	$\"Control/VBox/Time\".text = _Name
+	$\"Control\".custom_minimum_size = $\"Control/VBox\".size
+
+func Press(_sound : bool = true) -> void:
+	for _child in $\"..\".get_children():
+		_child.modulate = Color(\"808080\")
+		_child._Node.visible = false
+	modulate = Color.WHITE
+	_Node.visible = true
+	#if (_sound): s_Sound.Play_Sound(\"Menu\")
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_byjy0"]
+
+[sub_resource type="GDScript" id="GDScript_s033c"]
+script/source = "extends Button
+
+var _Focused : bool = false
+
+func _ready() -> void:
+	pass
+	#$\"../Control/VBox\".pivot_offset = $\"..\".size / 2
+	#$\"../Control/VBox\".rotation_degrees = randf_range(-2, 2)
+
+#func _process(_delta : float) -> void:
+	##$\"../Control/VBox\".pivot_offset = $\"../Control/VBox\".size / 2
+	#if (_Focused): $\"../Control/VBox\".modulate = CE_Global.Get_Color()
+	#else: $\"../Control/VBox\".modulate = Color.WHITE
+	##match get_draw_mode():
+		##DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
+		##DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+		##DRAW_PRESSED: $\"Decoration/Margin/Color\".modulate = Color.WHITE
+
+func Focus() -> void: _Focused = true#$\"Focus\".visible = true
+func Unfocus() -> void: _Focused = false#$\"Focus\".visible = false
+"
+
+[node name="Tab" type="MarginContainer"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_em3s6")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_byjy0")
+flat = true
+script = SubResource("GDScript_s033c")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -68.5
+offset_right = 62.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = -5
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Control/VBox"]
+texture_filter = 4
+custom_minimum_size = Vector2(125, 100)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Time" type="Label" parent="Control/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="focus_entered" from="Button" to="Button" method="Focus"]
+[connection signal="focus_exited" from="Button" to="Button" method="Unfocus"]
+[connection signal="pressed" from="Button" to="." method="Press"]

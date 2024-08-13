@@ -5,8 +5,8 @@ script/source = "extends CanvasLayer
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
@@ -14,7 +14,7 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): Return()
-func Return() -> void: CE_Interface.Return()
+func Return() -> void: s_Interface.Return()
 "
 
 [node name="Color_Input" type="CanvasLayer"]

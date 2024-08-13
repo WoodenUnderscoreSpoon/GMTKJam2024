@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://isaqp1as5awk"]
-
-[sub_resource type="GDScript" id="GDScript_fmrx4"]
-script/source = "extends Node3D
-"
-
-[node name="Scene" type="Node3D"]
-script = SubResource("GDScript_fmrx4")

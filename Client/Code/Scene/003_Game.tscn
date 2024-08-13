@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://isaqp1as5awk"]
+
+[sub_resource type="GDScript" id="GDScript_fmrx4"]
+script/source = "extends Node3D
+
+func _ready() -> void:
+	#s_Sound.Play_Music(\"Menu\", 4.0)
+	#s_Sound.Play_Ambient(\"\", 0.5)
+	s_Interface.Switch(\"Nothing\")
+"
+
+[node name="Scene" type="Node3D"]
+script = SubResource("GDScript_fmrx4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

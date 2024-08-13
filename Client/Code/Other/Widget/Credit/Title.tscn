@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmnjw58a1uvad"]
+
+[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="1_de5ln"]
+
+[sub_resource type="GDScript" id="GDScript_8ey7l"]
+script/source = "extends VBoxContainer
+
+@export var _Name : String = \"\"
+
+func _ready() -> void: Set_Text(_Name)
+func Set_Text(_text : String) -> void: $\"Margin/Name\".text = _text
+"
+
+[node name="Title" type="VBoxContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -23
+script = SubResource("GDScript_8ey7l")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Name" type="Label" parent="Margin"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_de5ln")
+theme_override_font_sizes/font_size = 80
+text = "Programmer"
+
+[node name="Line" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
