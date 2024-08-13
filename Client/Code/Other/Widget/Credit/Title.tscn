@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmnjw58a1uvad"]
-
-[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="1_de5ln"]
+[gd_scene load_steps=2 format=3 uid="uid://bmnjw58a1uvad"]
 
 [sub_resource type="GDScript" id="GDScript_8ey7l"]
 script/source = "extends VBoxContainer
@@ -31,7 +29,6 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("1_de5ln")
 theme_override_font_sizes/font_size = 80
 text = "Programmer"
 

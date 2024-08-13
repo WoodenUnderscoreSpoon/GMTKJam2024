@@ -1,30 +1,30 @@
 extends Node
-#class_name CE_Option
+#class_name s_Option
 
 signal CONTROLLER_CHANGED
 signal LANGUAGE_CHANGED
-@onready var _File_Options := CE_Filesystem.Get_Config_File("Profile/Options.txt")
-#@onready var _File_Keybinds := CE_Filesystem.Get_Config_File("Profile/Keybinds.txt")
-@onready var _File_Keybinds := CE_Filesystem.Get_Config_File("Profile/Keybinds.txt", "HAMEL1994")
+@onready var _File_Options := s_Filesystem.Get_Config_File("Profile/Options.txt")
+#@onready var _File_Keybinds := s_Filesystem.Get_Config_File("Profile/Keybinds.txt")
+@onready var _File_Keybinds := s_Filesystem.Get_Config_File("Profile/Keybinds.txt", "HAMEL1994")
 @onready var _Options : Dictionary = {
 	#VIDEO
-	"FULLSCREEN" : CE_Bool.Create(false, Change_Fullscreen),
-	"VSYNC" : CE_Bool.Create(true, Change_VSync),
-	"FRAMERATE" : CE_Int.Create(2, 0, 4, Change_Framerate, Display_Framerate),
-	#"ANTIALIASING" : CE_Int.Create(0, 0, 3),
-	#"SHADOW_QUALITY" : CE_Int.Create(6, 0, 6),
+	"FULLSCREEN" : s_Bool.Create(false, Change_Fullscreen),
+	"VSYNC" : s_Bool.Create(true, Change_VSync),
+	"FRAMERATE" : s_Int.Create(2, 0, 4, Change_Framerate, Display_Framerate),
+	#"ANTIALIASING" : s_Int.Create(0, 0, 3),
+	#"SHADOW_QUALITY" : s_Int.Create(6, 0, 6),
 	#AUDIO
-	"MASTER_VOLUME" : CE_Int.Create(50, 0, 100, Change_Master_Volume, Display_Volume),
-	"MUSIC_VOLUME" : CE_Int.Create(50, 0, 100, Change_Music_Volume, Display_Volume),
-	"AMBIENT_VOLUME" : CE_Int.Create(50, 0, 100, Change_Ambient_Volume, Display_Volume),
-	"SOUND_VOLUME" : CE_Int.Create(50, 0, 100, Change_Sound_Volume, Display_Volume),
-	#"FOOTSTEP_VOLUME" : CE_Int.Create(50, 0, 100, Change_Footstep_Volume, Display_Volume),
-	#"TAUNT_VOLUME" : CE_Int.Create(50, 0, 100, Change_Taunt_Volume, Display_Volume),
+	"MASTER_VOLUME" : s_Int.Create(50, 0, 100, Change_Master_Volume, Display_Volume),
+	"MUSIC_VOLUME" : s_Int.Create(50, 0, 100, Change_Music_Volume, Display_Volume),
+	"AMBIENT_VOLUME" : s_Int.Create(50, 0, 100, Change_Ambient_Volume, Display_Volume),
+	"SOUND_VOLUME" : s_Int.Create(50, 0, 100, Change_Sound_Volume, Display_Volume),
+	#"FOOTSTEP_VOLUME" : s_Int.Create(50, 0, 100, Change_Footstep_Volume, Display_Volume),
+	#"TAUNT_VOLUME" : s_Int.Create(50, 0, 100, Change_Taunt_Volume, Display_Volume),
 	#GENERAL
-	"UI_SCALE" : CE_Int.Create(50, 0, 150, Change_UI_Scale, Display_UI_Scale, true),
-	#"CAMERA_SENSITIVITY" : CE_Int.Create(100, 1, 200, Change_Camera_Sensitivity, Display_Camera_Sensitivity),
-	#"LANGUAGE" : CE_Enum.Create("English", ["English"], Change_Language), #CE_Language.v_Languages.keys(),
-	"CONTROLLER" : CE_Enum.Create("XBox", ["XBox", "Playstation", "Nintendo"], Change_Controller),
+	"UI_SCALE" : s_Int.Create(50, 0, 150, Change_UI_Scale, Display_UI_Scale, true),
+	#"CAMERA_SENSITIVITY" : s_Int.Create(100, 1, 200, Change_Camera_Sensitivity, Display_Camera_Sensitivity),
+	#"LANGUAGE" : s_Enum.Create("English", ["English"], Change_Language), #s_Language.v_Languages.keys(),
+	"CONTROLLER" : s_Enum.Create("XBox", ["XBox", "Playstation", "Nintendo"], Change_Controller),
 }
 @onready var _Keybinds : Dictionary = {
 	"MOVE_FORWARD" : [[0, 87], [0, 4194320], [2, 11]],
@@ -45,12 +45,12 @@ func _ready() -> void:
 	for _name in _Options.keys(): _Options[_name].Set(_File_Options.Get("OPTIONS", _name, _Options[_name].Get()))
 	#KEYBINDS
 	#var _version = _File_Keybinds.Get("KEYBINDS", "VERSION", "1.0.0.0")
-	#if (CE_Version_Control.Is_Greater_Or_Equal(_version, "1.5.0.0")): pass
+	#if (s_Version_Control.Is_Greater_Or_Equal(_version, "1.5.0.0")): pass
 	for _name in _Keybinds.keys():
 		_Keybinds[_name] = _File_Keybinds.Get("KEYBINDS", _name, _Keybinds[_name])
 		InputMap.action_erase_events(_name)
 		for _i in _Keybinds[_name].size(): if (_Keybinds[_name][_i] != null): InputMap.action_add_event(_name, s_Control.Array_To_Event(_Keybinds[_name][_i]))
-	#_File_Keybinds.Set("KEYBINDS", "VERSION", CE_Game.Get_Version())
+	#_File_Keybinds.Set("KEYBINDS", "VERSION", s_Game.Get_Version())
 	#_File_Keybinds.Save()
 
 func Save() -> void:

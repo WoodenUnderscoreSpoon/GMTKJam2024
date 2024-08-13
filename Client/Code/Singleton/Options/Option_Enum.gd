@@ -1,5 +1,5 @@
 extends Resource
-class_name CE_Enum
+class_name s_Enum
 
 var _Value : String = ""
 #var _Default : String = ""
@@ -15,7 +15,7 @@ func Set(_value : String) -> void:
 		_Function.call(_Value)
 
 static func Create(_default : String, _possibilities : Array[String], _function : Callable) -> Resource:
-	var _Return = CE_Enum.new()
+	var _Return = s_Enum.new()
 	_Return._Possibilities = _possibilities
 	_Return._Value = [_default, _possibilities[0]][int(_possibilities.has(_default))]
 	#_Return._Default = _default

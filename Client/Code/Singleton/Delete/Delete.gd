@@ -1,5 +1,5 @@
 extends Node
-#class_name CE_Delete
+#class_name s_Delete
 
 var _Nodes : Array[Node] = []
 

@@ -1,12 +1,12 @@
 extends Node
-class_name CE_Config_File
+class_name s_Config_File
 
 var _Path : String = ""
 var _Password : String = ""
 var _Config_File : ConfigFile = ConfigFile.new()
 var _Modified : bool = false
 
-func Load(_path : String, _password : String = "") -> CE_Config_File:
+func Load(_path : String, _password : String = "") -> s_Config_File:
 	_Path = _path
 	_Password = _password
 	var _error = ERR_UNAVAILABLE

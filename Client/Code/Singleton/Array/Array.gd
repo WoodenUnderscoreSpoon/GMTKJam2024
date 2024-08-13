@@ -1,5 +1,5 @@
 extends Resource
-class_name CE_Array
+class_name s_Array
 
 static func Create_1D(_X : int, _Value = null) -> Array:
 	var _Return = []

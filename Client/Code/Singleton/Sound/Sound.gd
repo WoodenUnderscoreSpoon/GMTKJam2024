@@ -1,5 +1,5 @@
 extends Node
-#class_name CE_Sound
+#class_name s_Sound
 
 var c_Dictionary_Music := { #Layer, Volume, Audio
 	#"Menu" : [0, 0.6, "001_Music/Legacy/Kevin MacLeod - Erik Satie - Gymnopedie No 1.ogg"],

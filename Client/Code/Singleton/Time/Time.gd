@@ -1,5 +1,5 @@
 extends Node
-class_name CE_Time
+class_name s_Time
 
 const _Ages : Array = [18, 0, 11, 22, 3, 14, 25, 6, 17, 28, 9, 20, 1, 12, 23, 4, 15, 26, 7]
 const _Offsets : Array = [-1, 1, 0, 1, 2, 3, 4, 5, 7, 7, 9, 9]

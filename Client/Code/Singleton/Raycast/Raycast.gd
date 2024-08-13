@@ -1,5 +1,5 @@
 extends Resource
-class_name CE_Raycast
+class_name s_Raycast
 
 #I never got this to work and I don't know why
 static func Get_Collision(p_From : Vector3, p_To : Vector3, p_Exceptions : Array = [], p_Mask : int = 2147483647, p_Bodies : bool = true, p_Areas : bool = true) -> Dictionary:

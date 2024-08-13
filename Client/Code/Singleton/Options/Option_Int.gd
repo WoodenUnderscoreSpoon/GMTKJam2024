@@ -1,5 +1,5 @@
 extends Resource
-class_name CE_Int
+class_name s_Int
 
 var _Value : int = 0
 #var _Default : int = 0
@@ -18,7 +18,7 @@ func Set(_value : int) -> void:
 	_Function.call(_Value)
 
 static func Create(_default : int, _min : int, _max : int, _function : Callable, _function_display : Callable, _update_on_release : bool = false) -> Resource:
-	var _Return = CE_Int.new()
+	var _Return = s_Int.new()
 	_Return._Min = _min
 	_Return._Max = _max
 	_Return._Value = clampi(_default, _min, _max)

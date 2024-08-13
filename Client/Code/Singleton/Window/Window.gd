@@ -1,7 +1,7 @@
 extends Node
-#class_name CE_Window
+#class_name s_Window
 
-@onready var _File_Window : CE_Config_File = CE_Filesystem.Get_Config_File("Profile/Window.txt")
+@onready var _File_Window : s_Config_File = s_Filesystem.Get_Config_File("Profile/Window.txt")
 var _Maximized : bool = false
 var _Fullscreen : bool = false
 var _Timer : Timer = Timer.new()

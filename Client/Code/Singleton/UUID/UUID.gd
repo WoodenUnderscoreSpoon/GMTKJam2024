@@ -1,5 +1,5 @@
 extends Resource
-class_name CE_UUID
+class_name s_UUID
 
 static func Get_Random_Int() -> int:
 	#Randomize every time to minimize the risk of collisions

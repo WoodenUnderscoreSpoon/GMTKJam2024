@@ -1,5 +1,5 @@
 extends Node
-#class_name CE_Game
+#class_name s_Game
 
 @onready var _Name : String = ProjectSettings.get_setting("application/config/name")
 @onready var _Path : String = [OS.get_executable_path().get_base_dir() + "/", ProjectSettings.globalize_path("res://Build/")][int(Is_Editor())]

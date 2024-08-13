@@ -1,5 +1,5 @@
 extends Resource
-class_name CE_Bool
+class_name s_Bool
 
 var _Value : bool = false
 #var _Default : bool = false
@@ -12,7 +12,7 @@ func Set(_value : bool) -> void:
 	_Function.call(_Value)
 
 static func Create(_default : bool, _function : Callable) -> Resource:
-	var _Return = CE_Bool.new()
+	var _Return = s_Bool.new()
 	_Return._Value = _default
 	#_Return._Default = _default
 	_Return._Function = _function

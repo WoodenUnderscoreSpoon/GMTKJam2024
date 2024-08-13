@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id="GDScript_g2va2"]
 script/source = "extends CanvasLayer
-#class_name CE_Tooltip
+#class_name s_Tooltip
 
 var _Tween = null
 var _Widget = null

@@ -1,5 +1,5 @@
 extends Node
-#class_name CE_Interface
+#class_name s_Interface
 
 const _Interfaces := {
 	#BASIC

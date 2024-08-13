@@ -1,5 +1,5 @@
 extends Node
-class_name CE_Pause
+class_name s_Pause
 
 static func Pause_Tree(_node : Node, _pause : bool):
 	Pause_Node(_node, _pause)

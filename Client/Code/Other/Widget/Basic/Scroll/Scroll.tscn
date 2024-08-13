@@ -100,8 +100,8 @@ func _ready() -> void:
 	Update_Padding_Vertical()
 	Update_Padding_Horizontal()
 
-func Update_Padding_Vertical() -> void: $\"Margin\".set(\"theme_override_constants/margin_right\", [[0, -50][int(!CE_Bitflag.Get($\"Margin\".size_flags_horizontal, SIZE_EXPAND))], _Padding][int(get_v_scroll_bar().visible)])
-func Update_Padding_Horizontal() -> void: $\"Margin\".set(\"theme_override_constants/margin_bottom\", [[0, -50][int(!CE_Bitflag.Get($\"Margin\".size_flags_vertical, SIZE_EXPAND))], _Padding][int(get_h_scroll_bar().visible)])
+func Update_Padding_Vertical() -> void: $\"Margin\".set(\"theme_override_constants/margin_right\", [[0, -50][int(!s_Bitflag.Get($\"Margin\".size_flags_horizontal, SIZE_EXPAND))], _Padding][int(get_v_scroll_bar().visible)])
+func Update_Padding_Horizontal() -> void: $\"Margin\".set(\"theme_override_constants/margin_bottom\", [[0, -50][int(!s_Bitflag.Get($\"Margin\".size_flags_vertical, SIZE_EXPAND))], _Padding][int(get_h_scroll_bar().visible)])
 "
 
 [node name="Scroll" type="ScrollContainer"]

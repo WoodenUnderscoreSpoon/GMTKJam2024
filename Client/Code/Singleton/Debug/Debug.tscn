@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id="GDScript_cdm3a"]
 script/source = "extends CanvasLayer
-#class_name CE_Debug
+#class_name s_Debug
 
 enum {STATIC = 0, METHOD, VARIABLE}
 var _Values := {}

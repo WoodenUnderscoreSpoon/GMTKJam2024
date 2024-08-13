@@ -1,5 +1,5 @@
 extends Node
-#class_name CE_Mouse
+#class_name s_Mouse
 
 var _Mode := Input.MOUSE_MODE_VISIBLE #Mode before a capture
 var _Position : Vector2i = Vector2i.ZERO #Position before a capture

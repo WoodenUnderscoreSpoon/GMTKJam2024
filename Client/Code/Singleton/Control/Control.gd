@@ -1,5 +1,5 @@
 extends Node
-#class_name CE_Control
+#class_name s_Control
 
 const _Texture_Mouse := preload("res://Resource/Texture/Interface/Controls/Mouse.png")
 const _Texture_Keyboard := preload("res://Resource/Texture/Interface/Controls/Keyboard.png")

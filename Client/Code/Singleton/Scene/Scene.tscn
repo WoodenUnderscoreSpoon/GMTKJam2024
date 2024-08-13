@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id="GDScript_ryc5a"]
 script/source = "extends CanvasLayer
-#class_name CE_Scene
+#class_name s_Scene
 
 const _Scenes := {
 	\"Menu\" : \"res://Code/Scene/002_Menu.tscn\",
