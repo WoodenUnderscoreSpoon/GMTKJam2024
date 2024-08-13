@@ -1,4 +1,7 @@
-extends Node
+[gd_scene load_steps=2 format=3 uid="uid://btlr3r7a52yxa"]
+
+[sub_resource type="GDScript" id="GDScript_cdm3a"]
+script/source = "extends CanvasLayer
 #class_name CE_Debug
 
 enum {STATIC = 0, METHOD, VARIABLE}
@@ -7,10 +10,10 @@ var _Timer := Timer.new()
 
 func _ready() -> void:
 	#OVERLAY
-	var _Overlay = preload("res://003_Code/001_Singleton/005_Debug/Overlay.tscn").instantiate()
-	add_child(_Overlay)
+	#var _Overlay = preload(\"res://Code/Singleton/Debug/Overlay.tscn\").instantiate()
+	#add_child(_Overlay)
 	#TIMER
-	_Timer.name = "Update"
+	_Timer.name = \"Update\"
 	_Timer.autostart = true
 	_Timer.wait_time = 0.25
 	add_child(_Timer)
@@ -21,13 +24,13 @@ func Set_Visible(_visible : bool) -> void:
 		Update()
 		_Timer.timeout.connect(Update)
 	else: _Timer.timeout.disconnect(Update)
-	$"Overlay".visible = _visible
+	visible = _visible
 
 func Update() -> void:
-	var _text = ""
+	var _text = \"\"
 	for _name in _Values.keys():
 		var _value = _Values[_name]
-		var _string = ""
+		var _string = \"\"
 		if (_value[0] == STATIC): _string = str(_value[1])
 		elif (_value[0] == METHOD):
 			if (_value[1].is_valid()): _string = str(_value[1].call())
@@ -35,15 +38,38 @@ func Update() -> void:
 		elif (_value[0] == VARIABLE):
 			if (is_instance_valid(_value[1])): _string = str(_value[1].get(_value[2]))
 			if (_value[3] != null): _string = _value[3].call(_string)
-		_text += _name + " = " + _string + "\n"
-	$"Overlay/Text".text = _text
+		_text += _name + \" = \" + _string + \"\\n\"
+	$\"Text\".text = _text
 
-func _input(_event : InputEvent) -> void: if (_event.is_action_pressed("F1")): Set_Visible(!Is_Visible())
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"F1\")): Set_Visible(!Is_Visible())
 func Add_Static(_name : String, _value : Variant, _function : Variant = null) -> void: _Values[_name] = [STATIC, _value]
 func Add_Method(_name : String, _callable : Callable, _function : Variant = null) -> void: _Values[_name] = [METHOD, _callable, _function]
 func Add_Variable(_name : String, _parent : Object, _method : String, _function : Variant = null) -> void: _Values[_name] = [VARIABLE, _parent, _method, _function]
 func Remove(_name : String) -> void: _Values.erase(_name)
-func Is_Visible() -> bool: return $"Overlay".visible
-static func Framerate_To_String(_data : String) -> String: return _data + " FPS"
+func Is_Visible() -> bool: return visible
+static func Framerate_To_String(_data : String) -> String: return _data + \" FPS\"
 static func Memory_To_String(_data : String) -> String: return String.humanize_size(int(_data))
-static func Power_To_String(_data : String) -> String: return ["Infinite", _data + "%"][int(_data != "-1")]
+static func Power_To_String(_data : String) -> String: return [\"Infinite\", _data + \"%\"][int(_data != \"-1\")]
+"
+
+[node name="Debug" type="CanvasLayer"]
+layer = 128
+visible = false
+script = SubResource("GDScript_cdm3a")
+
+[node name="Text" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = 4.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 13

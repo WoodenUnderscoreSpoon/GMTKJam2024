@@ -1,9 +1,9 @@
 extends Node
 #class_name CE_Control
 
-const _Texture_Mouse := preload("res://002_Resource/001_Texture/006_Interface/Controls/Mouse.png")
-const _Texture_Keyboard := preload("res://002_Resource/001_Texture/006_Interface/Controls/Keyboard.png")
-const _Texture_Controller := preload("res://002_Resource/001_Texture/006_Interface/Controls/Controller.png")
+const _Texture_Mouse := preload("res://Resource/Texture/Interface/Controls/Mouse.png")
+const _Texture_Keyboard := preload("res://Resource/Texture/Interface/Controls/Keyboard.png")
+const _Texture_Controller := preload("res://Resource/Texture/Interface/Controls/Controller.png")
 
 func Get_Keyboard_Layout_Name() -> String: return DisplayServer.keyboard_get_layout_name(DisplayServer.keyboard_get_current_layout())
 
@@ -28,8 +28,8 @@ func Array_To_Event(_key : Variant) -> Variant:
 	return _event
 
 func Get_Text_From_Controller(_index : int) -> String:
-	var _controller = CE_Options._Options["CONTROLLER"].Get_Position()
-	var _option = CE_Options._Options["CONTROLLER"].Get()
+	var _controller = s_Options._Options["CONTROLLER"].Get_Position()
+	var _option = s_Options._Options["CONTROLLER"].Get()
 	match _index:
 		0 : return ["A", "Cross", "B"][_controller]
 		1 : return ["B", "Circle", "A"][_controller]

@@ -10,8 +10,8 @@ func Load(_path : String, _password : String = "") -> CE_Config_File:
 	_Path = _path
 	_Password = _password
 	var _error = ERR_UNAVAILABLE
-	if (_Password == ""): _error = _Config_File.load(CE_Game.Get_Path() + _Path)
-	else: _error = _Config_File.load_encrypted_pass(CE_Game.Get_Path() + _Path, _Password)
+	if (_Password == ""): _error = _Config_File.load(s_Game.Get_Path() + _Path)
+	else: _error = _Config_File.load_encrypted_pass(s_Game.Get_Path() + _Path, _Password)
 	if (_error == ERR_FILE_CORRUPT): GD3_To_GD4()
 	#_Config_File.save(CE_Game.Get_Path() + "test.txt") #decrypt
 	return self
@@ -28,10 +28,10 @@ func Set(_section : String, _key : String, _value = null) -> void:
 func Save() -> void:
 	if (_Modified):
 		_Modified = false
-		DirAccess.make_dir_recursive_absolute((CE_Game.Get_Path() + _Path).get_base_dir())
+		DirAccess.make_dir_recursive_absolute((s_Game.Get_Path() + _Path).get_base_dir())
 		var _error = ERR_UNAVAILABLE
-		if (_Password == ""): _error = _Config_File.save(CE_Game.Get_Path() + _Path)
-		else: _error = _Config_File.save_encrypted_pass(CE_Game.Get_Path() + _Path, _Password)
+		if (_Password == ""): _error = _Config_File.save(s_Game.Get_Path() + _Path)
+		else: _error = _Config_File.save_encrypted_pass(s_Game.Get_Path() + _Path, _Password)
 
 func GD3_To_GD4() -> void:
 	# read file

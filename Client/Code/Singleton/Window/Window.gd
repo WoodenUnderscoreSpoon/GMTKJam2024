@@ -10,7 +10,7 @@ func _ready() -> void:
 	#WINDOW
 	DisplayServer.set_icon(preload("res://Resource/Texture/Game/Icon_Image.png"))
 	var _window = Get()
-	_window.title = CE_Game.Get_Name()
+	_window.title = s_Game.Get_Name()
 	_window.min_size = Vector2i(640, 480)
 	var _position_x = _File_Window.Get("WINDOW", "POSITION_X", null)
 	var _position_y = _File_Window.Get("WINDOW", "POSITION_Y", null)
@@ -36,7 +36,7 @@ func _ready() -> void:
 	_Timer.timeout.connect(Save)
 	add_child(_Timer)
 
-func _notification(_what : int) -> void: if (_what == NOTIFICATION_WM_CLOSE_REQUEST): CE_Game.Quit()
+func _notification(_what : int) -> void: if (_what == NOTIFICATION_WM_CLOSE_REQUEST): s_Game.Quit()
 func Get() -> Window: return $"/root"
 func Get_Size() -> Vector2i: return Get().size
 func Is_Maximized() -> bool: return _Maximized

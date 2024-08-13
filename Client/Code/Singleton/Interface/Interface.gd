@@ -45,18 +45,18 @@ func Return(_fallback_focus : Node = null) -> void:
 	if (is_instance_valid(_widget) and _widget.is_inside_tree()): _widget.grab_focus()
 	elif (is_instance_valid(_fallback_focus) and _fallback_focus.is_inside_tree()): _fallback_focus.grab_focus()
 	remove_child(_interface)
-	CE_Delete.Add(_interface)
+	s_Delete.Add(_interface)
 	_Focused_Interfaces.back().visible = true
 	_Focused_Interfaces.back().set_process_input(true)
 
 func Clear() -> void:
 	for _old_interface in _Focused_Interfaces:
 		remove_child(_old_interface)
-		CE_Delete.Add(_old_interface)
+		s_Delete.Add(_old_interface)
 	_Focused_Widgets.clear()
 	_Focused_Interfaces.clear()
 
-func _process(_delta : float) -> void: _Scale = float(min(CE_Window.Get().get_size().x+1, CE_Window.Get().get_size().y+1)) / 1024
+func _process(_delta : float) -> void: _Scale = float(min(s_Window.Get().get_size().x+1, s_Window.Get().get_size().y+1)) / 1024
 func Get_Scale() -> float: return _Scale * _Scale_Option
 func Get_Anchor() -> float: return 1.0 / Get_Scale()
 func Get_Focused_Widget() -> Node: return get_viewport().gui_get_focus_owner()

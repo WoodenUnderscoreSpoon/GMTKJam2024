@@ -2,7 +2,7 @@ extends Node
 #class_name CE_Game
 
 @onready var _Name : String = ProjectSettings.get_setting("application/config/name")
-@onready var _Path : String = [OS.get_executable_path().get_base_dir() + "/", ProjectSettings.globalize_path("res://001_Build/")][int(Is_Editor())]
+@onready var _Path : String = [OS.get_executable_path().get_base_dir() + "/", ProjectSettings.globalize_path("res://Build/")][int(Is_Editor())]
 @onready var _Mode : String = "Editor" if (Is_Editor()) else ["Release", "Debug"][int(Is_Debug())]
 @onready var _Version : String = ProjectSettings.get_setting("application/config/version")
 
@@ -18,7 +18,7 @@ func Is_Debug() -> bool: return OS.has_feature("debug")
 func Is_Demo() -> bool: return OS.has_feature("demo")
 
 func Quit() -> void:
-	CE_Window._Timer.stop()
-	CE_Window.Save()
-	CE_Options.Save()
+	s_Window._Timer.stop()
+	s_Window.Save()
+	s_Options.Save()
 	get_tree().quit()

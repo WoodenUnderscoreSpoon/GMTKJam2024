@@ -10,17 +10,17 @@ const _Scenes := {
 	\"Game\" : \"res://003_Code/004_Scene/004_Game.tscn\",
 }
 const _Masks := {
-	\"Bottom_To_Top\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Bottom_To_Top.png\"),
-	\"Top_To_Bottom\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Top_To_Bottom.png\"),
-	\"Left_To_Right\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Left_To_Right.png\"),
-	\"Right_To_Left\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Right_To_Left.png\"),
-	\"Middle_Horizontal\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Middle_Horizontal.png\"),
-	\"Middle_Vertical\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Middle_Vertical.png\"),
-	\"Spiral\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Spiral.png\"),
-	\"Noise\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Noise.png\"),
-	\"Crater\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Crater.png\"),
-	\"River\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/River.png\"),
-	\"Cloud\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Cloud.png\"),
+	\"Bottom_To_Top\" : preload(\"res://Resource/Texture/Shader/Transition/Bottom_To_Top.png\"),
+	\"Top_To_Bottom\" : preload(\"res://Resource/Texture/Shader/Transition/Top_To_Bottom.png\"),
+	\"Left_To_Right\" : preload(\"res://Resource/Texture/Shader/Transition/Left_To_Right.png\"),
+	\"Right_To_Left\" : preload(\"res://Resource/Texture/Shader/Transition/Right_To_Left.png\"),
+	\"Middle_Horizontal\" : preload(\"res://Resource/Texture/Shader/Transition/Middle_Horizontal.png\"),
+	\"Middle_Vertical\" : preload(\"res://Resource/Texture/Shader/Transition/Middle_Vertical.png\"),
+	\"Spiral\" : preload(\"res://Resource/Texture/Shader/Transition/Spiral.png\"),
+	\"Noise\" : preload(\"res://Resource/Texture/Shader/Transition/Noise.png\"),
+	\"Crater\" : preload(\"res://Resource/Texture/Shader/Transition/Crater.png\"),
+	\"River\" : preload(\"res://Resource/Texture/Shader/Transition/River.png\"),
+	\"Cloud\" : preload(\"res://Resource/Texture/Shader/Transition/Cloud.png\"),
 }
 var _Scene = null
 var _Tween = null

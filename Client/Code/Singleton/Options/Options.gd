@@ -49,7 +49,7 @@ func _ready() -> void:
 	for _name in _Keybinds.keys():
 		_Keybinds[_name] = _File_Keybinds.Get("KEYBINDS", _name, _Keybinds[_name])
 		InputMap.action_erase_events(_name)
-		for _i in _Keybinds[_name].size(): if (_Keybinds[_name][_i] != null): InputMap.action_add_event(_name, CE_Control.Array_To_Event(_Keybinds[_name][_i]))
+		for _i in _Keybinds[_name].size(): if (_Keybinds[_name][_i] != null): InputMap.action_add_event(_name, s_Control.Array_To_Event(_Keybinds[_name][_i]))
 	#_File_Keybinds.Set("KEYBINDS", "VERSION", CE_Game.Get_Version())
 	#_File_Keybinds.Save()
 
@@ -59,7 +59,7 @@ func Save() -> void:
 	for _name in _Keybinds.keys(): _File_Keybinds.Set("KEYBINDS", _name, _Keybinds[_name])
 	_File_Keybinds.Save()
 
-static func Change_Fullscreen(_value : bool) -> void: CE_Window.Set_Fullscreen(_value)
+static func Change_Fullscreen(_value : bool) -> void: s_Window.Set_Fullscreen(_value)
 static func Change_VSync(_value : bool) -> void: DisplayServer.window_set_vsync_mode([DisplayServer.VSYNC_DISABLED, DisplayServer.VSYNC_ENABLED][int(_value)])
 static func Change_Framerate(_value : int) -> void: Engine.max_fps = [0, 30, 60, 120, 240][_value]
 static func Change_Master_Volume(_value : int) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(float(_value) / 100))
@@ -68,10 +68,10 @@ static func Change_Ambient_Volume(_value : int) -> void: AudioServer.set_bus_vol
 static func Change_Sound_Volume(_value : int) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"), linear_to_db(float(_value) / 100))
 #static func Change_Footstep_Volume(_value : int) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Footstep"), linear_to_db(float(_value) / 100))
 #static func Change_Taunt_Volume(_value : int) -> void: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Taunt"), linear_to_db(float(_value) / 100))
-static func Change_UI_Scale(_value : int) -> void: CE_Interface._Scale_Option = remap(float(_value), 0, 150, 0.5, 2.0)
+static func Change_UI_Scale(_value : int) -> void: s_Interface._Scale_Option = remap(float(_value), 0, 150, 0.5, 2.0)
 static func Change_Camera_Sensitivity(_value : int) -> void: pass
-static func Change_Language(_value : String) -> void: CE_Options.LANGUAGE_CHANGED.emit()
-static func Change_Controller(_value : String) -> void: CE_Options.CONTROLLER_CHANGED.emit()
+static func Change_Language(_value : String) -> void: s_Options.LANGUAGE_CHANGED.emit()
+static func Change_Controller(_value : String) -> void: s_Options.CONTROLLER_CHANGED.emit()
 
 static func Display_Framerate(_value : int) -> String: return ["Unlimited", str(30.0 * pow(2.0, _value - 1)) + " FPS"][int(_value > 0)]
 static func Display_Volume(_value : int) -> String: return str(_value) + "%"

@@ -3,3 +3,14 @@ res://Code/Scene/001_Main.tscn
 res://Code/Scene/002_Intro.tscn
 res://Code/Scene/003_Menu.tscn
 res://Code/Singleton/Window/Window.gd
+res://Code/Singleton/Game/Game.gd
+res://Code/Singleton/Control/Control.gd
+res://Code/Singleton/Options/Options.gd
+res://Code/Singleton/Debug/Debug.tscn
+res://Code/Singleton/Filesystem/Config_File.gd
+res://Code/Singleton/Filesystem/Filesystem.gd
+res://Code/Singleton/Interface/Interface.gd
+res://Code/Singleton/Raycast/Raycast.gd
+res://Code/Singleton/Scene/Scene.tscn
+res://Code/Singleton/Tooltip/Tooltip.tscn
+res://Code/Singleton/Sound/Sound.gd

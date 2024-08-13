@@ -9,8 +9,8 @@ var _Widget = null
 
 func _process(_delta : float) -> void:
 	#SCALE
-	var _scale = CE_Interface.Get_Scale()
-	var _anchor = CE_Interface.Get_Anchor()
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
@@ -18,10 +18,10 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 	#POSITION
 	if (is_instance_valid(_Widget)):
-		var _position = CE_Mouse.Get_Position() + Vector2(10, 10)
-		_position.x = clamp(_position.x, 0, CE_Window.Get_Size().x - _Widget.size.x * CE_Interface.Get_Scale())
-		_position.y = clamp(_position.y, 0, CE_Window.Get_Size().y - _Widget.size.y * CE_Interface.Get_Scale())
-		$\"Control\".position = _position / CE_Interface.Get_Scale()
+		var _position = s_Mouse.Get_Position() + Vector2(10, 10)
+		_position.x = clamp(_position.x, 0, s_Window.Get_Size().x - _Widget.size.x * s_Interface.Get_Scale())
+		_position.y = clamp(_position.y, 0, s_Window.Get_Size().y - _Widget.size.y * s_Interface.Get_Scale())
+		$\"Control\".position = _position / s_Interface.Get_Scale()
 
 func Set_Widget(_widget : Node) -> void:
 	if (is_instance_valid(_Widget)):

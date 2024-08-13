@@ -22,7 +22,25 @@ run/flush_stdout_on_print=true
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://Resource/Texture/Game/Icon.png"
-config/windows_native_icon="res://002_Resource/001_Texture/001_Game/Icon.ico"
+config/windows_native_icon="res://Resource/Texture/Game/Icon.ico"
+
+[autoload]
+
+s_Control="*res://Code/Singleton/Control/Control.gd"
+s_Debug="*res://Code/Singleton/Debug/Debug.tscn"
+s_Delete="*res://Code/Singleton/Delete/Delete.gd"
+s_Filesystem="*res://Code/Singleton/Filesystem/Filesystem.gd"
+s_Game="*res://Code/Singleton/Game/Game.gd"
+s_Interface="*res://Code/Singleton/Interface/Interface.gd"
+s_Mouse="*res://Code/Singleton/Mouse/Mouse.gd"
+s_Options="*res://Code/Singleton/Options/Options.gd"
+s_Pause="*res://Code/Singleton/Pause/Pause.gd"
+s_Random="*res://Code/Singleton/Random/Random.gd"
+s_Scene="*res://Code/Singleton/Scene/Scene.tscn"
+s_Sound="*res://Code/Singleton/Sound/Sound.gd"
+s_Time="*res://Code/Singleton/Time/Time.gd"
+s_Tooltip="*res://Code/Singleton/Tooltip/Tooltip.tscn"
+s_Window="*res://Code/Singleton/Window/Window.gd"
 
 [debug]
 
