@@ -1,0 +1,5 @@
+res://Code/Scene/004_Game.tscn
+res://Code/Scene/001_Main.tscn
+res://Code/Scene/002_Intro.tscn
+res://Code/Scene/003_Menu.tscn
+res://Code/Singleton/Window/Window.gd

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bovu6pxcup232"]
+
+[sub_resource type="GDScript" id="GDScript_g2va2"]
+script/source = "extends CanvasLayer
+#class_name CE_Tooltip
+
+var _Tween = null
+var _Widget = null
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = CE_Interface.Get_Scale()
+	var _anchor = CE_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right  = _anchor
+		_child.anchor_bottom = _anchor
+	#POSITION
+	if (is_instance_valid(_Widget)):
+		var _position = CE_Mouse.Get_Position() + Vector2(10, 10)
+		_position.x = clamp(_position.x, 0, CE_Window.Get_Size().x - _Widget.size.x * CE_Interface.Get_Scale())
+		_position.y = clamp(_position.y, 0, CE_Window.Get_Size().y - _Widget.size.y * CE_Interface.Get_Scale())
+		$\"Control\".position = _position / CE_Interface.Get_Scale()
+
+func Set_Widget(_widget : Node) -> void:
+	if (is_instance_valid(_Widget)):
+		$\"Control\".remove_child(_Widget)
+		_Widget.queue_free()
+	_Widget = _widget
+	$\"Control\".add_child(_Widget)
+
+func Show() -> void:
+	if (is_instance_valid(_Tween)): _Tween.kill()
+	_Tween = get_tree().create_tween()
+	_Tween.tween_property($\"Control\", \"modulate:a\", 1.0, 0.2)
+	visible = true
+
+func Hide() -> void:
+	if (is_instance_valid(_Tween)): _Tween.kill()
+	_Tween = get_tree().create_tween()
+	_Tween.tween_property($\"Control\", \"modulate:a\", 0.0, 0.2)
+	_Tween.tween_callback(set_visible.bind(false))
+"
+
+[node name="Overlay" type="CanvasLayer"]
+layer = 127
+visible = false
+script = SubResource("GDScript_g2va2")
+
+[node name="Control" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

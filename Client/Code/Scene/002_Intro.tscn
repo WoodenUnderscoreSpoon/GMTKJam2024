@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://pgab3l36j7d3"]
+
+[sub_resource type="GDScript" id="GDScript_jk6iv"]
+script/source = "extends Node3D
+
+@onready var _Tween = get_tree().create_tween()
+
+func _ready() -> void:
+	#INDIGOBLIN
+	_Tween.tween_callback(Set_Company_Texture)
+	_Tween.tween_callback($\"Environment\".environment.sky.sky_material.set_sky_horizon_color.bind(Color(\"4b00aa\")))
+	_Tween.tween_callback($\"Environment\".environment.sky.sky_material.set_ground_horizon_color.bind(Color(\"4b00aa\")))
+	_Tween.tween_property($\"Company\", \"modulate:a\", 1.0, 1.0).set_delay(0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_Tween.parallel().tween_property($\"Environment\".environment, \"background_energy_multiplier\", 1.0, 1.0).set_delay(0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_Tween.tween_property($\"Company\", \"modulate:a\", 0.0, 1.0).set_delay(1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	_Tween.parallel().tween_property($\"Environment\".environment, \"background_energy_multiplier\", 0.0, 1.0).set_delay(1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	#GODOT
+	#_Tween.tween_callback(Set_Godot_Texture).set_delay(0.5)
+	#_Tween.tween_callback($\"Environment\".environment.sky.sky_material.set_sky_horizon_color.bind(Color(\"3157a6\")))
+	#_Tween.tween_callback($\"Environment\".environment.sky.sky_material.set_ground_horizon_color.bind(Color(\"3157a6\")))
+	#_Tween.tween_property($\"Company\", \"modulate:a\", 1.0, 1.0).set_delay(0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	#_Tween.parallel().tween_property($\"Environment\".environment, \"background_energy_multiplier\", 1.0, 1.0).set_delay(0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	#_Tween.tween_property($\"Company\", \"modulate:a\", 0.0, 1.0).set_delay(1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	#_Tween.parallel().tween_property($\"Environment\".environment, \"background_energy_multiplier\", 0.0, 1.0).set_delay(1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	#MENU
+	_Tween.tween_callback(CE_Scene.Switch_Second_Half.bind(\"Menu\", [], \"Spiral\"))
+
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")):
+		_Tween.stop()
+		CE_Scene.Switch_Instantly(\"Menu\")
+
+func Set_Company_Texture() -> void:
+	if   (CE_Time.Get_String_Month() == \"December\" and Time.get_date_dict_from_system().day == 25): $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/Christmas.png\")
+	elif (CE_Time.Get_String_Month() == \"October\" and Time.get_date_dict_from_system().day == 31): $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/Halloween.png\")
+	elif (CE_Time.Get_String_Month() == \"March\" and Time.get_date_dict_from_system().day == 17): $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/StPatrick.png\")
+	elif (CE_Time.Get_String_Month() == \"February\" and Time.get_date_dict_from_system().day == 14): $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/Valentine.png\")
+	elif (CE_Time.Get_String_Month() == CE_Time.Get_Easter()[0] and Time.get_date_dict_from_system().day == CE_Time.Get_Easter()[1]): $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/Easter.png\")
+	else: $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/Indigoblin.png\")
+
+func Set_Godot_Texture() -> void: $\"Company\".texture = load(\"res://002_Resource/001_Texture/002_Company/Godot.png\")
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rct4k"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.294118, 0, 0.666667, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.294118, 0, 0.666667, 1)
+ground_curve = 0.15
+
+[sub_resource type="Sky" id="Sky_v11vj"]
+sky_material = SubResource("ProceduralSkyMaterial_rct4k")
+
+[sub_resource type="Environment" id="Environment_ekpww"]
+background_mode = 2
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_v11vj")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+
+[node name="Scene" type="Node3D"]
+script = SubResource("GDScript_jk6iv")
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ekpww")
+
+[node name="Camera" type="Camera3D" parent="."]
+
+[node name="Company" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+texture_filter = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

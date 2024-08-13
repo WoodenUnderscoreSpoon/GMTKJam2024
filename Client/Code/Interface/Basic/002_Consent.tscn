@@ -1,0 +1,136 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc48udeakjsa7"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_x2b8h"]
+[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_i1k7t"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn" id="3_qf0lx"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func Setup(_text : String, _function_no : Callable, _function_yes : Callable) -> void:
+	$\"Margin/Margin/Margin/VBox/HBox/No\".grab_focus()
+	$\"Margin/Margin/Margin/VBox/Name\".text = _text
+	$\"Margin/Margin/Margin/VBox/HBox/No\".pressed.connect(_function_no)
+	$\"Margin/Margin/Margin/VBox/HBox/Yes\".pressed.connect(_function_yes)
+	call_deferred(\"Resize\", $\"Margin/Margin/Margin/VBox/HBox\")
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = CE_Interface.Get_Scale()
+	var _anchor = CE_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right  = _anchor
+		_child.anchor_bottom = _anchor
+
+func Resize(_node : Node) -> void:
+	var _size = 0
+	for _child in _node.get_children(): if (_child.visible): _size = max(_size, _child.size.x + 70)
+	for _child in _node.get_children(): _child.custom_minimum_size.x = _size
+
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): Return()
+func Return() -> void: CE_Interface.Return()
+"
+
+[node name="Popup" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="Color" type="ColorRect" parent="."]
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+
+[node name="Decoration" parent="Margin/Margin" instance=ExtResource("1_x2b8h")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Margin/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Margin/Margin/Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="Margin" type="MarginContainer" parent="Margin/Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Margin/Margin"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Name" type="Label" parent="Margin/Margin/Margin/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_i1k7t")
+theme_override_font_sizes/font_size = 45
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Margin/Margin/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="No" parent="Margin/Margin/Margin/VBox/HBox" instance=ExtResource("3_qf0lx")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "No"
+
+[node name="Yes" parent="Margin/Margin/Margin/VBox/HBox" instance=ExtResource("3_qf0lx")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "Yes"
+
+[connection signal="button_down" from="Button" to="." method="Return"]

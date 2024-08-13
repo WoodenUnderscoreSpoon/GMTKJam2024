@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvsc45jx2kbyw"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_4cdkd"]
+
+[sub_resource type="GDScript" id="GDScript_o1pbx"]
+script/source = "extends CanvasLayer
+
+var _Node = null
+
+func Setup(_node : Node, _choices : Array[String], _position : Vector2i) -> void:
+	_Node = _node
+	var _option = load(\"res://003_Code/002_Object/001_Widget/002_Options/003_Dropdown/Dropdown_Option.tscn\")
+	for _choice in _choices:
+		var _option_node = _option.instantiate()
+		_option_node.Setup(_node, _choice)
+		$\"Color/Margin/Margin/VBox\".add_child(_option_node)
+		if (_choice == CE_Options._Options[_node._Option].Get()): _option_node.grab_focus()
+	$\"Color/Margin\".position = _position
+	$\"Color/Margin\".custom_minimum_size.x = _Node.get_node(\"HBox/Dropdown\").size.x# * (1.0 - _scale)
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = CE_Interface.Get_Scale()
+	var _anchor = CE_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right  = _anchor
+		_child.anchor_bottom = _anchor
+	#SIZE
+	$\"Color/Margin\".custom_minimum_size.x = _Node.get_node(\"HBox/Dropdown\").size.x# * (1.0 - _scale)
+
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): CE_Interface.Return()
+func Unfocus() -> void: CE_Interface.Return()
+"
+
+[node name="Dropdown_Overlay" type="CanvasLayer"]
+script = SubResource("GDScript_o1pbx")
+
+[node name="Color" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Button" type="Button" parent="Color"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="Margin" type="MarginContainer" parent="Color"]
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 42.0
+
+[node name="Decoration" parent="Color/Margin" instance=ExtResource("1_4cdkd")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Color/Margin/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Color/Margin/Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.901961)
+
+[node name="Margin" type="MarginContainer" parent="Color/Margin"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBox" type="VBoxContainer" parent="Color/Margin/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[connection signal="button_down" from="Color/Button" to="." method="Unfocus"]

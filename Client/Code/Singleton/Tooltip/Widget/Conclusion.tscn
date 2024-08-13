@@ -1,0 +1,154 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxv2kgxpfdamt"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_l4kyg"]
+[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_q2xa2"]
+[ext_resource type="PackedScene" uid="uid://bq2331dg8igxo" path="res://003_Code/002_Object/001_Widget/010_Conclusion/Conclusion_Stat.tscn" id="3_bkejf"]
+
+[sub_resource type="GDScript" id="GDScript_qq7n8"]
+script/source = "extends MarginContainer
+
+func Setup(_monster : CE_Monster, _monster2 : CE_Monster) -> void:
+	#TEXT
+	$\"Margin/VBox/Box/HBox/Level\".text = \"Level : \" + str(_monster.Get_Level())
+	$\"Margin/VBox/Box/HBox/Level2\".text = \"-> \" + str(_monster2.Get_Level())
+	$\"Margin/VBox/Box/HBox/Level2\".visible = (_monster.Get_Level() != _monster2.Get_Level())
+	#STATS
+	$\"Margin/VBox/Grid/Health\".Set_Text(str(_monster.Get_Max_Health()))
+	$\"Margin/VBox/Grid/Attack\".Set_Text(str(_monster.Get_Attack()))
+	$\"Margin/VBox/Grid/Defense\".Set_Text(str(_monster.Get_Defense()))
+	$\"Margin/VBox/Grid/Mana\".Set_Text(str(_monster.Get_Max_Mana()))
+	$\"Margin/VBox/Grid/Intelligence\".Set_Text(str(_monster.Get_Intelligence()))
+	$\"Margin/VBox/Grid/Resilience\".Set_Text(str(_monster.Get_Resilience()))
+	$\"Margin/VBox/Grid/Speed\".Set_Text(str(_monster.Get_Speed()))
+	$\"Margin/VBox/Grid/Agility\".Set_Text(str(_monster.Get_Agility()))
+	$\"Margin/VBox/Grid/Charisma\".Set_Text(str(_monster.Get_Charisma()))
+	#STATS 2
+	$\"Margin/VBox/Grid/Health\".Set_Text_2(str(_monster2.Get_Max_Health()))
+	$\"Margin/VBox/Grid/Attack\".Set_Text_2(str(_monster2.Get_Attack()))
+	$\"Margin/VBox/Grid/Defense\".Set_Text_2(str(_monster2.Get_Defense()))
+	$\"Margin/VBox/Grid/Mana\".Set_Text_2(str(_monster2.Get_Max_Mana()))
+	$\"Margin/VBox/Grid/Intelligence\".Set_Text_2(str(_monster2.Get_Intelligence()))
+	$\"Margin/VBox/Grid/Resilience\".Set_Text_2(str(_monster2.Get_Resilience()))
+	$\"Margin/VBox/Grid/Speed\".Set_Text_2(str(_monster2.Get_Speed()))
+	$\"Margin/VBox/Grid/Agility\".Set_Text_2(str(_monster2.Get_Agility()))
+	$\"Margin/VBox/Grid/Charisma\".Set_Text_2(str(_monster2.Get_Charisma()))
+	#GRADE
+	#$\"Margin/VBox/Grid/Health\".Set_Grade(_monster.Get_Grade_Health())
+	#$\"Margin/VBox/Grid/Attack\".Set_Grade(_monster.Get_Grade_Attack())
+	#$\"Margin/VBox/Grid/Defense\".Set_Grade(_monster.Get_Grade_Defense())
+	#$\"Margin/VBox/Grid/Mana\".Set_Grade(_monster.Get_Grade_Mana())
+	#$\"Margin/VBox/Grid/Intelligence\".Set_Grade(_monster.Get_Grade_Intelligence())
+	#$\"Margin/VBox/Grid/Resilience\".Set_Grade(_monster.Get_Grade_Resilience())
+	#$\"Margin/VBox/Grid/Speed\".Set_Grade(_monster.Get_Grade_Speed())
+	#$\"Margin/VBox/Grid/Agility\".Set_Grade(_monster.Get_Grade_Agility())
+	#$\"Margin/VBox/Grid/Charisma\".Set_Grade(_monster.Get_Grade_Charisma())
+"
+
+[node name="Monster" type="MarginContainer"]
+script = SubResource("GDScript_qq7n8")
+
+[node name="Decoration" parent="." instance=ExtResource("1_l4kyg")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.901961)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Box" type="MarginContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox/Box"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="Level" type="Label" parent="Margin/VBox/Box/HBox"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_q2xa2")
+theme_override_font_sizes/font_size = 30
+text = "Level"
+vertical_alignment = 1
+
+[node name="Level2" type="Label" parent="Margin/VBox/Box/HBox"]
+visible = false
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_q2xa2")
+theme_override_font_sizes/font_size = 30
+text = "-> 12"
+vertical_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+
+[node name="Health" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "HP"
+
+[node name="Mana" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "MANA"
+
+[node name="Speed" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "SPE"
+
+[node name="Attack" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "ATT"
+
+[node name="Intelligence" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "INT"
+
+[node name="Agility" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "AGI"
+
+[node name="Defense" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "DEF"
+
+[node name="Resilience" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "RES"
+
+[node name="Charisma" parent="Margin/VBox/Grid" instance=ExtResource("3_bkejf")]
+layout_mode = 2
+_Name = "CHA"

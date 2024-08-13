@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqajj0wp1lop5"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_7ocfp"]
+[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_rm5fo"]
+
+[sub_resource type="GDScript" id="GDScript_ydfwx"]
+script/source = "extends MarginContainer
+
+func Setup(_text : String) -> void: $\"Control/Label\".text = _text
+func Resize() -> void: custom_minimum_size.x = $\"Control/Label\".size.x + 35
+"
+
+[node name="Text" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 70)
+offset_right = 42.0
+offset_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = SubResource("GDScript_ydfwx")
+
+[node name="Decoration" parent="." instance=ExtResource("1_7ocfp")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.901961)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -21.0
+offset_right = 0.5
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_rm5fo")
+theme_override_font_sizes/font_size = 45
+
+[connection signal="resized" from="Control/Label" to="." method="Resize"]

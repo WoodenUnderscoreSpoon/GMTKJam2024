@@ -1,0 +1,282 @@
+[gd_scene load_steps=8 format=3 uid="uid://chm5v8ay30whj"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_55ehd"]
+[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="1_ljay3"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn" id="3_ccrqc"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+const _Alphabet := \"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\"
+var _Function : Callable
+var _Uppercase := true
+var _Events_Accept := []
+var _Events_Left := []
+var _Events_Right := []
+var _Events_Up := []
+var _Events_Down := []
+
+func _ready() -> void:
+	#KEYBOARD
+	_Events_Accept = InputMap.action_get_events(\"ui_accept\").duplicate()
+	_Events_Left = InputMap.action_get_events(\"ui_left\").duplicate()
+	_Events_Right = InputMap.action_get_events(\"ui_right\").duplicate()
+	_Events_Up = InputMap.action_get_events(\"ui_up\").duplicate()
+	_Events_Down = InputMap.action_get_events(\"ui_down\").duplicate()
+	InputMap.action_erase_events(\"ui_accept\")
+	InputMap.action_erase_events(\"ui_left\")
+	InputMap.action_erase_events(\"ui_right\")
+	InputMap.action_erase_events(\"ui_up\")
+	InputMap.action_erase_events(\"ui_down\")
+	for _i in _Events_Accept: if (_i is InputEventJoypadButton): InputMap.action_add_event(\"ui_accept\", _i)
+	for _i in _Events_Accept: if (_i is InputEventJoypadButton): InputMap.action_add_event(\"ui_left\", _i)
+	for _i in _Events_Accept: if (_i is InputEventJoypadButton): InputMap.action_add_event(\"ui_right\", _i)
+	for _i in _Events_Accept: if (_i is InputEventJoypadButton): InputMap.action_add_event(\"ui_up\", _i)
+	for _i in _Events_Accept: if (_i is InputEventJoypadButton): InputMap.action_add_event(\"ui_down\", _i)
+	#LETTERS
+	var _widget = load(\"res://003_Code/002_Object/001_Widget/001_Basic/001_Button/Button.tscn\")
+	for _letter in _Alphabet:
+		var _instance = _widget.instantiate()
+		$\"Margin/Margin/Margin/VBox/HBox/Grid\".add_child(_instance)
+		_instance.Set_Text(_letter)
+		_instance.call_deferred(\"set_custom_minimum_size\", Vector2.ONE * 70)
+		_instance.pressed.connect(Add_Letter.bind(_letter))
+	$\"Margin/Margin/Margin/VBox/HBox/Grid\".get_child(0).grab_focus()
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = CE_Interface.Get_Scale()
+	var _anchor = CE_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right  = _anchor
+		_child.anchor_bottom = _anchor
+
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")): Return()
+	elif (_event is InputEventKey and _event.is_pressed()):
+		var _shift = _event.shift_pressed
+		_event.shift_pressed = false
+		_event.meta_pressed = false
+		_event.ctrl_pressed = false
+		_event.alt_pressed = false
+		_event.command_or_control_autoremap = false
+		if (_Alphabet.find(_event.as_text_keycode()) > -1):
+			for _i in $\"Margin/Margin/Margin/VBox/HBox/Grid\".get_children(): if (_i.get_node(\"Control/Label\").text == _event.as_text_keycode()): _i.grab_focus()
+			Add_Letter([_event.as_text_keycode().to_lower(), _event.as_text_keycode()][int(_shift)])
+		elif (_event.keycode == KEY_BACKSPACE):
+			$\"Margin/Margin/Margin/VBox/HBox/VBox/Backspace\".grab_focus()
+			Backspace()
+		elif (_event.keycode == KEY_SPACE):
+			$\"Margin/Margin/Margin/VBox/HBox/VBox/Space\".grab_focus()
+			Space()
+		elif (_event.keycode == KEY_ENTER): $\"Margin/Margin/Margin/VBox/HBox/VBox/Confirm\".grab_focus()
+	elif (_event is InputEventKey and _event.is_released()): if (_event.keycode == KEY_ENTER): Confirm()
+
+func Return() -> void:
+	InputMap.action_erase_events(\"ui_accept\")
+	InputMap.action_erase_events(\"ui_left\")
+	InputMap.action_erase_events(\"ui_right\")
+	InputMap.action_erase_events(\"ui_up\")
+	InputMap.action_erase_events(\"ui_down\")
+	for _i in _Events_Accept: InputMap.action_add_event(\"ui_accept\", _i)
+	for _i in _Events_Left: InputMap.action_add_event(\"ui_left\", _i)
+	for _i in _Events_Right: InputMap.action_add_event(\"ui_right\", _i)
+	for _i in _Events_Up: InputMap.action_add_event(\"ui_up\", _i)
+	for _i in _Events_Down: InputMap.action_add_event(\"ui_down\", _i)
+	CE_Interface.Return()
+
+func Set_Text(_text : String) -> void: $\"Margin/Margin/Margin/VBox/Name\".text = _text
+func Set_Function(_function : Callable) -> void: _Function = _function
+func Add_Letter(_letter : String) -> void: if ($\"Margin/Margin/Margin/VBox/Name\".text.length() < 20): $\"Margin/Margin/Margin/VBox/Name\".text += [_letter.to_lower(), _letter][int(_Uppercase)]
+func Backspace() -> void: $\"Margin/Margin/Margin/VBox/Name\".text = $\"Margin/Margin/Margin/VBox/Name\".text.left(-1)
+func Space() -> void: Add_Letter(\" \")
+
+func Shift() -> void:
+	_Uppercase = !_Uppercase
+	var _children = $\"Margin/Margin/Margin/VBox/HBox/Grid\".get_children()
+	var _alphabet = [_Alphabet.to_lower(), _Alphabet][int(_Uppercase)]
+	for _i in _alphabet.length(): _children[_i].Set_Text(_alphabet[_i])
+
+func Confirm() -> void:
+	Return()
+	_Function.call($\"Margin/Margin/Margin/VBox/Name\".text)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2ggp"]
+resource_local_to_scene = true
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.25098)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16kn2"]
+resource_local_to_scene = true
+content_margin_left = 20.0
+content_margin_right = 20.0
+draw_center = false
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riwb3"]
+resource_local_to_scene = true
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.25098)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="Text_Input" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="Color" type="ColorRect" parent="."]
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+
+[node name="Decoration" parent="Margin/Margin" instance=ExtResource("1_55ehd")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Margin/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Margin/Margin/Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="Margin" type="MarginContainer" parent="Margin/Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Margin/Margin"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="LineEdit" type="LineEdit" parent="Margin/Margin/Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_selected_color = Color(0.388235, 0.643137, 1, 1)
+theme_override_colors/selection_color = Color(0.0705882, 0.458824, 1, 0.658824)
+theme_override_constants/caret_width = 2
+theme_override_fonts/font = ExtResource("1_ljay3")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_b2ggp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_16kn2")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_riwb3")
+max_length = 15
+
+[node name="Name" type="Label" parent="Margin/Margin/Margin/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_ljay3")
+theme_override_font_sizes/font_size = 45
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HBox" type="HBoxContainer" parent="Margin/Margin/Margin/VBox"]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Margin/Margin/Margin/VBox/HBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 10
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Margin/Margin/VBox/HBox"]
+layout_mode = 2
+
+[node name="Backspace" parent="Margin/Margin/Margin/VBox/HBox/VBox" instance=ExtResource("3_ccrqc")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "Backspace"
+
+[node name="Space" parent="Margin/Margin/Margin/VBox/HBox/VBox" instance=ExtResource("3_ccrqc")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "Space"
+
+[node name="Shift" parent="Margin/Margin/Margin/VBox/HBox/VBox" instance=ExtResource("3_ccrqc")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "Shift"
+
+[node name="Confirm" parent="Margin/Margin/Margin/VBox/HBox/VBox" instance=ExtResource("3_ccrqc")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "Confirm"
+
+[node name="Cancel" parent="Margin/Margin/Margin/VBox/HBox/VBox" instance=ExtResource("3_ccrqc")]
+layout_mode = 2
+size_flags_horizontal = 9
+text = "Cancel"
+
+[connection signal="button_down" from="Button" to="." method="Return"]
+[connection signal="pressed" from="Margin/Margin/Margin/VBox/HBox/VBox/Backspace" to="." method="Backspace"]
+[connection signal="pressed" from="Margin/Margin/Margin/VBox/HBox/VBox/Space" to="." method="Space"]
+[connection signal="pressed" from="Margin/Margin/Margin/VBox/HBox/VBox/Shift" to="." method="Shift"]
+[connection signal="pressed" from="Margin/Margin/Margin/VBox/HBox/VBox/Confirm" to="." method="Confirm"]
+[connection signal="pressed" from="Margin/Margin/Margin/VBox/HBox/VBox/Cancel" to="." method="Return"]

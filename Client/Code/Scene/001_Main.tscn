@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://der6sf4w57h2j"]
+
+[sub_resource type="GDScript" id="GDScript_2brpq"]
+script/source = "extends Node3D
+
+#func _ready() -> void:
+	#CE_Debug.Add_Static(\"Game\", CE_Game.Get_Full_Name())
+	#CE_Debug.Add_Static(\"Mode\", CE_Game.Get_Mode())
+	#CE_Debug.Add_Static(\"Demo\", str(CE_Game.Is_Demo()).capitalize())
+	#CE_Debug.Add_Static(\"Storefront\", CE_Storefront.Get_Name())
+	#CE_Debug.Add_Static(\"OS\", OS.get_name())
+	#CE_Debug.Add_Static(\"Processor\", OS.get_processor_name())
+	#CE_Debug.Add_Method(\"Date\", CE_Time.Get_String_Date)
+	#CE_Debug.Add_Method(\"Time\", CE_Time.Get_String_Time)
+	#CE_Debug.Add_Method(\"Framerate\", Engine.get_frames_per_second, CE_Debug.Framerate_To_String)
+	#CE_Debug.Add_Method(\"Keyboard\", CE_Control.Get_Keyboard_Layout_Name)
+	##CE_Debug.Add(\"Control Mode\", CE_Control, \"Get_Control_Mode_String\")
+	#if (CE_Game.Is_Debug()): CE_Debug.Add_Method(\"Static Memory\", OS.get_static_memory_usage, CE_Debug.Memory_To_String)
+##	print(\"Game = \", CE_Game.Get_Full_Name())
+##	print(\"Mode = \", CE_Game.Get_Mode())
+##	print(\"Demo = \", CE_Game.Is_Demo())
+##	print(\"Platform = \", CE_Storefront.Get_Name())
+##	print(\"OS = \", OS.get_name())
+##	print(\"Keyboard = \", OS.get_latin_keyboard_variant())
+##	print(\"Power = \", CE_Debug.Power_To_String(str(OS.get_power_percent_left())))
+##	print(\"Date = \", CE_Time.Get_String_Date())
+##	print(\"Start Time = \", CE_Time.Get_String_Time())
+	#CE_Scene.call_deferred(\"Switch_Instantly\", \"Intro\")
+
+#func _input(_event : InputEvent) -> void:
+#	if (_event.is_action_pressed(\"MENU_RETURN\")):
+#		CE_Scene.call_deferred(\"Switch_Instantly\", \"Intro\")
+"
+
+[node name="Main" type="Node"]
+
+[node name="Scene" type="Node3D" parent="."]
+script = SubResource("GDScript_2brpq")
+
+[node name="Color" type="ColorRect" parent="Scene"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

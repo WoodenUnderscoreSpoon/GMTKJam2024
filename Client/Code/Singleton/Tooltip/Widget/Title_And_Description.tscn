@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1jy5gdhikc10"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://003_Code/002_Object/001_Widget/001_Basic/003_Decoration/Decoration.tscn" id="1_nfqfe"]
+[ext_resource type="FontFile" uid="uid://bw6cql4xarqiv" path="res://002_Resource/002_Font/Abscissa/Abscissa.ttf" id="2_3xkqy"]
+
+[sub_resource type="GDScript" id="GDScript_ydfwx"]
+script/source = "extends MarginContainer
+
+func Setup(_title : String, _description : String) -> void:
+	$\"Control/VBox/Title\".text = _title
+	$\"Control/VBox/Description\".text = _description
+
+func Resize() -> void: custom_minimum_size.x = max($\"Control/VBox/Title\".size.x, $\"Control/VBox/Description\".size.x) + 35
+"
+
+[node name="Text" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 109)
+offset_right = 42.0
+offset_bottom = 70.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = SubResource("GDScript_ydfwx")
+
+[node name="Decoration" parent="." instance=ExtResource("1_nfqfe")]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.901961)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -10
+
+[node name="Title" type="Label" parent="Control/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_3xkqy")
+theme_override_font_sizes/font_size = 45
+
+[node name="Description" type="Label" parent="Control/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_3xkqy")
+theme_override_font_sizes/font_size = 30
+
+[connection signal="resized" from="Control/VBox/Title" to="." method="Resize"]
+[connection signal="resized" from="Control/VBox/Description" to="." method="Resize"]

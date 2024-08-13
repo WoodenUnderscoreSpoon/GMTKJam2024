@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://ikicpkclwgn1"]
+
+[sub_resource type="GDScript" id="GDScript_ryc5a"]
+script/source = "extends CanvasLayer
+#class_name CE_Scene
+
+const _Scenes := {
+	\"Intro\" : \"res://003_Code/004_Scene/002_Intro.tscn\",
+	\"Menu\" : \"res://003_Code/004_Scene/003_Menu.tscn\",
+	\"Game\" : \"res://003_Code/004_Scene/004_Game.tscn\",
+}
+const _Masks := {
+	\"Bottom_To_Top\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Bottom_To_Top.png\"),
+	\"Top_To_Bottom\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Top_To_Bottom.png\"),
+	\"Left_To_Right\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Left_To_Right.png\"),
+	\"Right_To_Left\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Right_To_Left.png\"),
+	\"Middle_Horizontal\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Middle_Horizontal.png\"),
+	\"Middle_Vertical\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Middle_Vertical.png\"),
+	\"Spiral\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Spiral.png\"),
+	\"Noise\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Noise.png\"),
+	\"Crater\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Crater.png\"),
+	\"River\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/River.png\"),
+	\"Cloud\" : preload(\"res://002_Resource/001_Texture/005_Shader/001_Transition/Cloud.png\"),
+}
+var _Scene = null
+var _Tween = null
+
+func _ready() -> void: _Scene = $\"/root/Main/Scene\"
+func Get_Current() -> Node: return _Scene
+func Is_In_Transition() -> bool: return is_instance_valid(_Tween)
+
+func Switch(_scene : String, _arguments : Array = [], _mask : String = \"Spiral\", _time : float = 1.0) -> void:
+	if (!Is_In_Transition()):
+		var _color = $\"Color\"
+		_Tween = get_tree().create_tween()
+		#FIRST HALF
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Mask\", _Masks[_mask]))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Cutoff\", 1.0))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Reversed\", false))
+		_Tween.tween_callback(set_visible.bind(true))
+		_Tween.tween_property(_color.material, \"shader_parameter/_Cutoff\", 0.0, _time)
+		#SECOND HALF
+		_Tween.tween_callback(PRIVATE_Switch_Scene.bind(_scene, _arguments))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Cutoff\", 0.0))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Reversed\", true))
+		_Tween.tween_property(_color.material, \"shader_parameter/_Cutoff\", 1.0, _time)
+		_Tween.tween_callback(set_visible.bind(false))
+		_Tween.tween_callback(PRIVATE_Switch_Cleanup)
+
+func Switch_Second_Half(_scene : String, _arguments : Array = [], _mask : String = \"Spiral\", _time : float = 1.0) -> void:
+	if (!Is_In_Transition()):
+		var _color = $\"Color\"
+		_Tween = get_tree().create_tween()
+		#SECOND HALF
+		_Tween.tween_callback(PRIVATE_Switch_Scene.bind(_scene, _arguments))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Mask\", _Masks[_mask]))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Cutoff\", 0.0))
+		_Tween.tween_callback(_color.material.set_shader_parameter.bind(\"_Reversed\", true))
+		_Tween.tween_callback(set_visible.bind(true))
+		_Tween.tween_property(_color.material, \"shader_parameter/_Cutoff\", 1.0, _time)
+		_Tween.tween_callback(set_visible.bind(false))
+		_Tween.tween_callback(PRIVATE_Switch_Cleanup)
+
+func Switch_Instantly(_scene : String, _arguments : Array = []) -> void:
+	if (!Is_In_Transition()):
+		PRIVATE_Switch_Scene(_scene, _arguments)
+		PRIVATE_Switch_Cleanup()
+
+func PRIVATE_Switch_Scene(_scene : String, _arguments : Array = []) -> void:
+	#DELETE
+	var _game = $\"/root/Main\"
+	for _child in _game.get_children():
+		_game.remove_child(_child)
+		_child.queue_free()
+	#ADD
+	var _scene_node = load(_Scenes[_scene]).instantiate()
+	_game.add_child(_scene_node)
+	_Scene = _scene_node
+	if (_Scene.has_method(\"Setup\")): _Scene.Setup(_arguments)
+
+func PRIVATE_Switch_Cleanup() -> void:
+	visible = false
+	_Tween = null
+"
+
+[sub_resource type="Shader" id="Shader_435ey"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D _Mask : hint_default_transparent;
+uniform float _Cutoff : hint_range(0.0, 1.0);
+uniform float _Smoothness : hint_range(0.0, 1.0);
+uniform bool _Reversed;
+
+void fragment() {
+	float _value = texture(_Mask, UV).r;
+	if (_Reversed == true) {_value = 1.0 - _value;}
+	float _alpha = smoothstep(_Cutoff, _Cutoff + _Smoothness, _value * (1.0 - _Smoothness) + _Smoothness);
+	COLOR.a = _alpha;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i38w"]
+shader = SubResource("Shader_435ey")
+shader_parameter/_Cutoff = 0.0
+shader_parameter/_Smoothness = 0.5
+shader_parameter/_Reversed = true
+
+[node name="Scene" type="CanvasLayer"]
+layer = 127
+script = SubResource("GDScript_ryc5a")
+
+[node name="Color" type="ColorRect" parent="."]
+texture_filter = 2
+material = SubResource("ShaderMaterial_1i38w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
