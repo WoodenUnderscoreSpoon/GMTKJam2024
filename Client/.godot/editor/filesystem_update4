@@ -15,3 +15,6 @@ res://Code/Other/Widget/Options/Dropdown/Dropdown_Option.tscn
 res://Code/Other/Widget/Options/Dropdown/Dropdown.tscn
 res://Code/Singleton/Global/Global.gd
 res://Code/Other/Widget/Options/Keybind/Keybind.tscn
+res://Code/Interface/Game/001_Nothing.tscn
+res://Code/Interface/Game/002_Pause.tscn
+res://Code/Other/Character/Character.tscn

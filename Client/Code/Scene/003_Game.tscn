@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=4 format=3 uid="uid://isaqp1as5awk"]
+
+[ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
 
 [sub_resource type="GDScript" id="GDScript_fmrx4"]
-script/source = "extends Node3D
+script/source = "extends Node2D
 
 func _ready() -> void:
 	#s_Sound.Play_Music(\"Menu\", 4.0)
@@ -9,12 +11,18 @@ func _ready() -> void:
 	s_Interface.Switch(\"Nothing\")
 "
 
-[node name="Scene" type="Node3D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]
+size = Vector2(445, 35)
+
+[node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Character" parent="." instance=ExtResource("1_c47od")]
+
+[node name="Camera" type="Camera2D" parent="Character"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(46, 43)
+shape = SubResource("RectangleShape2D_upe0k")
