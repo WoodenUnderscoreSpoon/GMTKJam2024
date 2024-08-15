@@ -18,3 +18,4 @@ res://Code/Other/Widget/Options/Keybind/Keybind.tscn
 res://Code/Interface/Game/001_Nothing.tscn
 res://Code/Interface/Game/002_Pause.tscn
 res://Code/Other/Character/Character.tscn
+res://Code/Singleton/Options/Options.gd

@@ -27,8 +27,6 @@ signal LANGUAGE_CHANGED
 	"CONTROLLER" : s_Enum.Create("XBox", ["XBox", "Playstation", "Nintendo"], Change_Controller),
 }
 @onready var _Keybinds : Dictionary = {
-	"MOVE_FORWARD" : [[0, 87], [0, 4194320], [2, 11]],
-	"MOVE_BACKWARD" : [[0, 83], [0, 4194322], [2, 12]],
 	"MOVE_LEFT" : [[0, 65], [0, 4194319], [2, 13]],
 	"MOVE_RIGHT" : [[0, 68], [0, 4194321], [2, 14]],
 	"JUMP" : [[0, 32], null, [2, 0]],
@@ -36,8 +34,6 @@ signal LANGUAGE_CHANGED
 	"OPEN_MENU" : [[0, 4194306], null, null],
 #	"ZOOM_IN" : [null, null, null],
 #	"ZOOM_OUT" : [null, null, null],
-	#"SHORTCUT_INVENTORY" : [[0, 73], null, null],
-	#"SHORTCUT_MAP" : [[0, 77], null, null],
 }
 
 func _ready() -> void:
