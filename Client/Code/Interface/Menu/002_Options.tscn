@@ -21,7 +21,7 @@ func _ready() -> void:
 	$\"VBox/Margin1/HBox/Video\".Press(false)
 	for _child in $\"VBox/Margin2/Scroll/Margin\".get_children(): Resize(_child)
 
-func Setup() -> void: $\"Decoration\".visible = true
+func Setup() -> void: $\"Color\".visible = true
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): Return()
 
 func Resize(_node : Node) -> void:
@@ -47,6 +47,15 @@ func Return() -> void:
 [node name="Options" type="CanvasLayer"]
 script = SubResource("GDScript_ub5eq")
 
+[node name="Color" type="ColorRect" parent="."]
+visible = false
+offset_left = -21.0
+offset_top = -21.0
+offset_right = -21.0
+offset_bottom = -21.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.901961)
+
 [node name="Decoration" parent="." instance=ExtResource("1_jl7hq")]
 visible = false
 
@@ -63,11 +72,6 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
-
-[node name="Color" type="ColorRect" parent="Decoration/Margin"]
-layout_mode = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.901961)
 
 [node name="VBox" type="VBoxContainer" parent="."]
 anchors_preset = 15
