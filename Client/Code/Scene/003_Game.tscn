@@ -10,6 +10,9 @@ func _ready() -> void:
 	#s_Sound.Play_Music(\"Menu\", 4.0)
 	#s_Sound.Play_Ambient(\"\", 0.5)
 	s_Interface.Switch(\"Nothing\")
+	$\"Zone\"._Function = Start_Fishing
+
+func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\"): s_Interface.Add(\"Fishing\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]

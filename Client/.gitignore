@@ -1,5 +1,4 @@
 # Godot 4+ specific ignores
-/.godot/imported/
-/.godot/shader_cache/
+/.godot/
 /.import/
-/001_Build/
+/Build/

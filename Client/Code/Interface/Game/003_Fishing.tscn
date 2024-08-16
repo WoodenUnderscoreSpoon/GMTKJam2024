@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddo0exxeu7uxw"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right = _anchor
+		_child.anchor_bottom = _anchor
+
+#func _input(_event : InputEvent) -> void:
+	#if (_event.is_action_pressed(\"PAUSE\")): Return()
+	#elif (_event.is_action_pressed(\"OPEN_MENU\")): Return()
+
+func Return() -> void: s_Interface.Return()
+"
+
+[node name="Fishing" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="Margin"]
+layout_mode = 2
+color = Color(1, 0, 0, 0.52549)
