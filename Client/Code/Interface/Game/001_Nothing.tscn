@@ -3,6 +3,9 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
+@onready var money_counter = $\"Control/Money Counter\"
+var money = 0
+
 func _process(_delta : float) -> void:
 	#SCALE
 	var _scale = s_Interface.Get_Scale()
@@ -12,6 +15,12 @@ func _process(_delta : float) -> void:
 	for _child in get_children():
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
+		
+		
+func Add_Money(fish_size): # Calculating price can be done in fish code too if we prefer
+	money += fish_size * 2 # 2 is also placeholder until sizes are determined
+	money_counter.text = \"Money: \" + str(money)
+	
 
 func _input(_event : InputEvent) -> void:
 	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
@@ -38,3 +47,21 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Money Counter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.14
+anchor_bottom = 1.103
+offset_right = -5.60001
+offset_bottom = -4.12
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Money: "
