@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhlvkit3rx2d3"]
+
+[sub_resource type="GDScript" id="GDScript_wda3j"]
+script/source = "extends Area2D
+
+var _Is_Inside := false
+
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"INTERACT\")): if (_Is_Inside): print(\"Fishing\")
+func Body_Entered(_body : Node2D) -> void: if (_body.is_in_group(\"Character\")): _Is_Inside = true
+func Body_Exited(_body : Node2D) -> void: if (_body.is_in_group(\"Character\")): _Is_Inside = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1cmb"]
+size = Vector2(150, 20)
+
+[node name="Zone" type="Area2D"]
+script = SubResource("GDScript_wda3j")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b1cmb")
+debug_color = Color(0.666667, 1, 0, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="Body_Entered"]
+[connection signal="body_exited" from="." to="." method="Body_Exited"]
