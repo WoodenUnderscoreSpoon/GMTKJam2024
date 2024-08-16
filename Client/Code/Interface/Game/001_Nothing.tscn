@@ -14,7 +14,7 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 
 func _input(_event : InputEvent) -> void:
-	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\")
+	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
 	#elif (_event.is_action_pressed(\"OPEN_MENU\")): s_Interface.Add(\"Pause\")
 	#elif (_event.is_action_pressed(\"SHORTCUT_INVENTORY\")): s_Interface.Add(\"Inventory\")
 	#elif (_event.is_action_pressed(\"SHORTCUT_MAP\")): s_Interface.Add(\"Map\")

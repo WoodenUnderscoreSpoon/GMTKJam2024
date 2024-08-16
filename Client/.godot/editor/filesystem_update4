@@ -15,3 +15,5 @@ res://Code/Singleton/Global/Global.gd
 res://Code/Singleton/Options/Options.gd
 res://Code/Singleton/Sound/Sound.gd
 res://Code/Singleton/UUID/UUID.gd
+res://Code/Other/Widget/Basic/Button/Button.tscn
+res://Code/Other/Widget/Basic/Decoration/Decoration.tscn

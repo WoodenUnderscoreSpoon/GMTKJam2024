@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddo0exxeu7uxw"]
+[gd_scene load_steps=3 format=3 uid="uid://ddo0exxeu7uxw"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_cxboc"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -13,8 +15,8 @@ func _process(_delta : float) -> void:
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
 
-#func _input(_event : InputEvent) -> void:
-	#if (_event.is_action_pressed(\"PAUSE\")): Return()
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
 	#elif (_event.is_action_pressed(\"OPEN_MENU\")): Return()
 
 func Return() -> void: s_Interface.Return()
@@ -39,3 +41,59 @@ theme_override_constants/margin_bottom = 0
 [node name="ColorRect" type="ColorRect" parent="Margin"]
 layout_mode = 2
 color = Color(1, 0, 0, 0.52549)
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Decoration" parent="Margin/VBox" instance=ExtResource("1_cxboc")]
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Margin/VBox/Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.4, 0.4, 0.501961)
+
+[node name="Decoration2" parent="Margin/VBox" instance=ExtResource("1_cxboc")]
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorRect" parent="Margin/VBox/Decoration2/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.4, 0.4, 0.501961)
