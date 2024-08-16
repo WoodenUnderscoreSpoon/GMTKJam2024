@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddo0exxeu7uxw"]
+[gd_scene load_steps=7 format=3 uid="uid://ddo0exxeu7uxw"]
 
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_cxboc"]
+[ext_resource type="Texture2D" uid="uid://b40uogs0ys4b7" path="res://Resource/Texture/Interface/Widget/Border.png" id="2_cg45d"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
 @export var _Colors : Gradient
 var _Progress := 50.0
-var _Bar_Position
+var _Bar_Velocity := 0.0
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -19,21 +20,31 @@ func _process(_delta : float) -> void:
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
 	#BARS
-	_Progress = sin(Time.get_ticks_msec())
+	#_Progress = (sin(float(Time.get_ticks_usec()) / 1000000) + 1.0)*50
 	$\"Margin/HBox/Decoration2/Margin/Progress\".value = _Progress
 	$\"Margin/HBox/Decoration2/Margin/Progress\".modulate = _Colors.sample(_Progress/100)
 
-func _input(_event : InputEvent) -> void:
-	if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
-	elif (_event.is_action_pressed(\"INTERACT\")): print(\"test\")
+func _physics_process(_delta : float) -> void:
+	#CONTROLS
+	if (Input.is_action_pressed(\"INTERACT\")): _Bar_Velocity -= _delta * 80.0
+	else: _Bar_Velocity += _delta * 80.0
+	#BAR
+	$\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y = clamp($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + _Bar_Velocity / 8.0, 0, 340)
+	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y >= 340.0 or $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= 0.0): _Bar_Velocity = 0.0
+	#PROGRESS
+	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y): _Progress += _delta * 20.0
+	else: _Progress -= _delta * 20.0
+	if (_Progress <= 0.0): Return()
+	elif (_Progress >= 100.0): Return()
 
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
 func Return() -> void: s_Interface.Return()
 "
 
 [sub_resource type="Gradient" id="Gradient_6aqww"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(0.165087, 0.694475, 0, 1, 0.975001, 0.718368, 2.31028e-06, 1, 0.795865, 0, 0.166209, 1)
+colors = PackedColorArray(0.795865, 0, 0.166209, 1, 0.975001, 0.718368, 2.31028e-06, 1, 0.165087, 0.694475, 0, 1)
 metadata/_snap_enabled = true
 metadata/_snap_count = 4
 
@@ -70,7 +81,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 2
 
 [node name="Decoration" parent="Margin/HBox" instance=ExtResource("1_cxboc")]
-custom_minimum_size = Vector2(80, 500)
+custom_minimum_size = Vector2(70, 500)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -99,11 +110,22 @@ layout_mode = 2
 
 [node name="Bar" type="ColorRect" parent="Margin/HBox/Decoration/Margin/Node"]
 custom_minimum_size = Vector2(0, 100)
-offset_top = 390.0
-offset_right = 70.0
+layout_mode = 0
+offset_top = 340.0
+offset_right = 60.0
 offset_bottom = 490.0
 size_flags_vertical = 4
 color = Color(0.935431, 0.436617, 0, 1)
+
+[node name="Fish" type="TextureRect" parent="Margin/HBox/Decoration/Margin/Node"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_top = 215.0
+offset_right = 60.0
+offset_bottom = 275.0
+texture = ExtResource("2_cg45d")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Decoration2" parent="Margin/HBox" instance=ExtResource("1_cxboc")]
 custom_minimum_size = Vector2(40, 500)
