@@ -12,7 +12,7 @@ func _ready() -> void:
 	s_Interface.Switch(\"Nothing\")
 	$\"Zone\"._Function = Start_Fishing
 
-func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\"): s_Interface.Add(\"Fishing\")
+func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\"): s_Interface.Add(\"Fishing\", false)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]

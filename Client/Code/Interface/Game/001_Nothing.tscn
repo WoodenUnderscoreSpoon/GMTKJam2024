@@ -15,12 +15,10 @@ func _process(_delta : float) -> void:
 	for _child in get_children():
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
-		
-		
-func Add_Money(fish_size): # Calculating price can be done in fish code too if we prefer
+
+func Add_Money(fish_size) -> void: # Calculating price can be done in fish code too if we prefer
 	money += fish_size * 2 # 2 is also placeholder until sizes are determined
 	money_counter.text = \"Money: \" + str(money)
-	
 
 func _input(_event : InputEvent) -> void:
 	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)

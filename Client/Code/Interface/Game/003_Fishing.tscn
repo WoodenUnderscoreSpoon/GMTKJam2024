@@ -35,9 +35,14 @@ func _physics_process(_delta : float) -> void:
 	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y): _Progress += _delta * 20.0
 	else: _Progress -= _delta * 20.0
 	if (_Progress <= 0.0): Return()
-	elif (_Progress >= 100.0): Return()
+	elif (_Progress >= 100.0): Catch_Fish()
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
+
+func Catch_Fish() -> void:
+	Return()
+	s_Interface.Get_Current().Add_Money(10) #TODO placeholder money
+
 func Return() -> void: s_Interface.Return()
 "
 
