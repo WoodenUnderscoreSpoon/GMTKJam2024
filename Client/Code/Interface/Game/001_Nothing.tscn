@@ -16,6 +16,7 @@ func _process(_delta : float) -> void:
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
 
+#I think we want every species to have a different price range
 func Add_Money(fish_size) -> void: # Calculating price can be done in fish code too if we prefer
 	money += fish_size * 2 # 2 is also placeholder until sizes are determined
 	money_counter.text = \"Money: \" + str(money)
@@ -62,4 +63,4 @@ offset_bottom = -4.12
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
-text = "Money: "
+text = "Money: 0"
