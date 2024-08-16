@@ -27,7 +27,7 @@ func _ready() -> void:
 	_Fullscreen = _File_Window.Get("WINDOW", "FULLSCREEN", false)
 	if (_Maximized): _window.mode = Window.MODE_MAXIMIZED
 	if (_Fullscreen): _window.mode = Window.MODE_FULLSCREEN
-	_window.move_to_foreground()
+	_window.grab_focus() #_window.move_to_foreground()
 	#TIMER
 	_Timer.name = "Autosave"
 	_Timer.autostart = true

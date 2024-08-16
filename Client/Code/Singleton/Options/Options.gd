@@ -1,8 +1,8 @@
 extends Node
 #class_name s_Option
 
-signal CONTROLLER_CHANGED
-signal LANGUAGE_CHANGED
+@warning_ignore("unused_signal") signal CONTROLLER_CHANGED
+@warning_ignore("unused_signal") signal LANGUAGE_CHANGED
 @onready var _File_Options := s_Filesystem.Get_Config_File("Profile/Options.txt")
 #@onready var _File_Keybinds := s_Filesystem.Get_Config_File("Profile/Keybinds.txt")
 @onready var _File_Keybinds := s_Filesystem.Get_Config_File("Profile/Keybinds.txt", "HAMEL1994")
