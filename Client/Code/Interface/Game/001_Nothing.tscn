@@ -3,8 +3,8 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
-@onready var money_counter = $\"Control/Money Counter\"
-var money = 0
+@onready var _Money_counter = $\"Control/Money Counter\"
+var _Money := 0.0
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -16,9 +16,10 @@ func _process(_delta : float) -> void:
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
 
-func Add_Money(fish_size) -> void:
-	money += fish_size
-	money_counter.text = \"Money: \" + str(money)
+func Add_Money(_price : float) -> void:
+	_Money += _price
+	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
+	_Money_counter.text = \"Money: \" + str(\"%0*.*f\" % [0, 2, _Money]) + \"$\"
 
 func _input(_event : InputEvent) -> void:
 	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
@@ -62,4 +63,4 @@ offset_bottom = -4.12
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
-text = "Money: 0"
+text = "Money: 0.00$"
