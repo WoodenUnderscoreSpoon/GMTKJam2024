@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6qdk5ux8fbb1"]
+[gd_scene load_steps=8 format=3 uid="uid://b6qdk5ux8fbb1"]
 
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="1_jwiqk"]
 [ext_resource type="StyleBox" uid="uid://btv8mswlbju8r" path="res://Resource/Other/Theme_Interface.tres" id="2_my2o8"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="2_y03px"]
 
@@ -84,7 +85,8 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("1_jwiqk")
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 2
 
 [node name="On" type="Button" parent="HBox"]
@@ -149,9 +151,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.184314, 0.184314, 0.184314, 1)
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 45
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_jwiqk")
+theme_override_font_sizes/font_size = 25
 text = "On"
+vertical_alignment = 1
 
 [node name="Off" type="Button" parent="HBox"]
 custom_minimum_size = Vector2(200, 70)
@@ -214,9 +218,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.184314, 0.184314, 0.184314, 1)
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 45
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_jwiqk")
+theme_override_font_sizes/font_size = 25
 text = "Off"
+vertical_alignment = 1
 
 [connection signal="focus_entered" from="HBox/On" to="HBox/On" method="Focus"]
 [connection signal="focus_exited" from="HBox/On" to="HBox/On" method="Unfocus"]

@@ -12,6 +12,7 @@ func _ready() -> void:
 	var _window = Get()
 	_window.title = s_Game.Get_Name()
 	_window.min_size = Vector2i(640, 480)
+	_window.content_scale_size = Vector2i(1920, 1080)
 	var _position_x = _File_Window.Get("WINDOW", "POSITION_X", null)
 	var _position_y = _File_Window.Get("WINDOW", "POSITION_Y", null)
 	var _size_x = _File_Window.Get("WINDOW", "SIZE_X", _window.get_size_with_decorations().x)

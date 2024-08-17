@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b58y37w4s1ky1"]
+[gd_scene load_steps=7 format=3 uid="uid://b58y37w4s1ky1"]
 
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_6mpiv"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="3_b2lr6"]
 [ext_resource type="Texture2D" uid="uid://b34o12drg00na" path="res://Resource/Texture/Interface/Controls/Mouse.png" id="3_wcb2q"]
 
 [sub_resource type="GDScript" id="GDScript_tdbry"]
@@ -124,6 +125,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 
 [node name="Logo" type="TextureRect" parent="Button/Margin/HBox"]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
@@ -134,7 +136,8 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 45
+theme_override_fonts/font = ExtResource("3_b2lr6")
+theme_override_font_sizes/font_size = 25
 text_overrun_behavior = 3
 
 [connection signal="focus_entered" from="Button" to="Button" method="Focus"]

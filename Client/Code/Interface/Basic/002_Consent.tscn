@@ -20,7 +20,7 @@ func _process(_delta : float) -> void:
 	scale.x = _scale
 	scale.y = _scale
 	for _child in get_children():
-		_child.anchor_right  = _anchor
+		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
 
 func Resize(_node : Node) -> void:

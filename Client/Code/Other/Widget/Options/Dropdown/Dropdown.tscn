@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cerxwrx5mtyw3"]
+[gd_scene load_steps=6 format=3 uid="uid://cerxwrx5mtyw3"]
 
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="1_rfayb"]
 [ext_resource type="Texture2D" uid="uid://d041ufr2h480c" path="res://Resource/Texture/Interface/Options/Arrow.png" id="2_nsldw"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="3_g3ye0"]
 
@@ -53,7 +54,8 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("1_rfayb")
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 2
 
 [node name="Dropdown" type="MarginContainer" parent="HBox"]
@@ -125,7 +127,9 @@ offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 45
+theme_override_fonts/font = ExtResource("1_rfayb")
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [node name="Control" type="Control" parent="HBox/Dropdown"]
 layout_mode = 2

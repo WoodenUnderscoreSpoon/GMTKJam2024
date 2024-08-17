@@ -93,7 +93,7 @@ theme_override_constants/margin_bottom = 25
 
 [node name="HBox" type="HBoxContainer" parent="VBox/Margin1"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Video" parent="VBox/Margin1/HBox" node_paths=PackedStringArray("_Node") instance=ExtResource("1_xoa5h")]

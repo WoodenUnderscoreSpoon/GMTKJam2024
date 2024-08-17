@@ -19,6 +19,7 @@ const _Interfaces := {
 	"Fishing" : "res://Code/Interface/Game/003_Fishing.tscn",
 	"Journal" : "res://Code/Interface/Game/004_Journal.tscn",
 	"Shop" : "res://Code/Interface/Game/005_Shop.tscn",
+	"Catch" : "res://Code/Interface/Game/006_Catch.tscn",
 }
 var _Scale : float = 1.0
 var _Scale_Option : float = 1.0
@@ -61,7 +62,7 @@ func Clear() -> void:
 	_Focused_Interfaces.clear()
 
 func _process(_delta : float) -> void: _Scale = float(min(s_Window.Get().get_size().x+1, s_Window.Get().get_size().y+1)) / 1024
-func Get_Scale() -> float: return _Scale * _Scale_Option
+func Get_Scale() -> float: return 1.0 #_Scale * _Scale_Option
 func Get_Anchor() -> float: return 1.0 / Get_Scale()
 func Get_Focused_Widget() -> Node: return get_viewport().gui_get_focus_owner()
 func Get_Current() -> Node: return _Focused_Interfaces.back()

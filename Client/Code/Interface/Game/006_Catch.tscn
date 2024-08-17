@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu4x6q3tsa2re"]
+
+[ext_resource type="Texture2D" uid="uid://jo2gvcb74o6t" path="res://Resource/Texture/Fish/Test1.png" id="1_5wlkw"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="2_quccr"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right = _anchor
+		_child.anchor_bottom = _anchor
+"
+
+[node name="Catch" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Animation" type="AnimationPlayer" parent="Margin"]
+
+[node name="Control" type="Control" parent="Margin"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 37.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Fish" type="TextureRect" parent="Margin/Control/VBox"]
+texture_filter = 1
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+texture = ExtResource("1_5wlkw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Margin/Control/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_quccr")
+theme_override_font_sizes/font_size = 40
+text = "Sunfish"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Size" type="Label" parent="Margin/Control/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_quccr")
+theme_override_font_sizes/font_size = 25
+text = "18 inches"
+horizontal_alignment = 1
+vertical_alignment = 1

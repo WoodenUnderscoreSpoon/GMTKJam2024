@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d22wwfkhauryu"]
+[gd_scene load_steps=7 format=3 uid="uid://d22wwfkhauryu"]
 
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="1_um2h7"]
 [ext_resource type="Texture2D" uid="uid://cpbgl2l51rc1s" path="res://Resource/Texture/Interface/Empty.png" id="2_vlpyb"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="4_5lv4r"]
 
@@ -77,7 +78,8 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("1_um2h7")
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 2
 
 [node name="Margin2" type="MarginContainer" parent="HBox"]
@@ -143,8 +145,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.184314, 0.184314, 0.184314, 1)
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 45
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_um2h7")
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [connection signal="drag_ended" from="HBox/Margin2/Decoration/Margin/Slider" to="." method="Drag_End"]
 [connection signal="drag_started" from="HBox/Margin2/Decoration/Margin/Slider" to="." method="Drag_Start"]

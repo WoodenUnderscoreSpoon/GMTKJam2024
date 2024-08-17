@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b40uogs0ys4b7" path="res://Resource/Texture/Interface/Widget/Border.png" id="1_op0nv"]
 
 [node name="Decoration" type="NinePatchRect"]
-texture_filter = 2
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_op0nv")
 draw_center = false
-patch_margin_left = 21
-patch_margin_top = 21
-patch_margin_right = 21
-patch_margin_bottom = 21
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8

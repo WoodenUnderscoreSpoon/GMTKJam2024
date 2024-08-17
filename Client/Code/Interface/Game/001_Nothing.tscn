@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://g5qxyhawque5"]
+[gd_scene load_steps=5 format=3 uid="uid://g5qxyhawque5"]
 
 [ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_ax3jy"]
 [ext_resource type="Texture2D" uid="uid://ctn1c0do7c21s" path="res://Resource/Texture/Interface/Journal.png" id="2_7nyks"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="3_1i7we"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -78,6 +79,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_1i7we")
 theme_override_font_sizes/font_size = 40
 text = "Money: 0.00$"
 vertical_alignment = 1

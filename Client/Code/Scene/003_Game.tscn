@@ -39,6 +39,7 @@ autostart = true
 [node name="Character" parent="." instance=ExtResource("1_c47od")]
 
 [node name="Camera" type="Camera2D" parent="Character"]
+zoom = Vector2(4, 4)
 
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
 

@@ -58,6 +58,7 @@ visible = false
 script = SubResource("GDScript_cdm3a")
 
 [node name="Text" type="Label" parent="."]
+auto_translate_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -66,10 +67,9 @@ offset_right = 4.0
 offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
 theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 13
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 40

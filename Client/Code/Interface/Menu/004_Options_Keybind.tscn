@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://p07ltlmmf8d2"]
+[gd_scene load_steps=3 format=3 uid="uid://p07ltlmmf8d2"]
+
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="1_bl5u8"]
 
 [sub_resource type="GDScript" id="GDScript_o1pbx"]
 script/source = "extends CanvasLayer
@@ -59,8 +61,9 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 60
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("1_bl5u8")
+theme_override_font_sizes/font_size = 40
 text = "Press any key"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -70,3 +73,5 @@ visible = false
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_bl5u8")
+theme_override_font_sizes/font_size = 10
