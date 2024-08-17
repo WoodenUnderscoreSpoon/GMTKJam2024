@@ -44,7 +44,7 @@ var c_Dictionary_Music := { #Layer, Volume, Audio
 	#"WE_Boss" : [31, 0.6, "001_Music/Legacy/PeriTune - Material_EpicBattle2_loop.ogg"],
 }
 var c_Dictionary_Ambient := { #Audio
-	#"Wind" : "003_Ambient/Legacy/Wind.ogg",
+	"Wind" : "Ambient/Wind.ogg",
 	#"Earthquake" : "003_Ambient/Legacy/Earthquake.ogg",
 	#"Water" : "003_Ambient/Legacy/Water.ogg",
 	#"Computer_Loop" : "003_Ambient/Legacy/DriveBootLoop.ogg",

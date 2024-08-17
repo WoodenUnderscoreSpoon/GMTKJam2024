@@ -7,8 +7,8 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	#s_Sound.Play_Music(\"Menu\", 4.0)
-	#s_Sound.Play_Ambient(\"\", 0.5)
+	s_Sound.Play_Music(\"\", 4.0)
+	s_Sound.Play_Ambient(\"Wind\", 1.0)
 	s_Interface.Switch(\"Nothing\")
 	$\"Zone\"._Function = Start_Fishing
 

@@ -10,6 +10,16 @@ script/source = "extends CanvasLayer
 var _Progress := 50.0
 var _Bar_Velocity := 0.0
 var _Fish_Target := 0.0
+var _Fish : Fish
+var _Difficulty := 0.0
+
+func _ready() -> void:
+	_Fish = Fish.Create(\"Test\")
+	print(_Fish.Get_Size())
+	print(_Fish.Get_Price())
+	_Difficulty = randf_range(0.0, 100.0)
+	print(\"Difficulty: \", _Difficulty)
+	$\"Margin/Timer\".wait_time = (100.0 - _Difficulty) / 100.0
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -47,7 +57,7 @@ func Move_Fish() -> void: _Fish_Target = randf_range(0.0, 440.0)
 
 func Catch_Fish() -> void:
 	Return()
-	s_Interface.Get_Current().Add_Money(10) #TODO placeholder money
+	s_Interface.Get_Current().Add_Money(_Fish.Get_Price()) #TODO placeholder money
 "
 
 [sub_resource type="Gradient" id="Gradient_6aqww"]
