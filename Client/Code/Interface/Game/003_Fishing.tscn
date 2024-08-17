@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddo0exxeu7uxw"]
 
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_cxboc"]
-[ext_resource type="Texture2D" uid="uid://b40uogs0ys4b7" path="res://Resource/Texture/Interface/Widget/Border.png" id="2_cg45d"]
+[ext_resource type="Texture2D" uid="uid://jo2gvcb74o6t" path="res://Resource/Texture/Fish/Test1.png" id="2_m3gfm"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -9,17 +9,16 @@ script/source = "extends CanvasLayer
 @export var _Colors : Gradient
 var _Progress := 50.0
 var _Bar_Velocity := 0.0
-var _Fish_Target := 0.0
 var _Fish : Fish
-var _Difficulty := 0.0
+var _Fish_Target := 0.0
+var _Fish_AI_Position := 0
 
 func _ready() -> void:
-	_Fish = Fish.Create(\"Test\")
-	print(_Fish.Get_Size())
-	print(_Fish.Get_Price())
-	_Difficulty = randf_range(0.0, 100.0)
-	print(\"Difficulty: \", _Difficulty)
-	$\"Margin/Timer\".wait_time = (100.0 - _Difficulty) / 100.0
+	var _species = [\"Test1\", \"Test2\"]
+	_Fish = Fish.Create(_species.pick_random())
+	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)
+	$\"Margin/HBox/Decoration/Margin/Node/Fish/Fish\".texture = load(Species.Get_Texture(_Fish._Species))
+	Move_Fish()
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -44,16 +43,24 @@ func _physics_process(_delta : float) -> void:
 	$\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y = clamp($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + _Bar_Velocity / 8.0, 0, 365)
 	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y >= 365.0 or $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= 0.0): _Bar_Velocity = 0.0
 	#FISH
-	$\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y = lerp($\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y, _Fish_Target, _delta / 2)
+	$\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y = lerp($\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y, _Fish_Target, _delta / 2 * Species.Get_Speed(_Fish._Species))
 	#PROGRESS
-	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y): _Progress += _delta * 10.0
+	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y - $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y): _Progress += _delta * 10.0 / Species.Get_Defense(_Fish._Species)
 	else: _Progress -= _delta * 18.0
 	if (_Progress <= 0.0): Return()
 	elif (_Progress >= 100.0): Catch_Fish()
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
 func Return() -> void: s_Interface.Return()
-func Move_Fish() -> void: _Fish_Target = randf_range(0.0, 440.0)
+
+func Move_Fish() -> void:
+	var _pattern = Species.Get_AI(_Fish._Species)
+	var _power = Species.Get_Power(_Fish._Species) * 100.0
+	var _direction = _pattern[_Fish_AI_Position]
+	if (randi() % 4 == 0): _direction *= -1.0
+	var _modifier = randf_range(0.8, 1.2)
+	_Fish_AI_Position = posmod(_Fish_AI_Position + 1, _pattern.size())
+	_Fish_Target = clamp(_Fish_Target + _direction * _power * _modifier, 0, 440.0)
 
 func Catch_Fish() -> void:
 	Return()
@@ -93,11 +100,6 @@ theme_override_constants/margin_bottom = 0
 wait_time = 0.75
 autostart = true
 
-[node name="ColorRect" type="ColorRect" parent="Margin"]
-visible = false
-layout_mode = 2
-color = Color(1, 0, 0, 0.52549)
-
 [node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -129,11 +131,6 @@ layout_mode = 2
 mouse_filter = 2
 color = Color(0.4, 0.4, 0.4, 0.501961)
 
-[node name="Red" type="ColorRect" parent="Margin/HBox/Decoration/Margin"]
-visible = false
-layout_mode = 2
-color = Color(0.796078, 0, 0.164706, 1)
-
 [node name="Node" type="Control" parent="Margin/HBox/Decoration/Margin"]
 layout_mode = 2
 
@@ -145,13 +142,20 @@ offset_right = 60.0
 offset_bottom = 490.0
 size_flags_vertical = 4
 
-[node name="Fish" type="TextureRect" parent="Margin/HBox/Decoration/Margin/Node"]
+[node name="Fish" type="MarginContainer" parent="Margin/HBox/Decoration/Margin/Node"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 0
 offset_top = 430.0
 offset_right = 60.0
 offset_bottom = 490.0
-texture = ExtResource("2_cg45d")
+
+[node name="Fish" type="TextureRect" parent="Margin/HBox/Decoration/Margin/Node/Fish"]
+texture_filter = 2
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_m3gfm")
 expand_mode = 1
 stretch_mode = 4
 
