@@ -6,7 +6,7 @@ const _Dictionary := {
 		"SPEED" : 1.0, #should never be more than like 3
 		"POWER" : 1.0, #should never be more tahn like 1.5
 		"DEFENSE" : 1.0, #should never be more than like 2
-		"AI" : [-1.0, -1.0, 2.5], #TODO need to implement AI
+		"AI" : [-1.0, -1.0, 2.5],
 		"TEXTURE" : "res://Resource/Texture/Fish/Test1.png",
 		"SIZE" : 1.0,
 		"PRICE" : 1.0,
@@ -19,6 +19,15 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Test2.png",
 		"SIZE" : 10.0,
 		"PRICE" : 10.0,
+	},
+	"Test3" : {
+		"SPEED" : 3.0,
+		"POWER" : 1.5,
+		"DEFENSE" : 2.0,
+		"AI" : [1.0, -1.0, -1.0, 1.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Test3.png",
+		"SIZE" : 50.0,
+		"PRICE" : 50.0,
 	},
 }
 

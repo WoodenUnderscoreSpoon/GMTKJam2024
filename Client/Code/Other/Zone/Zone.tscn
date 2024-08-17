@@ -6,7 +6,7 @@ script/source = "extends Area2D
 var _Is_Inside := false
 var _Function : Callable #need to set something with code
 
-func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"INTERACT\")): if (_Is_Inside): _Function.call()
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"INTERACT\")): if (_Is_Inside and _Function.is_valid()): _Function.call()
 func Body_Entered(_body : Node2D) -> void: if (_body.is_in_group(\"Character\")): _Is_Inside = true
 func Body_Exited(_body : Node2D) -> void: if (_body.is_in_group(\"Character\")): _Is_Inside = false
 "

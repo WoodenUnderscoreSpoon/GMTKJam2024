@@ -14,7 +14,7 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
-	var _species = [\"Test1\", \"Test2\"]
+	var _species = Species._Dictionary.keys()
 	_Fish = Fish.Create(_species.pick_random())
 	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)
 	$\"Margin/HBox/Decoration/Margin/Node/Fish/Fish\".texture = load(Species.Get_Texture(_Fish._Species))
@@ -51,7 +51,10 @@ func _physics_process(_delta : float) -> void:
 	elif (_Progress >= 100.0): Catch_Fish()
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
-func Return() -> void: s_Interface.Return()
+
+func Return() -> void:
+	s_Interface.Return()
+	s_Scene.Get_Current().Stop_Fishing()
 
 func Move_Fish() -> void:
 	var _pattern = Species.Get_AI(_Fish._Species)
@@ -64,7 +67,7 @@ func Move_Fish() -> void:
 
 func Catch_Fish() -> void:
 	Return()
-	s_Interface.Get_Current().Add_Money(_Fish.Get_Price()) #TODO placeholder money
+	s_Interface.Get_Current().Add_Money(_Fish.Get_Price())
 "
 
 [sub_resource type="Gradient" id="Gradient_6aqww"]

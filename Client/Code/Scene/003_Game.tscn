@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=6 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
 [ext_resource type="PackedScene" uid="uid://bhlvkit3rx2d3" path="res://Code/Other/Zone/Zone.tscn" id="2_05tr2"]
@@ -7,29 +7,50 @@
 script/source = "extends Node2D
 
 var _Savefile : s_Config_File
+@export var _Animation_Playing := false
 
 func Setup(_arguments : Array) -> void:
 	s_Sound.Play_Music(\"\", 1.0)
 	s_Sound.Play_Ambient(\"Wind\", 1.0)
-	$\"Zone\"._Function = Start_Fishing
+	$\"Zone_Fishing\"._Function = Start_Fishing
 	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\") #TODO encrypt savefiles
 	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
 	s_Interface.Switch(\"Nothing\")
 
-func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\"): s_Interface.Add(\"Fishing\", false)
+#func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and !_Animation_Playing): $\"Animation\".play(\"Fish\")
+#func Start_Fishing_Animation_End() -> void: s_Interface.Add(\"Fishing\", false)
+
+func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Fishing\", false)
+func Stop_Fishing() -> void: $\"Timer\".start()
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kokd"]
+size = Vector2(50, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]
 size = Vector2(445, 35)
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
+_Animation_Playing = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
 
 [node name="Character" parent="." instance=ExtResource("1_c47od")]
 
 [node name="Camera" type="Camera2D" parent="Character"]
 
-[node name="Zone" parent="." instance=ExtResource("2_05tr2")]
+[node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
+
+[node name="Zone_Shop" parent="." instance=ExtResource("2_05tr2")]
+position = Vector2(-202, 0)
+
+[node name="Collision" parent="Zone_Shop" index="0"]
+position = Vector2(38, 0)
+shape = SubResource("RectangleShape2D_2kokd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-45, -13)
@@ -37,3 +58,5 @@ position = Vector2(-45, -13)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(46, 43)
 shape = SubResource("RectangleShape2D_upe0k")
+
+[editable path="Zone_Shop"]
