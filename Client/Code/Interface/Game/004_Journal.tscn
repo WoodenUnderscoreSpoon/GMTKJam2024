@@ -2,6 +2,25 @@
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right = _anchor
+		_child.anchor_bottom = _anchor
+
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")): Return()
+	elif (_event.is_action_pressed(\"OPEN_JOURNAL\")): Return()
+
+func Return() -> void:
+	s_Interface.Return()
+	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
+	#s_Global._Paused = false
 "
 
 [node name="Journal" type="CanvasLayer"]
@@ -19,3 +38,7 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="Margin"]
+layout_mode = 2
+color = Color(0, 0.513716, 0.913104, 0.238)

@@ -221,9 +221,9 @@ _Option = "JUMP"
 layout_mode = 2
 _Option = "INTERACT"
 
-[node name="Open Menu" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
+[node name="Open Journal" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
 layout_mode = 2
-_Option = "OPEN_MENU"
+_Option = "OPEN_JOURNAL"
 
 [node name="Margin3" type="MarginContainer" parent="VBox"]
 layout_mode = 2

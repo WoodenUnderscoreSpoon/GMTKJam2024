@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://g5qxyhawque5"]
+[gd_scene load_steps=4 format=3 uid="uid://g5qxyhawque5"]
+
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_ax3jy"]
+[ext_resource type="Texture2D" uid="uid://ctn1c0do7c21s" path="res://Resource/Texture/Interface/Journal.png" id="2_7nyks"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
-@onready var _Money_counter = $\"Control/Money Counter\"
 var _Money := 0.0
 
 func _ready() -> void:
+	$\"Margin/Journal\".custom_minimum_size.x = 100
 	_Money = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"MONEY\", 0.0)
 	Update_Money()
 
@@ -20,55 +23,65 @@ func _process(_delta : float) -> void:
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
 
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
+	elif (_event.is_action_pressed(\"OPEN_JOURNAL\")): Start_Shop()
+
+func Start_Shop() -> void: s_Interface.Add(\"Journal\", false)
+func Update_Money() -> void: $\"Margin/Money\".text = \"Money: \" + str(\"%0*.*f\" % [0, 2, _Money]) + \"$\"
+
 func Add_Money(_price : float) -> void:
 	_Money += _price
 	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
 	s_Scene.Get_Current()._Savefile.Set(\"SAVE\", \"MONEY\", _Money)
 	s_Scene.Get_Current()._Savefile.Save()
 	Update_Money()
-
-func Update_Money() -> void: _Money_counter.text = \"Money: \" + str(\"%0*.*f\" % [0, 2, _Money]) + \"$\"
-
-func _input(_event : InputEvent) -> void:
-	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
-	#elif (_event.is_action_pressed(\"OPEN_MENU\")): s_Interface.Add(\"Pause\")
-	#elif (_event.is_action_pressed(\"SHORTCUT_INVENTORY\")): s_Interface.Add(\"Inventory\")
-	#elif (_event.is_action_pressed(\"SHORTCUT_MAP\")): s_Interface.Add(\"Map\")
-	#elif (_event.is_action_pressed(\"ZOOM_IN\")): s_Scene.Get_Current()._Camera_Zoom = clamp(s_Scene.Get_Current()._Camera_Zoom * 0.9, 0.175, 0.825)
-	#elif (_event.is_action_pressed(\"ZOOM_OUT\")): s_Scene.Get_Current()._Camera_Zoom = clamp(s_Scene.Get_Current()._Camera_Zoom * 1.1, 0.175, 0.825)
 "
 
 [node name="Nothing" type="CanvasLayer"]
 script = SubResource("GDScript_ub5eq")
 
 [node name="Margin" type="MarginContainer" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 0
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Journal" parent="Margin" instance=ExtResource("1_ax3jy")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+focus_mode = 0
 
-[node name="Money Counter" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.14
-anchor_bottom = 1.103
-offset_right = -5.60001
-offset_bottom = -4.12
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Margin" type="MarginContainer" parent="Margin/Journal/Decoration/Margin" index="1"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Texture" type="TextureRect" parent="Margin/Journal/Decoration/Margin/Margin"]
+layout_mode = 2
+texture = ExtResource("2_7nyks")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Money" type="Label" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "Money: 0.00$"
+vertical_alignment = 1
+
+[connection signal="pressed" from="Margin/Journal" to="." method="Start_Shop"]
+
+[editable path="Margin/Journal"]

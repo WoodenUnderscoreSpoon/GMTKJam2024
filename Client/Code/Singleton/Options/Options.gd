@@ -31,9 +31,7 @@ extends Node
 	"MOVE_RIGHT" : [[0, 68], [0, 4194321], [2, 14]],
 	"JUMP" : [[0, 32], null, [2, 0]],
 	"INTERACT" : [[0, 69], null, [2, 1]],
-	"OPEN_MENU" : [[0, 4194306], null, null],
-#	"ZOOM_IN" : [null, null, null],
-#	"ZOOM_OUT" : [null, null, null],
+	"OPEN_JOURNAL" : [[0, 74], null, [2, 10]],
 }
 
 func _ready() -> void:

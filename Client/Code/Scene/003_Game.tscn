@@ -7,19 +7,17 @@
 script/source = "extends Node2D
 
 var _Savefile : s_Config_File
-@export var _Animation_Playing := false
 
 func Setup(_arguments : Array) -> void:
 	s_Sound.Play_Music(\"\", 1.0)
 	s_Sound.Play_Ambient(\"Wind\", 1.0)
 	$\"Zone_Fishing\"._Function = Start_Fishing
+	$\"Zone_Shop\"._Function = Start_Shop
 	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\") #TODO encrypt savefiles
 	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
 	s_Interface.Switch(\"Nothing\")
 
-#func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and !_Animation_Playing): $\"Animation\".play(\"Fish\")
-#func Start_Fishing_Animation_End() -> void: s_Interface.Add(\"Fishing\", false)
-
+func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Shop\", false)
 func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Fishing\", false)
 func Stop_Fishing() -> void: $\"Timer\".start()
 "
@@ -32,7 +30,6 @@ size = Vector2(445, 35)
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
-_Animation_Playing = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
