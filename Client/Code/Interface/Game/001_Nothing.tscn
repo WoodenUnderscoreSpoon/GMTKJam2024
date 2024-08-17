@@ -6,6 +6,10 @@ script/source = "extends CanvasLayer
 @onready var _Money_counter = $\"Control/Money Counter\"
 var _Money := 0.0
 
+func _ready() -> void:
+	_Money = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"MONEY\", 0.0)
+	Update_Money()
+
 func _process(_delta : float) -> void:
 	#SCALE
 	var _scale = s_Interface.Get_Scale()
@@ -19,7 +23,11 @@ func _process(_delta : float) -> void:
 func Add_Money(_price : float) -> void:
 	_Money += _price
 	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
-	_Money_counter.text = \"Money: \" + str(\"%0*.*f\" % [0, 2, _Money]) + \"$\"
+	s_Scene.Get_Current()._Savefile.Set(\"SAVE\", \"MONEY\", _Money)
+	s_Scene.Get_Current()._Savefile.Save()
+	Update_Money()
+
+func Update_Money() -> void: _Money_counter.text = \"Money: \" + str(\"%0*.*f\" % [0, 2, _Money]) + \"$\"
 
 func _input(_event : InputEvent) -> void:
 	if   (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
