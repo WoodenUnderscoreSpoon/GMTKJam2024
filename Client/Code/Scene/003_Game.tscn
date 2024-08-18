@@ -82,10 +82,10 @@ size = Vector2(23, 20)
 size = Vector2(57, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vyspl"]
-size = Vector2(583.5, 55)
+size = Vector2(635, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfjl3"]
-size = Vector2(152, 107)
+size = Vector2(152, 174)
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
@@ -118,7 +118,7 @@ one_shot = true
 autostart = true
 
 [node name="Character" parent="." instance=ExtResource("1_c47od")]
-position = Vector2(97, 119)
+position = Vector2(65, 130)
 
 [node name="Camera" type="Camera2D" parent="Character"]
 offset = Vector2(0, -32)
@@ -146,15 +146,15 @@ shape = SubResource("RectangleShape2D_vp8en")
 position = Vector2(-45, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(142, 172)
+position = Vector2(119.5, 172)
 shape = SubResource("RectangleShape2D_vyspl")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(363, 91)
+position = Vector2(363, 113)
 shape = SubResource("RectangleShape2D_dfjl3")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-123, 91)
+position = Vector2(-123, 113)
 shape = SubResource("RectangleShape2D_dfjl3")
 
 [editable path="Zone_Fishing"]

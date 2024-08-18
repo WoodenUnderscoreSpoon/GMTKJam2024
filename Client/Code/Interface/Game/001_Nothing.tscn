@@ -64,6 +64,8 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="Texture" type="TextureRect" parent="Margin/Journal/Decoration/Margin/Margin"]
+texture_filter = 1
+texture_repeat = 1
 layout_mode = 2
 texture = ExtResource("2_7nyks")
 expand_mode = 1
