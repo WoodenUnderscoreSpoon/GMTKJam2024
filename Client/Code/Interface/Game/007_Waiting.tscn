@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmakn1aycvexn"]
+[gd_scene load_steps=2 format=3 uid="uid://bkhwfqb1bwy2j"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
 func _ready() -> void:
+	get_node(\"/root/Main/Scene/Character\").Set_Animation(3)
 	s_Sound.Play_Sound(\"Plop\")
 	$\"Margin/Timer\".wait_time = randf_range(1.0, 6.0)
 	$\"Margin/Timer\".start()
@@ -24,6 +25,7 @@ func _input(_event : InputEvent) -> void:
 		s_Interface.Return()
 
 func Start_Fishing() -> void:
+	get_node(\"/root/Main/Scene/Character\").Set_Animation(4)
 	s_Interface.Return()
 	s_Interface.Add(\"Fishing\", false)
 "

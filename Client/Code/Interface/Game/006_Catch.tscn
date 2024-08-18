@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu4x6q3tsa2re"]
 
-[ext_resource type="PackedScene" uid="uid://c1nyohvaxhrft" path="res://Code/Other/Fish/Catch_Effect.tscn" id="1_1k1mb"]
+[ext_resource type="PackedScene" path="res://Code/Other/Fish/Catch_Effect.tscn" id="1_1k1mb"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -32,6 +32,7 @@ func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\"
 func Ready_To_Quit() -> void: _Ready = true
 
 func Return() -> void:
+	get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 	s_Interface.Return()
 	s_Scene.Get_Current().Stop_Fishing()
 "
@@ -148,6 +149,33 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_retgh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_105ro"]
 resource_name = "Small"
 length = 2.0
@@ -178,33 +206,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"Play"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_retgh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Texture:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lnyig"]
