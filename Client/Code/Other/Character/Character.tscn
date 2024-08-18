@@ -29,33 +29,23 @@ func _physics_process(_delta : float) -> void:
 		if direction == 0: Set_Animation(0)
 		else: Set_Animation(1)
 
-func Set_Idle() -> void:
-	if (anim_direction > 0): $Animation.play(\"idle_left\")
-	else: $Animation.play(\"idle_right\")
-
-func Set_Walk() -> void:
-	if (anim_direction > 0): $Animation.play(\"walk_left\")
-	else: $Animation.play(\"walk_right\")
-
-func Set_Jump() -> void:
-	#TODO add jump animations
-	if (anim_direction > 0): $Animation.play(\"jump_left\")
-	else: $Animation.play(\"jump_right\")
+func Set_Idle() -> void: $\"Animation\".play([\"idle_right\", \"idle_left\"][int(anim_direction > 0)])
+func Set_Walk() -> void: $\"Animation\".play([\"walk_right\", \"walk_left\"][int(anim_direction > 0)])
+func Set_Jump() -> void: $\"Animation\".play([\"jump_right\", \"jump_left\"][int(anim_direction > 0)]) #TODO add jump animations
+func Set_Animation(animation : int) -> void: call(MOVEMENT_STATE_FUNCTIONS[animation])
+func Fishing_Animation_Complete(): ready_to_move = true
+func Plop_Sound() -> void: s_Sound.Play_Sound(\"Plop\")
 
 func Set_Wait() -> void:
 	ready_to_move = false
-	$Animation.play(\"cast_line\")
-	$Animation.queue(\"wait\")
+	$\"Animation\".play(\"cast_line\")
+	$\"Animation\".queue(\"wait\")
 
 func Set_Reel() -> void:
 	ready_to_move = false
 	s_Sound.Play_Sound(\"Squeak\")
-	$Animation.play(\"reel_line\")
-	$Animation.queue(\"reel_stagger\")
-
-func Set_Animation(animation : int) -> void: call(MOVEMENT_STATE_FUNCTIONS[animation])
-func Fishing_Animation_Complete(): ready_to_move = true
-func Plop_Sound() -> void: s_Sound.Play_Sound(\"Plop\")
+	$\"Animation\".play(\"reel_line\")
+	$\"Animation\".queue(\"reel_stagger\")
 "
 
 [sub_resource type="Animation" id="Animation_m7lof"]

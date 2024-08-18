@@ -24,12 +24,15 @@ func Setup(_arguments : Array) -> void:
 	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
 	_Money = _Savefile.Get(\"SAVE\", \"MONEY\", _Money)
 	_Journal = _Savefile.Get(\"SAVE\", \"JOURNAL\", _Journal)
+	_Licenses = _Savefile.Get(\"SAVE\", \"LICENSES\", _Licenses)
+	_Upgrades = _Savefile.Get(\"SAVE\", \"UPGRADES\", _Upgrades)
 	s_Interface.Switch(\"Nothing\")
 	s_Interface.Get_Current().Update_Money()
 
 func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Shop\", false)
 func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Waiting\", false)
 func Stop_Fishing() -> void: $\"Timer\".start()
+func Get_Upgrade_Level(_upgrade : int) -> int: return _Upgrades[_upgrade]
 
 func Add_Money(_price : float) -> void:
 	_Money += _price
@@ -61,9 +64,6 @@ func Unlock_Upgrade(_upgrade : int, _price : float) -> bool:
 	if MAX_UPGRADE_LEVELS[_upgrade] > _Upgrades[_upgrade]: _Upgrades[_upgrade] = _Upgrades[_upgrade] + 1
 	Add_Money(-_price)
 	return Is_Upgrade_Max_Level(_upgrade)
-
-func Get_Upgrade_Level(_upgrade : int) -> int:
-	return _Upgrades[_upgrade]
 
 func Is_Upgrade_Max_Level(_upgrade : int) -> bool:
 	if _Upgrades[_upgrade] == MAX_UPGRADE_LEVELS[_upgrade]: return true
