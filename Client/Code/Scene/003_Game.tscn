@@ -11,8 +11,9 @@ var _Savefile : s_Config_File
 var _Money := 0.0
 #TODO add license and upgrades to the savefile
 var _Journal := {}
-var _Licenses := [0, 0, 0] #0 = locked, 1 = unlocked, 2 = unlocked and equipped
+var _Licenses := [0, 0, 0, 0] #[small, medium, large, huge], 0 = locked, 1 = unlocked, 2 = unlocked and equipped
 var _Upgrades := [0, 0, 0] #[reel, rod, bait], number is the upgrade level
+const MAX_UPGRADE_LEVELS := [3, 3, 3] #[reel, rod, bait]
 
 func Setup(_arguments : Array) -> void:
 	s_Sound.Play_Music(\"\", 1.0)
@@ -35,7 +36,7 @@ func Add_Money(_price : float) -> void:
 	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
 	_Savefile.Set(\"SAVE\", \"MONEY\", _Money)
 	_Savefile.Save()
-	s_Interface.Get_Current().Update_Money()
+	if s_Interface.Get_Current().has_method(\"Update_Money\"): s_Interface.Get_Current().Update_Money()
 
 func Add_Fish(_fish : Fish) -> void:
 	if (!_Journal.has(_fish._Species)): _Journal[_fish._Species] = [_fish.Get_Size(), 1] #size, number caught
@@ -43,16 +44,30 @@ func Add_Fish(_fish : Fish) -> void:
 	_Savefile.Set(\"SAVE\", \"JOURNAL\", _Journal)
 	_Savefile.Save()
 
-func Unlock_License(_license : int) -> void:
+func Unlock_License(_license : int, _price : float) -> void:
 	var license = _license - 1 #so that _license can mean license 1 while in index 0
 	if _Licenses[license] == 0: _Licenses[license] = 1
 	Set_Active_License(license)
+	Add_Money(-_price)
 
 func Set_Active_License(_license : int) -> void:
 	var license = _license - 1 #so that _license can mean license 1 while in index 0
 	if _Licenses[license] != 0:
 		for current_license in _Licenses: if current_license == 2: current_license = 1
 		_Licenses[license] = 2
+
+##Returns true if the upgrade has reached its max level, false if it has not
+func Unlock_Upgrade(_upgrade : int, _price : float) -> bool:
+	if MAX_UPGRADE_LEVELS[_upgrade] > _Upgrades[_upgrade]: _Upgrades[_upgrade] = _Upgrades[_upgrade] + 1
+	Add_Money(-_price)
+	return Is_Upgrade_Max_Level(_upgrade)
+
+func Get_Upgrade_Level(_upgrade : int) -> int:
+	return _Upgrades[_upgrade]
+
+func Is_Upgrade_Max_Level(_upgrade : int) -> bool:
+	if _Upgrades[_upgrade] == MAX_UPGRADE_LEVELS[_upgrade]: return true
+	else: return false
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im4b6"]

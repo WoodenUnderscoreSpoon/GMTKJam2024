@@ -5,11 +5,12 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
-const MAX_UPGRADE_LEVELS := [3, 3, 3] #[reel, rod, bait]
-const PRICES := [[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]] #[reel, rod, bait, license], interior arrays are the prices of each upgrade/license at each level [lvl1, lvl2, lvl3]
+var scene : Node
+const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, 4]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
 
 func _ready() -> void: 
-	$\"Control/Margin/GridContainer/Better Reel\".grab_focus()
+	scene = s_Scene.Get_Current()
+	$\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".grab_focus()
 	Load_Button_States()
 
 func _process(_delta : float) -> void:
@@ -29,37 +30,61 @@ func _input(_event : InputEvent) -> void:
 func Return() -> void:
 	s_Interface.Return()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
+	s_Interface.Get_Current().Update_Money()
 	#s_Global._Paused = false
 
 func Upgrade_Reel() -> void:
-	s_Scene.Get_Current()._Upgrades[0] = s_Scene.Get_Current()._Upgrades[0] + 1
-	if s_Scene.Get_Current()._Upgrades[0] == MAX_UPGRADE_LEVELS[0]: $\"Control/Margin/GridContainer/Better Reel\".disabled = true
+	if scene.Unlock_Upgrade(0, PRICES[0][scene._Upgrades[0]]): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".disabled = true
+	Load_Button_States()
 func Upgrade_Rod() -> void:
-	s_Scene.Get_Current()._Upgrades[1] = s_Scene.Get_Current()._Upgrades[1] + 1
-	if s_Scene.Get_Current()._Upgrades[1] == MAX_UPGRADE_LEVELS[1]: $\"Control/Margin/GridContainer/Better Rod\".disabled = true
+	if scene.Unlock_Upgrade(1, PRICES[1][scene._Upgrades[1]]): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Rod\".disabled = true
+	Load_Button_States()
 func Upgrade_Bait() -> void:
-	s_Scene.Get_Current()._Upgrades[2] = s_Scene.Get_Current()._Upgrades[2] + 1
-	if s_Scene.Get_Current()._Upgrades[2] == MAX_UPGRADE_LEVELS[2]: $\"Control/Margin/GridContainer/Better Bait\".disabled = true
-func Unlock_License_1() -> void:
-	s_Scene.Get_Current().Unlock_License(1)
-	$\"Control/Margin/GridContainer/License 1\".disabled = true
-func Unlock_License_2() -> void:
-	s_Scene.Get_Current().Unlock_License(2)
-	$\"Control/Margin/GridContainer/License 2\".disabled = true
-func Unlock_License_3() -> void:
-	s_Scene.Get_Current().Unlock_License(3)
-	$\"Control/Margin/GridContainer/License 3\".disabled = true
+	if scene.Unlock_Upgrade(2, PRICES[2][scene._Upgrades[2]]): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait\".disabled = true
+	Load_Button_States()
+func Unlock_License_Small() -> void:
+	scene.Unlock_License(1, PRICES[3][0])
+	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".disabled = true
+	Load_Button_States()
+func Unlock_License_Medium() -> void:
+	scene.Unlock_License(2, PRICES[3][1])
+	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".disabled = true
+	Load_Button_States()
+func Unlock_License_Large() -> void:
+	scene.Unlock_License(3, PRICES[3][2])
+	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".disabled = true
+	Load_Button_States()
+func Unlock_License_Huge() -> void:
+	scene.Unlock_License(4, PRICES[3][3])
+	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".disabled = true
+	Load_Button_States()
 
 
 
 func Load_Button_States() -> void:
-	if s_Scene.Get_Current()._Upgrades[0] == MAX_UPGRADE_LEVELS[0]: $\"Control/Margin/GridContainer/Better Reel\".disabled = true
-	if s_Scene.Get_Current()._Upgrades[1] == MAX_UPGRADE_LEVELS[1]: $\"Control/Margin/GridContainer/Better Rod\".disabled = true
-	if s_Scene.Get_Current()._Upgrades[2] == MAX_UPGRADE_LEVELS[2]: $\"Control/Margin/GridContainer/Better Bait\".disabled = true
-	if s_Scene.Get_Current()._Licenses[0] > 0: $\"Control/Margin/GridContainer/License 1\".disabled = true
-	if s_Scene.Get_Current()._Licenses[1] > 0: $\"Control/Margin/GridContainer/License 2\".disabled = true
-	if s_Scene.Get_Current()._Licenses[2] > 0: $\"Control/Margin/GridContainer/License 3\".disabled = true
-	#TODO update buttons with the next level's price
+	if scene.Is_Upgrade_Max_Level(0): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".disabled = true
+	if scene.Is_Upgrade_Max_Level(1): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Rod\".disabled = true
+	if scene.Is_Upgrade_Max_Level(2): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait\".disabled = true
+	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".disabled = true
+	if scene._Licenses[1] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".disabled = true
+	if scene._Licenses[2] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".disabled = true
+	if scene._Licenses[3] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".disabled = true
+	
+	if PRICES[0][scene.Get_Upgrade_Level(0)] == null: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".text = \"Better Reel: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".text = str(\"Better Reel: $\", PRICES[0][scene.Get_Upgrade_Level(0)])
+	if PRICES[1][scene.Get_Upgrade_Level(1)] == null: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".text = \"Better Rod: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".text = str(\"Better Rod: $\", PRICES[1][scene.Get_Upgrade_Level(1)])
+	if PRICES[2][scene.Get_Upgrade_Level(2)] == null: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".text = \"Better Bait: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".text = str(\"Better Bait: $\", PRICES[2][scene.Get_Upgrade_Level(2)])
+	
+	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".text = \"Small License: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".text = str(\"Small License: $\", PRICES[3][0])
+	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".text = \"Medium License: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".text = str(\"Medium License: $\", PRICES[3][1])
+	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".text = \"Large License: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".text = str(\"Large License: $\", PRICES[3][2])
+	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".text = \"Huge License: SOLD OUT\"
+	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".text = str(\"Huge License: $\", PRICES[3][3])
 "
 
 [node name="Shop" type="CanvasLayer"]
@@ -96,7 +121,6 @@ layout_mode = 2
 color = Color(0.944198, 0, 0.261408, 0.238)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Margin"]
-visible = false
 layout_mode = 2
 
 [node name="Upgrades - VBoxContainer" type="VBoxContainer" parent="Control/Margin/HBoxContainer"]
@@ -104,63 +128,39 @@ layout_mode = 2
 
 [node name="Better Reel" parent="Control/Margin/HBoxContainer/Upgrades - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-text = "Better Reel"
+text = "Better Reel : $1"
 
 [node name="Better Rod" parent="Control/Margin/HBoxContainer/Upgrades - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-text = "Better Rod"
+text = "Better Rod : $1"
 
 [node name="Better Bait" parent="Control/Margin/HBoxContainer/Upgrades - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-text = "Better Bait"
+text = "Better Bait : $1"
 
-[node name="Licenses - VBoxContainer2" type="VBoxContainer" parent="Control/Margin/HBoxContainer"]
+[node name="Licenses - VBoxContainer" type="VBoxContainer" parent="Control/Margin/HBoxContainer"]
 layout_mode = 2
 
-[node name="License 1" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer2" instance=ExtResource("1_2ty76")]
+[node name="License Small" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-text = "Silver License"
+text = "Small License : $1"
 
-[node name="License 2" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer2" instance=ExtResource("1_2ty76")]
+[node name="License Medium" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-text = "Gold License"
+text = "Medium License : $2"
 
-[node name="License 3" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer2" instance=ExtResource("1_2ty76")]
+[node name="License Large" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-text = "Platinum License"
+text = "Large License : $3"
 
-[node name="GridContainer" type="GridContainer" parent="Control/Margin"]
+[node name="License Huge" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
-size_flags_stretch_ratio = 0.0
-columns = 2
+text = "Huge License : $4"
 
-[node name="Better Reel" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
-layout_mode = 2
-text = "Better Reel"
-
-[node name="License 1" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
-layout_mode = 2
-text = "Silver License"
-
-[node name="Better Rod" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
-layout_mode = 2
-text = "Better Rod"
-
-[node name="License 2" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
-layout_mode = 2
-text = "Gold License"
-
-[node name="Better Bait" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
-layout_mode = 2
-text = "Better Bait"
-
-[node name="License 3" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
-layout_mode = 2
-text = "Platinum License"
-
-[connection signal="pressed" from="Control/Margin/GridContainer/Better Reel" to="." method="Upgrade_Reel"]
-[connection signal="pressed" from="Control/Margin/GridContainer/License 1" to="." method="Unlock_License_1"]
-[connection signal="pressed" from="Control/Margin/GridContainer/Better Rod" to="." method="Upgrade_Rod"]
-[connection signal="pressed" from="Control/Margin/GridContainer/License 2" to="." method="Unlock_License_2"]
-[connection signal="pressed" from="Control/Margin/GridContainer/Better Bait" to="." method="Upgrade_Bait"]
-[connection signal="pressed" from="Control/Margin/GridContainer/License 3" to="." method="Unlock_License_3"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel" to="." method="Upgrade_Reel"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Rod" to="." method="Upgrade_Rod"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait" to="." method="Upgrade_Bait"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small" to="." method="Unlock_License_Small"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium" to="." method="Unlock_License_Medium"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large" to="." method="Unlock_License_Large"]
+[connection signal="pressed" from="Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge" to="." method="Unlock_License_Huge"]

@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://g5qxyhawque5"]
+
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_ax3jy"]
+[ext_resource type="Texture2D" uid="uid://ctn1c0do7c21s" path="res://Resource/Texture/Interface/Journal.png" id="2_7nyks"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="3_1i7we"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func _ready() -> void: $\"Margin/Journal\".custom_minimum_size.x = 100
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right = _anchor
+		_child.anchor_bottom = _anchor
+
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
+	elif (_event.is_action_pressed(\"OPEN_JOURNAL\")): s_Interface.Add(\"Journal\", false)
+
+func Start_Journal() -> void: s_Interface.Add(\"Journal\", false)
+func Update_Money() -> void: $\"Margin/Money\".text = \"Money: \" + str(\"%0*.*f\" % [0, 2, s_Scene.Get_Current()._Money]) + \"$\"
+"
+
+[node name="Nothing" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Journal" parent="Margin" instance=ExtResource("1_ax3jy")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+focus_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/Journal/Decoration/Margin" index="1"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Texture" type="TextureRect" parent="Margin/Journal/Decoration/Margin/Margin"]
+layout_mode = 2
+texture = ExtResource("2_7nyks")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Money" type="Label" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_1i7we")
+theme_override_font_sizes/font_size = 40
+text = "Money: 0.00$"
+vertical_alignment = 1
+
+[connection signal="pressed" from="Margin/Journal" to="." method="Start_Journal"]
+
+[editable path="Margin/Journal"]
