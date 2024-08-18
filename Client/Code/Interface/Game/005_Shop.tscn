@@ -5,9 +5,12 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
+const MAX_UPGRADE_LEVELS := [3, 3, 3] #[reel, rod, bait]
+const PRICES := [[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]] #[reel, rod, bait, license], interior arrays are the prices of each upgrade/license at each level [lvl1, lvl2, lvl3]
+
 func _ready() -> void: 
 	$\"Control/Margin/GridContainer/Better Reel\".grab_focus()
-	
+	Load_Button_States()
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -30,16 +33,33 @@ func Return() -> void:
 
 func Upgrade_Reel() -> void:
 	s_Scene.Get_Current()._Upgrades[0] = s_Scene.Get_Current()._Upgrades[0] + 1
+	if s_Scene.Get_Current()._Upgrades[0] == MAX_UPGRADE_LEVELS[0]: $\"Control/Margin/GridContainer/Better Reel\".disabled = true
 func Upgrade_Rod() -> void:
 	s_Scene.Get_Current()._Upgrades[1] = s_Scene.Get_Current()._Upgrades[1] + 1
+	if s_Scene.Get_Current()._Upgrades[1] == MAX_UPGRADE_LEVELS[1]: $\"Control/Margin/GridContainer/Better Rod\".disabled = true
 func Upgrade_Bait() -> void:
 	s_Scene.Get_Current()._Upgrades[2] = s_Scene.Get_Current()._Upgrades[2] + 1
+	if s_Scene.Get_Current()._Upgrades[2] == MAX_UPGRADE_LEVELS[2]: $\"Control/Margin/GridContainer/Better Bait\".disabled = true
 func Unlock_License_1() -> void:
 	s_Scene.Get_Current().Unlock_License(1)
+	$\"Control/Margin/GridContainer/License 1\".disabled = true
 func Unlock_License_2() -> void:
 	s_Scene.Get_Current().Unlock_License(2)
+	$\"Control/Margin/GridContainer/License 2\".disabled = true
 func Unlock_License_3() -> void:
 	s_Scene.Get_Current().Unlock_License(3)
+	$\"Control/Margin/GridContainer/License 3\".disabled = true
+
+
+
+func Load_Button_States() -> void:
+	if s_Scene.Get_Current()._Upgrades[0] == MAX_UPGRADE_LEVELS[0]: $\"Control/Margin/GridContainer/Better Reel\".disabled = true
+	if s_Scene.Get_Current()._Upgrades[1] == MAX_UPGRADE_LEVELS[1]: $\"Control/Margin/GridContainer/Better Rod\".disabled = true
+	if s_Scene.Get_Current()._Upgrades[2] == MAX_UPGRADE_LEVELS[2]: $\"Control/Margin/GridContainer/Better Bait\".disabled = true
+	if s_Scene.Get_Current()._Licenses[0] > 0: $\"Control/Margin/GridContainer/License 1\".disabled = true
+	if s_Scene.Get_Current()._Licenses[1] > 0: $\"Control/Margin/GridContainer/License 2\".disabled = true
+	if s_Scene.Get_Current()._Licenses[2] > 0: $\"Control/Margin/GridContainer/License 3\".disabled = true
+	#TODO update buttons with the next level's price
 "
 
 [node name="Shop" type="CanvasLayer"]
@@ -137,3 +157,10 @@ text = "Better Bait"
 [node name="License 3" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
 text = "Platinum License"
+
+[connection signal="pressed" from="Control/Margin/GridContainer/Better Reel" to="." method="Upgrade_Reel"]
+[connection signal="pressed" from="Control/Margin/GridContainer/License 1" to="." method="Unlock_License_1"]
+[connection signal="pressed" from="Control/Margin/GridContainer/Better Rod" to="." method="Upgrade_Rod"]
+[connection signal="pressed" from="Control/Margin/GridContainer/License 2" to="." method="Unlock_License_2"]
+[connection signal="pressed" from="Control/Margin/GridContainer/Better Bait" to="." method="Upgrade_Bait"]
+[connection signal="pressed" from="Control/Margin/GridContainer/License 3" to="." method="Unlock_License_3"]
