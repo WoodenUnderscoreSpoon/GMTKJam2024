@@ -157,6 +157,7 @@ theme_override_constants/separation = 5
 alignment = 1
 
 [node name="Upgrades" type="VBoxContainer" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 5
 

@@ -43,7 +43,9 @@ func Add_Money(_price : float) -> void:
 	if s_Interface.Get_Current().has_method(\"Update_Money\"): s_Interface.Get_Current().Update_Money()
 
 func Add_Fish(_fish : Fish) -> void:
-	if (!_Journal.has(_fish._Species)): _Journal[_fish._Species] = [_fish.Get_Size(), 1] #size, number caught
+	if (!_Journal.has(_fish._Species)):
+		_Journal[_fish._Species] = [_fish.Get_Size(), 1] #size, number caught
+		s_Sound.Play_Sound(\"Ding\")
 	else: _Journal[_fish._Species] = [max(_Journal[_fish._Species][0], _fish.Get_Size()), _Journal[_fish._Species][1] + 1]
 	_Savefile.Set(\"SAVE\", \"JOURNAL\", _Journal)
 	_Savefile.Save()
@@ -90,6 +92,11 @@ size = Vector2(152, 174)
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -111,11 +118,6 @@ texture = ExtResource("2_raqer")
 [node name="World" type="Sprite2D" parent="."]
 position = Vector2(106, -45)
 texture = ExtResource("1_8dohq")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-autostart = true
 
 [node name="Character" parent="." instance=ExtResource("1_c47od")]
 position = Vector2(65, 130)
