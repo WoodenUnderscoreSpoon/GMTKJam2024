@@ -93,7 +93,7 @@ const _Dictionary := {
 		#"DEFENSE" : 1.0, #should never be more than like 2
 		#"AI" : [-1.0, -1.0, 2.5],
 		#"TEXTURE" : "res://Resource/Texture/Fish/Test1.png",
-		#"SIZE" : 1.0,
+		#"SIZE" : 60.0,
 		#"PRICE" : 1.0,
 		#"PERMIT" : 2,
 	#},
@@ -105,7 +105,7 @@ const _Dictionary := {
 		#"DEFENSE" : 1.5,
 		#"AI" : [1.0, -1.0, 1.5, -1.5],
 		#"TEXTURE" : "res://Resource/Texture/Fish/Test2.png",
-		#"SIZE" : 51.0,
+		#"SIZE" : 120.0,
 		#"PRICE" : 10.0,
 		#"PERMIT" : 3,
 	#},

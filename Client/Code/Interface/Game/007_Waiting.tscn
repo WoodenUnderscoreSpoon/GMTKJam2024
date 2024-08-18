@@ -19,7 +19,7 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 
 func _input(_event : InputEvent) -> void:
-	if ((_event.is_action_pressed(\"PAUSE\") or _event.is_action_pressed(\"INTERACT\")) and s_Scene.Get_Current().get_node(\"Character/Animation\").current_animation != \"reel_line\"):
+	if ((_event.is_action_pressed(\"PAUSE\") or _event.is_action_pressed(\"INTERACT\")) and s_Scene.Get_Current().get_node(\"Character/Animation\").current_animation != \"reel_line\" and s_Scene.Get_Current().get_node(\"Character/Animation\").current_animation != \"reel_stagger\"):
 		get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 		s_Sound.Play_Sound(\"Splash\")
 		s_Interface.Return()

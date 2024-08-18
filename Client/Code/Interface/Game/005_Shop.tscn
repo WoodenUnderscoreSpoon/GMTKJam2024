@@ -111,7 +111,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Decoration" parent="Margin/VBox" instance=ExtResource("1_3i6iv")]
-custom_minimum_size = Vector2(1130, 750)
+custom_minimum_size = Vector2(1300, 750)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
