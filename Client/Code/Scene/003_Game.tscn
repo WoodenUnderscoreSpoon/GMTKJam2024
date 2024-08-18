@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=11 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
+[ext_resource type="Texture2D" uid="uid://dgujymthln2nu" path="res://Resource/Texture/Game/WorldBackground1.png" id="1_gkobv"]
 [ext_resource type="PackedScene" uid="uid://bhlvkit3rx2d3" path="res://Code/Other/Zone/Zone.tscn" id="2_05tr2"]
+[ext_resource type="Texture2D" uid="uid://1kv7p6fnsdg3" path="res://Resource/Texture/Game/WorldBackground2.png" id="2_raqer"]
 
 [sub_resource type="GDScript" id="GDScript_fmrx4"]
 script/source = "extends Node2D
@@ -74,23 +76,41 @@ func Is_Upgrade_Max_Level(_upgrade : int) -> bool:
 	else: return false
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_im4b6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73eib"]
 size = Vector2(23, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kokd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vp8en"]
 size = Vector2(57, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vyspl"]
 size = Vector2(583.5, 55)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_61ek4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfjl3"]
 size = Vector2(152, 107)
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-62, -165)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(308, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(154, 79)
+texture = ExtResource("1_gkobv")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(308, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(154, 96)
+texture = ExtResource("2_raqer")
+
+[node name="World" type="Sprite2D" parent="."]
+position = Vector2(106, -45)
 texture = ExtResource("1_8dohq")
 
 [node name="Timer" type="Timer" parent="."]
@@ -99,7 +119,7 @@ one_shot = true
 autostart = true
 
 [node name="Character" parent="." instance=ExtResource("1_c47od")]
-position = Vector2(-97, 11)
+position = Vector2(97, 119)
 
 [node name="Camera" type="Camera2D" parent="Character"]
 offset = Vector2(0, -16)
@@ -111,30 +131,30 @@ position_smoothing_speed = 4.0
 position = Vector2(0, 2)
 
 [node name="Collision" parent="Zone_Fishing" index="0"]
-position = Vector2(61.5, 0)
-shape = SubResource("RectangleShape2D_im4b6")
+position = Vector2(230, 119)
+shape = SubResource("RectangleShape2D_73eib")
 
 [node name="Zone_Shop" parent="." instance=ExtResource("2_05tr2")]
 position = Vector2(-210, 0)
 
 [node name="Collision" parent="Zone_Shop" index="0"]
-position = Vector2(38.5, 2)
-shape = SubResource("RectangleShape2D_2kokd")
+position = Vector2(206, 121)
+shape = SubResource("RectangleShape2D_vp8en")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-45, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-23, 52.5)
-shape = SubResource("RectangleShape2D_upe0k")
+position = Vector2(142, 172)
+shape = SubResource("RectangleShape2D_vyspl")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(194, -27.5)
-shape = SubResource("RectangleShape2D_61ek4")
+position = Vector2(363, 91)
+shape = SubResource("RectangleShape2D_dfjl3")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-240, -27)
-shape = SubResource("RectangleShape2D_61ek4")
+position = Vector2(-79, 91)
+shape = SubResource("RectangleShape2D_dfjl3")
 
 [editable path="Zone_Fishing"]
 [editable path="Zone_Shop"]
