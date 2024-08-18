@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddo0exxeu7uxw"]
+[gd_scene load_steps=11 format=3 uid="uid://ddo0exxeu7uxw"]
 
+[ext_resource type="AudioStream" uid="uid://qjs1r60pp375" path="res://Resource/Audio/Sound/Reel.ogg" id="1_axuan"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_cxboc"]
+[ext_resource type="AudioStream" uid="uid://r1aarrqmqnfd" path="res://Resource/Audio/Sound/Tension.ogg" id="2_8s4cv"]
 [ext_resource type="Texture2D" uid="uid://jo2gvcb74o6t" path="res://Resource/Texture/Fish/Test1.png" id="2_m3gfm"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
@@ -14,6 +16,7 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
+	s_Sound.Play_Sound(\"Plop\")
 	var _species = Species._Dictionary.keys()
 	_Fish = Fish.Create(_species.pick_random())
 	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)
@@ -37,7 +40,9 @@ func _process(_delta : float) -> void:
 
 func _physics_process(_delta : float) -> void:
 	#CONTROLS
-	if (Input.is_action_pressed(\"INTERACT\")): _Bar_Velocity -= _delta * 60.0
+	if (Input.is_action_pressed(\"INTERACT\")):
+		_Bar_Velocity -= _delta * 60.0
+		if (!$\"Margin/Reel\".playing): $\"Margin/Reel\".play()
 	else: _Bar_Velocity += _delta * 60.0
 	#BAR
 	$\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y = clamp($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + _Bar_Velocity / 8.0, 0, 365)
@@ -45,8 +50,11 @@ func _physics_process(_delta : float) -> void:
 	#FISH
 	$\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y = lerp($\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y, _Fish_Target, _delta / 2 * Species.Get_Speed(_Fish._Species))
 	#PROGRESS
-	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y - $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y): _Progress += _delta * 10.0 / Species.Get_Defense(_Fish._Species)
-	else: _Progress -= _delta * 18.0
+	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y - $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y):
+		_Progress += _delta * 10.0 / Species.Get_Defense(_Fish._Species)
+	else:
+		if (!$\"Margin/Tension\".playing): $\"Margin/Tension\".play()
+		_Progress -= _delta * 16.0
 	if (_Progress <= 0.0): Return()
 	elif (_Progress >= 100.0): Catch_Fish()
 
@@ -79,6 +87,18 @@ colors = PackedColorArray(0.795865, 0, 0.166209, 1, 0.975001, 0.718368, 2.31028e
 metadata/_snap_enabled = true
 metadata/_snap_count = 4
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o8qdo"]
+random_pitch = 1.05
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("1_axuan")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cvwy7"]
+random_pitch = 1.05
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("2_8s4cv")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4jq5s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abpl3"]
@@ -104,6 +124,13 @@ theme_override_constants/margin_bottom = 0
 [node name="Timer" type="Timer" parent="Margin"]
 wait_time = 0.75
 autostart = true
+
+[node name="Reel" type="AudioStreamPlayer2D" parent="Margin"]
+stream = SubResource("AudioStreamRandomizer_o8qdo")
+volume_db = 10.0
+
+[node name="Tension" type="AudioStreamPlayer2D" parent="Margin"]
+stream = SubResource("AudioStreamRandomizer_cvwy7")
 
 [node name="HBox" type="HBoxContainer" parent="Margin"]
 layout_mode = 2

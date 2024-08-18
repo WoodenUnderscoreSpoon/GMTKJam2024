@@ -8,6 +8,7 @@ script/source = "extends CanvasLayer
 var _Ready := false
 
 func Setup(_fish : Fish) -> void:
+	s_Sound.Play_Sound(\"Splash\")
 	$\"Margin/Center/Catch_Effect\".Set_Fish(_fish)
 	if (_fish.Get_Size() > 90.0):
 		$\"Margin/Texture\".texture = load(\"res://Resource/Texture/Space.png\")
