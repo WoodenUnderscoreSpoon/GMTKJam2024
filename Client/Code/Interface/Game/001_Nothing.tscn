@@ -48,14 +48,20 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 focus_mode = 0
 
-[node name="Margin" type="MarginContainer" parent="Margin/Journal/Decoration/Margin" index="1"]
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 2
+[node name="Margin" parent="Margin/Journal/Decoration" index="0"]
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
+
+[node name="Margin" type="MarginContainer" parent="Margin/Journal/Decoration/Margin" index="1"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="Texture" type="TextureRect" parent="Margin/Journal/Decoration/Margin/Margin"]
 layout_mode = 2
@@ -67,6 +73,9 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.93422, 0.773933, 1.54018e-06, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("3_1i7we")
 theme_override_font_sizes/font_size = 40
 text = "Money: 0.00$"

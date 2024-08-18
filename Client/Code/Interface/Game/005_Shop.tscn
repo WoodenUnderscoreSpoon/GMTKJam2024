@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b08yicsn0peat"]
+[gd_scene load_steps=4 format=3 uid="uid://b08yicsn0peat"]
 
 [ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_2ty76"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="2_k7xat"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -126,27 +127,41 @@ layout_mode = 2
 
 [node name="Better Reel" parent="Control/Margin/HBoxContainer/Upgrades - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [node name="Better Rod" parent="Control/Margin/HBoxContainer/Upgrades - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [node name="Better Bait" parent="Control/Margin/HBoxContainer/Upgrades - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [node name="Licenses - VBoxContainer" type="VBoxContainer" parent="Control/Margin/HBoxContainer"]
 layout_mode = 2
 
 [node name="License Small" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [node name="License Medium" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [node name="License Large" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [node name="License Huge" parent="Control/Margin/HBoxContainer/Licenses - VBoxContainer" instance=ExtResource("1_2ty76")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
 [connection signal="pressed" from="Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel" to="." method="Upgrade_Reel"]
 [connection signal="pressed" from="Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Rod" to="." method="Upgrade_Rod"]

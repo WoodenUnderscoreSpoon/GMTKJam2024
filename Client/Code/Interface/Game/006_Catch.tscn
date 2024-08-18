@@ -5,9 +5,11 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
+var _Fish : Fish
 var _Ready := false
 
 func Setup(_fish : Fish) -> void:
+	_Fish = _fish
 	s_Sound.Play_Sound(\"Splash\")
 	$\"Margin/Center/Catch_Effect\".Set_Fish(_fish)
 	if (_fish.Get_Size() > 90.0):
@@ -35,6 +37,7 @@ func Return() -> void:
 	get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 	s_Interface.Return()
 	s_Scene.Get_Current().Stop_Fishing()
+	s_Scene.Get_Current().Add_Money(_Fish.Get_Price())
 "
 
 [sub_resource type="Animation" id="Animation_140cm"]

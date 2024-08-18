@@ -11,7 +11,6 @@ script/source = "extends Node2D
 
 var _Savefile : s_Config_File
 var _Money := 0.0
-#TODO add license and upgrades to the savefile
 var _Journal := {}
 var _Licenses := [2, 0, 0, 0, 0] #[small, medium, large, huge], 0 = locked, 1 = unlocked, 2 = unlocked and equipped
 var _Upgrades := [0, 0, 0] #[reel, rod, bait], number is the upgrade level
@@ -122,8 +121,10 @@ autostart = true
 position = Vector2(97, 119)
 
 [node name="Camera" type="Camera2D" parent="Character"]
-offset = Vector2(0, -16)
-zoom = Vector2(8, 8)
+offset = Vector2(0, -32)
+zoom = Vector2(7, 7)
+limit_left = -100
+limit_right = 340
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
@@ -153,7 +154,7 @@ position = Vector2(363, 91)
 shape = SubResource("RectangleShape2D_dfjl3")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-79, 91)
+position = Vector2(-123, 91)
 shape = SubResource("RectangleShape2D_dfjl3")
 
 [editable path="Zone_Fishing"]
