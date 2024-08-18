@@ -55,7 +55,7 @@ func _physics_process(_delta : float) -> void:
 	else:
 		if (!$\"Margin/Tension\".playing): $\"Margin/Tension\".play()
 		_Progress -= _delta * 16.0
-	if (_Progress <= 0.0): Return()
+	if (_Progress <= 0.0): Lose_Fish()
 	elif (_Progress >= 100.0): Catch_Fish()
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
@@ -72,6 +72,10 @@ func Move_Fish() -> void:
 	var _modifier = randf_range(0.8, 1.2)
 	_Fish_AI_Position = posmod(_Fish_AI_Position + 1, _pattern.size())
 	_Fish_Target = clamp(_Fish_Target + _direction * _power * _modifier, 0, 440.0)
+
+func Lose_Fish() -> void:
+	Return()
+	s_Sound.Play_Sound(\"Line Break\")
 
 func Catch_Fish() -> void:
 	Return()

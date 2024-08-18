@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cf8ud1tldued8"
+path="res://.godot/imported/Line Break.ogg-6d70f68725059e9a520a3a3bd1e7443b.oggvorbisstr"
+
+[deps]
+
+source_file="res://Resource/Audio/Sound/Line Break.ogg"
+dest_files=["res://.godot/imported/Line Break.ogg-6d70f68725059e9a520a3a3bd1e7443b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

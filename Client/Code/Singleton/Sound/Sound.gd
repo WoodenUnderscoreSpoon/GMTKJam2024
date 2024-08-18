@@ -53,6 +53,8 @@ var c_Dictionary_Sound := { #Array of audio
 	"Splash" : ["Sound/Splash.ogg"],
 	"Reel" : ["Sound/Reel.ogg"],
 	"Tension" : ["Sound/Tension.ogg"],
+	"Line Break" : ["Sound/Line Break.ogg"],
+	"Ding" : ["Sound/Ding.ogg"],
 }
 var v_Music := ""
 var v_Ambient := ""
