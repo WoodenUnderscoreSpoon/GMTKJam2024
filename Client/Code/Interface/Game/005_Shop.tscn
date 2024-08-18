@@ -5,6 +5,8 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
+func _ready() -> void: $\"Control/Margin/GridContainer/Better Reel\".grab_focus()
+
 func _process(_delta : float) -> void:
 	#SCALE
 	var _scale = s_Interface.Get_Scale()
@@ -14,9 +16,6 @@ func _process(_delta : float) -> void:
 	for _child in get_children():
 		_child.anchor_right = _anchor
 		_child.anchor_bottom = _anchor
-
-#func _ready() -> void:
-	
 
 func _input(_event : InputEvent) -> void:
 	if (_event.is_action_pressed(\"PAUSE\")): Return()
