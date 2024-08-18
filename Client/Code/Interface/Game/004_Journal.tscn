@@ -1,7 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cinjpbbrpaqk5"]
+[gd_scene load_steps=5 format=3 uid="uid://cinjpbbrpaqk5"]
+
+[ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_y6133"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="2_jewdd"]
+[ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="3_x450f"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
+
+func _ready() -> void:
+	$\"Margin/VBox/Margin/Return\".grab_focus()
+	var _scene = load(\"res://Code/Other/Widget/Journal/Fish.tscn\")
+	for _i in Species._Dictionary.keys():
+		var _widget = _scene.instantiate()
+		_widget.Setup(_i)
+		$\"Margin/VBox/Decoration/Margin/VBox/HFlow\".add_child(_widget)
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -32,13 +44,71 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
 
-[node name="ColorRect" type="ColorRect" parent="Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
-color = Color(0, 0.513716, 0.913104, 0.238)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Decoration" parent="Margin/VBox" instance=ExtResource("1_y6133")]
+custom_minimum_size = Vector2(1060, 750)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Color" type="ColorRect" parent="Margin/VBox/Decoration/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.569701, 0.334747, 0.126351, 1)
+
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/Decoration/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="Margin/VBox/Decoration/Margin/VBox/Margin"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jewdd")
+theme_override_font_sizes/font_size = 45
+text = "Journal"
+horizontal_alignment = 1
+
+[node name="HFlow" type="HFlowContainer" parent="Margin/VBox/Decoration/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+alignment = 1
+last_wrap_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 25
+
+[node name="Return" parent="Margin/VBox/Margin" instance=ExtResource("3_x450f")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_bottom = NodePath("../../Margin1/HBox/Audio/Button")
+text = "Return"
+
+[connection signal="pressed" from="Margin/VBox/Margin/Return" to="." method="Return"]
