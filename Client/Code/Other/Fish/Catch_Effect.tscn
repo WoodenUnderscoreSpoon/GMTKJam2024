@@ -12,7 +12,7 @@ func Set_Fish(_fish : Fish) -> void: $\"Control/VBox/Texture\".texture = load(Sp
 func Play() -> void: $\"Animation\".play(\"Animation\")
 func Ding() -> void: s_Sound.Play_Sound(\"Ding\")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$\"Control/Aura\".position.y = 40
 	$\"Control/Sparkle\".position = $\"Control/Aura\".position
 "

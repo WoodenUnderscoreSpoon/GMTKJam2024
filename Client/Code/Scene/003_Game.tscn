@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=9 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
@@ -34,14 +34,17 @@ func Add_Money(_price : float) -> void:
 	s_Interface.Get_Current().Update_Money()
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_im4b6"]
+size = Vector2(23, 20)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2kokd"]
-size = Vector2(75, 20)
+size = Vector2(57, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]
-size = Vector2(583.5, 35.5)
+size = Vector2(583.5, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61ek4"]
-size = Vector2(148, 107)
+size = Vector2(152, 107)
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
@@ -59,26 +62,27 @@ autostart = true
 
 [node name="Camera" type="Camera2D" parent="Character"]
 offset = Vector2(0, -16)
-zoom = Vector2(16, 16)
+zoom = Vector2(8, 8)
 
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
 position = Vector2(0, 2)
 
 [node name="Collision" parent="Zone_Fishing" index="0"]
-position = Vector2(51.5, 0)
+position = Vector2(61.5, 0)
+shape = SubResource("RectangleShape2D_im4b6")
 
 [node name="Zone_Shop" parent="." instance=ExtResource("2_05tr2")]
 position = Vector2(-210, 0)
 
 [node name="Collision" parent="Zone_Shop" index="0"]
-position = Vector2(40, 2)
+position = Vector2(38.5, 2)
 shape = SubResource("RectangleShape2D_2kokd")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-45, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-23, 42.75)
+position = Vector2(-23, 52.5)
 shape = SubResource("RectangleShape2D_upe0k")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -86,7 +90,7 @@ position = Vector2(194, -27.5)
 shape = SubResource("RectangleShape2D_61ek4")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-242, -27)
+position = Vector2(-240, -27)
 shape = SubResource("RectangleShape2D_61ek4")
 
 [editable path="Zone_Fishing"]
