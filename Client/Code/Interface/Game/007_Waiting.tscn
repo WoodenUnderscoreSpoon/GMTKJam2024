@@ -25,8 +25,13 @@ func _input(_event : InputEvent) -> void:
 		s_Sound.Play_Sound(\"Splash\")
 		s_Interface.Return()
 
+#Called when a fish is caught, plays the reeling-in animation and starts the StartFishingDelayTimer to give the anim time to play before opening the minigame
 func Start_Fishing() -> void:
 	get_node(\"/root/Main/Scene/Character\").Set_Animation(4)
+	$Margin/StartFishingDelayTimer.start()
+
+#Called after the reeling animation plays, opens the fishing minigame
+func Start_Fishing_Minigame() -> void:
 	s_Interface.Return()
 	s_Interface.Add(\"Fishing\", false)
 "
@@ -48,4 +53,7 @@ theme_override_constants/margin_bottom = 0
 [node name="Timer" type="Timer" parent="Margin"]
 one_shot = true
 
+[node name="StartFishingDelayTimer" type="Timer" parent="Margin"]
+
 [connection signal="timeout" from="Margin/Timer" to="." method="Start_Fishing"]
+[connection signal="timeout" from="Margin/StartFishingDelayTimer" to="." method="Start_Fishing_Minigame"]
