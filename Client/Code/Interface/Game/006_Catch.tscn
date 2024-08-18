@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu4x6q3tsa2re"]
 
-[ext_resource type="PackedScene" path="res://Code/Other/Fish/Catch_Effect.tscn" id="1_1k1mb"]
+[ext_resource type="PackedScene" uid="uid://c1nyohvaxhrft" path="res://Code/Other/Fish/Catch_Effect.tscn" id="1_1k1mb"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer

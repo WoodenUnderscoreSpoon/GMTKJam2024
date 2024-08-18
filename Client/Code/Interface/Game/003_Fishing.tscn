@@ -80,6 +80,7 @@ func Lose_Fish() -> void:
 func Catch_Fish() -> void:
 	Return()
 	s_Scene.Get_Current().Add_Money(_Fish.Get_Price()) #TODO move this to the end of the catch animation
+	s_Scene.Get_Current().Add_Fish(_Fish)
 	s_Interface.Add(\"Catch\", false)
 	s_Interface.Get_Current().Setup(_Fish)
 "
