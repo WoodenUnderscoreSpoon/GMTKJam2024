@@ -11,7 +11,7 @@ var _Savefile : s_Config_File
 var _Money := 0.0
 #TODO add license and upgrades to the savefile
 var _Journal := {}
-var _Licenses := [0, 0, 0, 0] #[small, medium, large, huge], 0 = locked, 1 = unlocked, 2 = unlocked and equipped
+var _Licenses := [2, 0, 0, 0, 0] #[small, medium, large, huge], 0 = locked, 1 = unlocked, 2 = unlocked and equipped
 var _Upgrades := [0, 0, 0] #[reel, rod, bait], number is the upgrade level
 const MAX_UPGRADE_LEVELS := [3, 3, 3] #[reel, rod, bait]
 
@@ -49,7 +49,7 @@ func Add_Fish(_fish : Fish) -> void:
 
 func Unlock_License(_license : int, _price : float) -> void:
 	var license = _license - 1 #so that _license can mean license 1 while in index 0
-	if _Licenses[license] == 0: _Licenses[license] = 1
+	if _Licenses[license] == 0: _Licenses[license] = 2
 	Set_Active_License(license)
 	Add_Money(-_price)
 

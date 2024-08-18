@@ -43,32 +43,30 @@ func Upgrade_Bait() -> void:
 	if scene.Unlock_Upgrade(2, PRICES[2][scene._Upgrades[2]]): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait\".disabled = true
 	Load_Button_States()
 func Unlock_License_Small() -> void:
-	scene.Unlock_License(1, PRICES[3][0])
+	scene.Unlock_License(2, PRICES[3][0])
 	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".disabled = true
 	Load_Button_States()
 func Unlock_License_Medium() -> void:
-	scene.Unlock_License(2, PRICES[3][1])
+	scene.Unlock_License(3, PRICES[3][1])
 	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".disabled = true
 	Load_Button_States()
 func Unlock_License_Large() -> void:
-	scene.Unlock_License(3, PRICES[3][2])
+	scene.Unlock_License(4, PRICES[3][2])
 	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".disabled = true
 	Load_Button_States()
 func Unlock_License_Huge() -> void:
-	scene.Unlock_License(4, PRICES[3][3])
+	scene.Unlock_License(5, PRICES[3][3])
 	$\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".disabled = true
 	Load_Button_States()
-
-
 
 func Load_Button_States() -> void:
 	if scene.Is_Upgrade_Max_Level(0): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".disabled = true
 	if scene.Is_Upgrade_Max_Level(1): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Rod\".disabled = true
 	if scene.Is_Upgrade_Max_Level(2): $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait\".disabled = true
-	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".disabled = true
-	if scene._Licenses[1] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".disabled = true
-	if scene._Licenses[2] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".disabled = true
-	if scene._Licenses[3] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".disabled = true
+	if scene._Licenses[1] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".disabled = true
+	if scene._Licenses[2] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".disabled = true
+	if scene._Licenses[3] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".disabled = true
+	if scene._Licenses[4] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".disabled = true
 	
 	if PRICES[0][scene.Get_Upgrade_Level(0)] == null: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".set_text(\"Better Reel: SOLD OUT\")
 	else: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Reel\".set_text(str(\"Better Reel: $\", PRICES[0][scene.Get_Upgrade_Level(0)]))
@@ -77,13 +75,13 @@ func Load_Button_States() -> void:
 	if PRICES[2][scene.Get_Upgrade_Level(2)] == null: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait\".set_text(\"Better Bait: SOLD OUT\")
 	else: $\"Control/Margin/HBoxContainer/Upgrades - VBoxContainer/Better Bait\".set_text(str(\"Better Bait: $\", PRICES[2][scene.Get_Upgrade_Level(2)]))
 	
-	if scene._Licenses[0] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".set_text(\"Small License: SOLD OUT\")
+	if scene._Licenses[1] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".set_text(\"Small License: SOLD OUT\")
 	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Small\".set_text(str(\"Small License: $\", PRICES[3][0]))
-	if scene._Licenses[1] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".set_text(\"Medium License: SOLD OUT\")
+	if scene._Licenses[2] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".set_text(\"Medium License: SOLD OUT\")
 	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Medium\".set_text(str(\"Medium License: $\", PRICES[3][1]))
-	if scene._Licenses[2] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".set_text(\"Large License: SOLD OUT\")
+	if scene._Licenses[3] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".set_text(\"Large License: SOLD OUT\")
 	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Large\".set_text(str(\"Large License: $\", PRICES[3][2]))
-	if scene._Licenses[3] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".set_text(\"Huge License: SOLD OUT\")
+	if scene._Licenses[4] > 0: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".set_text(\"Huge License: SOLD OUT\")
 	else: $\"Control/Margin/HBoxContainer/Licenses - VBoxContainer/License Huge\".set_text(str(\"Huge License: $\", PRICES[3][3]))
 "
 

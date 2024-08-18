@@ -15,8 +15,12 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
+	print(s_Scene.Get_Current()._Licenses)
 	var _species = Species._Dictionary.keys()
-	_Fish = Fish.Create(_species.pick_random())
+	var _avaialble_species = []
+	for _i in _species: if (s_Scene.Get_Current()._Licenses[Species.Get_Permit(_i)] == 2): _avaialble_species.append(_i)
+	print(_avaialble_species)
+	_Fish = Fish.Create(_avaialble_species.pick_random())
 	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)
 	$\"Margin/HBox/Decoration/Margin/Node/Fish/Fish\".texture = load(Species.Get_Texture(_Fish._Species))
 	Move_Fish()
@@ -71,9 +75,9 @@ func Move_Fish() -> void:
 	_Fish_Target = clamp(_Fish_Target + _direction * _power * _modifier, 0, 440.0)
 
 func Lose_Fish() -> void:
+	s_Sound.Play_Sound(\"Line Break\")
 	get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 	Return()
-	s_Sound.Play_Sound(\"Line Break\")
 
 func Catch_Fish() -> void:
 	Return()

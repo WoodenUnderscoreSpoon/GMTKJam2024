@@ -43,7 +43,7 @@ theme_override_constants/margin_bottom = 2
 [node name="Color" type="ColorRect" parent="VBox/Decoration/Margin"]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.4, 0.4, 0.4, 0.501961)
+color = Color(0, 0, 0, 0.501961)
 
 [node name="Margin" type="MarginContainer" parent="VBox/Decoration/Margin"]
 layout_mode = 2

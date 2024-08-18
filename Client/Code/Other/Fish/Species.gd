@@ -11,6 +11,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Trash/Penny.png",
 		"SIZE" : 0.05,
 		"PRICE" : 0.05,
+		"PERMIT" : 0,
 	},
 	"Dollar" : {
 		"SPEED" : 0.5,
@@ -20,6 +21,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Trash/Dollar.png",
 		"SIZE" : 1.00,
 		"PRICE" : 1.00,
+		"PERMIT" : 0,
 	},
 	#endregion
 	#region Small
@@ -31,6 +33,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/Ancheddar.png",
 		"SIZE" : 1.0,
 		"PRICE" : 2.0,
+		"PERMIT" : 1,
 	},
 	"Briem" : {
 		"SPEED" : 1.0, #should never be more than like 3
@@ -40,6 +43,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/Briem.png",
 		"SIZE" : 1.0,
 		"PRICE" : 2.0,
+		"PERMIT" : 1,
 	},
 	"Curdchin" : {
 		"SPEED" : 0.8, #should never be more than like 3
@@ -49,6 +53,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/Curdchin.png",
 		"SIZE" : 1.0,
 		"PRICE" : 1.0,
+		"PERMIT" : 1,
 	},
 	"FettaFish" : {
 		"SPEED" : 1.0, #should never be more than like 3
@@ -58,6 +63,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/FettaFish.png",
 		"SIZE" : 1.0,
 		"PRICE" : 1.0,
+		"PERMIT" : 1,
 	},
 	"Sardanish" : {
 		"SPEED" : 1.0, #should never be more than like 3
@@ -67,6 +73,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/Sardanish.png",
 		"SIZE" : 1.0,
 		"PRICE" : 1.0,
+		"PERMIT" : 1,
 	},
 	#endregion
 	##region Medium
@@ -78,6 +85,7 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Cheese Fish.png",
 		"SIZE" : 1.0,
 		"PRICE" : 10.0,
+		"PERMIT" : 2,
 	},
 	#"Test1" : {
 		#"SPEED" : 1.0, #should never be more than like 3
@@ -87,6 +95,7 @@ const _Dictionary := {
 		#"TEXTURE" : "res://Resource/Texture/Fish/Test1.png",
 		#"SIZE" : 1.0,
 		#"PRICE" : 1.0,
+		#"PERMIT" : 2,
 	#},
 	##endregion
 	##region Large
@@ -98,6 +107,7 @@ const _Dictionary := {
 		#"TEXTURE" : "res://Resource/Texture/Fish/Test2.png",
 		#"SIZE" : 51.0,
 		#"PRICE" : 10.0,
+		#"PERMIT" : 3,
 	#},
 	##endregion
 	##region Huge
@@ -109,6 +119,7 @@ const _Dictionary := {
 		#"TEXTURE" : "res://Resource/Texture/Fish/Test3.png",
 		#"SIZE" : 101.0,
 		#"PRICE" : 50.0,
+		#"PERMIT" : 4,
 	#},
 	##endregion
 }
@@ -120,3 +131,4 @@ static func Get_AI(_name : String) -> Array: return _Dictionary[_name]["AI"]
 static func Get_Texture(_name : String) -> String: return _Dictionary[_name]["TEXTURE"]
 static func Get_Size(_name : String) -> float: return _Dictionary[_name]["SIZE"]
 static func Get_Price(_name : String) -> float: return _Dictionary[_name]["PRICE"]
+static func Get_Permit(_name : String) -> int: return _Dictionary[_name]["PERMIT"]
