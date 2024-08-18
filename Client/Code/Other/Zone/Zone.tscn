@@ -12,7 +12,7 @@ func Body_Exited(_body : Node2D) -> void: if (_body.is_in_group(\"Character\")):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1cmb"]
-size = Vector2(150, 20)
+size = Vector2(47, 20)
 
 [node name="Zone" type="Area2D"]
 script = SubResource("GDScript_wda3j")
