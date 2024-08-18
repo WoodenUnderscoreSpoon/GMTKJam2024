@@ -7,7 +7,13 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
-func _ready() -> void: $\"Margin/VBox/Margin/Return\".grab_focus()
+func _ready() -> void:
+	$\"Margin/VBox/Margin/Return\".grab_focus()
+	var _scene = load(\"res://Code/Other/Widget/Journal/Fish.tscn\")
+	for _i in Species._Dictionary.keys():
+		var _widget = _scene.instantiate()
+		_widget.Setup(_i)
+		$\"Margin/VBox/Decoration/Margin/VBox/HFlow\".add_child(_widget)
 
 func _process(_delta : float) -> void:
 	#SCALE
