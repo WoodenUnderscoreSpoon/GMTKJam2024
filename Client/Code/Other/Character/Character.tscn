@@ -49,7 +49,7 @@ func Set_Wait() -> void:
 
 func Set_Reel() -> void:
 	ready_to_move = false
-	s_Sound.Play_Sound(\"Ding\")
+	s_Sound.Play_Sound(\"Squeak\")
 	$Animation.play(\"reel_line\")
 	$Animation.queue(\"reel_stagger\")
 

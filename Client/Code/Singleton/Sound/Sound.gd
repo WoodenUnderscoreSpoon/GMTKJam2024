@@ -55,6 +55,7 @@ var c_Dictionary_Sound := { #Array of audio
 	"Tension" : ["Sound/Tension.ogg"],
 	"Line Break" : ["Sound/Line Break.ogg"],
 	"Ding" : ["Sound/Ding.ogg"],
+	"Squeak" : ["Sound/Squeak 1.ogg", "Sound/Squeak 2.ogg"],
 }
 var v_Music := ""
 var v_Ambient := ""
