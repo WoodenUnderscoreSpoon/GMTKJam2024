@@ -16,7 +16,6 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
-	s_Sound.Play_Sound(\"Ding\")
 	var _species = Species._Dictionary.keys()
 	_Fish = Fish.Create(_species.pick_random())
 	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)
@@ -40,9 +39,7 @@ func _process(_delta : float) -> void:
 
 func _physics_process(_delta : float) -> void:
 	#CONTROLS
-	if (Input.is_action_pressed(\"INTERACT\")):
-		_Bar_Velocity -= _delta * 60.0
-		if (!$\"Margin/Reel\".playing): $\"Margin/Reel\".play()
+	if (Input.is_action_pressed(\"INTERACT\")): _Bar_Velocity -= _delta * 60.0
 	else: _Bar_Velocity += _delta * 60.0
 	#BAR
 	$\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y = clamp($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + _Bar_Velocity / 8.0, 0, 365)
@@ -50,12 +47,9 @@ func _physics_process(_delta : float) -> void:
 	#FISH
 	$\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y = lerp($\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y, _Fish_Target, _delta / 2 * Species.Get_Speed(_Fish._Species))
 	#PROGRESS
-	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y - $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y):
-		_Progress += _delta * 10.0 / Species.Get_Defense(_Fish._Species)
-	else:
-		if (!$\"Margin/Tension\".playing): $\"Margin/Tension\".play()
-		_Progress -= _delta * 16.0
-	if (_Progress <= 0.0): Lose_Fish()
+	if ($\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y <= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 and $\"Margin/HBox/Decoration/Margin/Node/Bar\".position.y + $\"Margin/HBox/Decoration/Margin/Node/Bar\".size.y - $\"Margin/HBox/Decoration/Margin/Node/Fish\".size.y / 2 >= $\"Margin/HBox/Decoration/Margin/Node/Fish\".position.y): _Progress += _delta * 10.0 / Species.Get_Defense(_Fish._Species)
+	else: _Progress -= _delta * 18.0
+	if (_Progress <= 0.0): Return()
 	elif (_Progress >= 100.0): Catch_Fish()
 
 func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
@@ -73,15 +67,11 @@ func Move_Fish() -> void:
 	_Fish_AI_Position = posmod(_Fish_AI_Position + 1, _pattern.size())
 	_Fish_Target = clamp(_Fish_Target + _direction * _power * _modifier, 0, 440.0)
 
-func Lose_Fish() -> void:
-	Return()
-	s_Sound.Play_Sound(\"Line Break\")
-
 func Catch_Fish() -> void:
 	Return()
-	s_Interface.Get_Current().Add_Money(_Fish.Get_Price()) #TODO move this to the end of the catch animation
-	s_Interface.Add(\"Catch\", false)
-	s_Interface.Get_Current().Setup(_Fish)
+	s_Scene.Get_Current().Add_Money(_Fish.Get_Price()) #TODO move this to the end of the catch animation
+	#s_Interface.Get_Current().Catch_Animation(_Fish)
+	#s_Interface.Add(\"Catch\", false)
 "
 
 [sub_resource type="Gradient" id="Gradient_6aqww"]
