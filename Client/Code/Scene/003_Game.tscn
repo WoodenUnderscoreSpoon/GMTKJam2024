@@ -18,7 +18,7 @@ func Setup(_arguments : Array) -> void:
 	s_Interface.Switch(\"Nothing\")
 
 func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Shop\", false)
-func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Fishing\", false)
+func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Waiting\", false)
 func Stop_Fishing() -> void: $\"Timer\".start()
 "
 

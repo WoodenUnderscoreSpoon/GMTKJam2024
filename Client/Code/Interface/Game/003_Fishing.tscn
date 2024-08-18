@@ -16,7 +16,7 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
-	s_Sound.Play_Sound(\"Plop\")
+	s_Sound.Play_Sound(\"Ding\")
 	var _species = Species._Dictionary.keys()
 	_Fish = Fish.Create(_species.pick_random())
 	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)

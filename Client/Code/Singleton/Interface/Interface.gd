@@ -20,6 +20,7 @@ const _Interfaces := {
 	"Journal" : "res://Code/Interface/Game/004_Journal.tscn",
 	"Shop" : "res://Code/Interface/Game/005_Shop.tscn",
 	"Catch" : "res://Code/Interface/Game/006_Catch.tscn",
+	"Waiting" : "res://Code/Interface/Game/007_Waiting.tscn",
 }
 var _Scale : float = 1.0
 var _Scale_Option : float = 1.0

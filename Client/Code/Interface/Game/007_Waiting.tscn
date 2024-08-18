@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmakn1aycvexn"]
+
+[sub_resource type="GDScript" id="GDScript_ub5eq"]
+script/source = "extends CanvasLayer
+
+func _ready() -> void:
+	s_Sound.Play_Sound(\"Plop\")
+	$\"Margin/Timer\".wait_time = randf_range(1.0, 6.0)
+	$\"Margin/Timer\".start()
+
+func _process(_delta : float) -> void:
+	#SCALE
+	var _scale = s_Interface.Get_Scale()
+	var _anchor = s_Interface.Get_Anchor()
+	scale.x = _scale
+	scale.y = _scale
+	for _child in get_children():
+		_child.anchor_right = _anchor
+		_child.anchor_bottom = _anchor
+
+func _input(_event : InputEvent) -> void:
+	if (_event.is_action_pressed(\"PAUSE\") or _event.is_action_pressed(\"INTERACT\")):
+		s_Sound.Play_Sound(\"Splash\")
+		s_Interface.Return()
+
+func Start_Fishing() -> void:
+	s_Interface.Return()
+	s_Interface.Add(\"Fishing\", false)
+"
+
+[node name="Waiting" type="CanvasLayer"]
+script = SubResource("GDScript_ub5eq")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Timer" type="Timer" parent="Margin"]
+one_shot = true
+
+[connection signal="timeout" from="Margin/Timer" to="." method="Start_Fishing"]
