@@ -5,7 +5,6 @@ script/source = "extends CanvasLayer
 
 func _ready() -> void:
 	get_node(\"/root/Main/Scene/Character\").Set_Animation(3)
-	s_Sound.Play_Sound(\"Plop\")
 	$\"Margin/Timer\".wait_time = randf_range(1.0, 6.0)
 	$\"Margin/Timer\".start()
 
@@ -20,7 +19,7 @@ func _process(_delta : float) -> void:
 		_child.anchor_bottom = _anchor
 
 func _input(_event : InputEvent) -> void:
-	if (_event.is_action_pressed(\"PAUSE\") or _event.is_action_pressed(\"INTERACT\")):
+	if ((_event.is_action_pressed(\"PAUSE\") or _event.is_action_pressed(\"INTERACT\")) and s_Scene.Get_Current().get_node(\"Character/Animation\").current_animation != \"reel_line\"):
 		get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 		s_Sound.Play_Sound(\"Splash\")
 		s_Interface.Return()
