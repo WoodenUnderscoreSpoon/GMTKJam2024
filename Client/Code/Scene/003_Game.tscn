@@ -17,9 +17,8 @@ func Setup(_arguments : Array) -> void:
 	$\"Zone_Shop\"._Function = Start_Shop
 	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\") #TODO encrypt savefiles
 	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
-	s_Interface.Switch(\"Nothing\")
-	
 	_Money = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"MONEY\", 0.0)
+	s_Interface.Switch(\"Nothing\")
 	s_Interface.Get_Current().Update_Money()
 
 func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Shop\", false)
@@ -38,7 +37,7 @@ func Add_Money(_price : float) -> void:
 size = Vector2(50, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upe0k"]
-size = Vector2(445, 35)
+size = Vector2(583.5, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61ek4"]
 size = Vector2(148, 107)
@@ -59,7 +58,7 @@ zoom = Vector2(4, 4)
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
 
 [node name="Zone_Shop" parent="." instance=ExtResource("2_05tr2")]
-position = Vector2(-202, 0)
+position = Vector2(-210, 0)
 
 [node name="Collision" parent="Zone_Shop" index="0"]
 position = Vector2(38, 0)
@@ -69,11 +68,15 @@ shape = SubResource("RectangleShape2D_2kokd")
 position = Vector2(-45, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(46, 43)
+position = Vector2(-23.25, 43)
 shape = SubResource("RectangleShape2D_upe0k")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(194, -27.5)
+shape = SubResource("RectangleShape2D_61ek4")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-242, -27)
 shape = SubResource("RectangleShape2D_61ek4")
 
 [editable path="Zone_Shop"]

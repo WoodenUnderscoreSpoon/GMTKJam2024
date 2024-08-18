@@ -27,6 +27,7 @@ func _input(_event : InputEvent) -> void:
 	if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
 	elif (_event.is_action_pressed(\"OPEN_JOURNAL\")): s_Interface.Add(\"Journal\", false)
 
+func Start_Journal() -> void: s_Interface.Add(\"Journal\", false)
 func Update_Money() -> void: $\"Margin/Money\".text = \"Money: \" + str(\"%0*.*f\" % [0, 2, s_Scene.Get_Current()._Money]) + \"$\"
 "
 
@@ -75,6 +76,6 @@ theme_override_font_sizes/font_size = 40
 text = "Money: 0.00$"
 vertical_alignment = 1
 
-[connection signal="pressed" from="Margin/Journal" to="." method="Start_Shop"]
+[connection signal="pressed" from="Margin/Journal" to="." method="Start_Journal"]
 
 [editable path="Margin/Journal"]
