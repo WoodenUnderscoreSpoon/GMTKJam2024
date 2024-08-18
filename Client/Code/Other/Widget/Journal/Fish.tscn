@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://debh6vm5q3sum"]
+[gd_scene load_steps=4 format=3 uid="uid://debh6vm5q3sum"]
 
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_bavvb"]
+[ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="2_6t144"]
 
 [sub_resource type="GDScript" id="GDScript_mirv1"]
 script/source = "extends MarginContainer
 
 func Setup(_name : String) -> void:
 	$\"VBox/Decoration/Margin/Margin/Texture\".texture = load(Species.Get_Texture(_name))
+	$\"VBox/Name\".text = _name
+	var _dictionary = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"JOURNAL\", {})
+	$\"VBox/Size\".text = str(floor(_dictionary[_name][0] * 10.0) / 10.0) + \"mm\"
+	$\"VBox/Number\".text = str(_dictionary[_name][1]) + \"x\"
 "
 
 [node name="Fish" type="MarginContainer"]
@@ -18,7 +23,7 @@ script = SubResource("GDScript_mirv1")
 layout_mode = 2
 
 [node name="Decoration" parent="VBox" instance=ExtResource("1_bavvb")]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="VBox/Decoration"]
@@ -51,3 +56,21 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Name" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6t144")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Size" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6t144")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Number" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6t144")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
