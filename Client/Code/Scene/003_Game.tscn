@@ -9,7 +9,9 @@ script/source = "extends Node2D
 
 var _Savefile : s_Config_File
 var _Money := 0.0
-var _License := [0, 0, 0] #0 = locked, 1 = unlocked, 2 = unlocked and equipped
+#TODO add license and upgrades to the savefile
+var _Licenses := [0, 0, 0] #0 = locked, 1 = unlocked, 2 = unlocked and equipped
+var _Upgrades := [0, 0, 0] #[reel, rod, bait], number is the upgrade level
 
 func Setup(_arguments : Array) -> void:
 	s_Sound.Play_Music(\"\", 1.0)
@@ -26,12 +28,27 @@ func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and
 func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Waiting\", false)
 func Stop_Fishing() -> void: $\"Timer\".start()
 
+
+
 func Add_Money(_price : float) -> void:
 	_Money += _price
 	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
 	s_Scene.Get_Current()._Savefile.Set(\"SAVE\", \"MONEY\", _Money)
 	s_Scene.Get_Current()._Savefile.Save()
 	s_Interface.Get_Current().Update_Money()
+
+
+
+func Unlock_License(_license : int) -> void:
+	var license = _license - 1 #so that _license can mean license 1 while in index 0
+	if _Licenses[license] == 0: _Licenses[license] = 1
+	Set_Active_License(license)
+
+func Set_Active_License(_license : int) -> void:
+	var license = _license - 1 #so that _license can mean license 1 while in index 0
+	if _Licenses[license] != 0:
+		for current_license in _Licenses: if current_license == 2: current_license = 1
+		_Licenses[license] = 2
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im4b6"]

@@ -5,7 +5,9 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
-func _ready() -> void: $\"Control/Margin/GridContainer/Better Reel\".grab_focus()
+func _ready() -> void: 
+	$\"Control/Margin/GridContainer/Better Reel\".grab_focus()
+	
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -26,7 +28,18 @@ func Return() -> void:
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
 	#s_Global._Paused = false
 
-#func Upgrade_Reel() -> void: 
+func Upgrade_Reel() -> void:
+	s_Scene.Get_Current()._Upgrades[0] = s_Scene.Get_Current()._Upgrades[0] + 1
+func Upgrade_Rod() -> void:
+	s_Scene.Get_Current()._Upgrades[1] = s_Scene.Get_Current()._Upgrades[1] + 1
+func Upgrade_Bait() -> void:
+	s_Scene.Get_Current()._Upgrades[2] = s_Scene.Get_Current()._Upgrades[2] + 1
+func Unlock_License_1() -> void:
+	s_Scene.Get_Current().Unlock_License(1)
+func Unlock_License_2() -> void:
+	s_Scene.Get_Current().Unlock_License(2)
+func Unlock_License_3() -> void:
+	s_Scene.Get_Current().Unlock_License(3)
 "
 
 [node name="Shop" type="CanvasLayer"]
@@ -98,6 +111,7 @@ text = "Platinum License"
 
 [node name="GridContainer" type="GridContainer" parent="Control/Margin"]
 layout_mode = 2
+size_flags_stretch_ratio = 0.0
 columns = 2
 
 [node name="Better Reel" parent="Control/Margin/GridContainer" instance=ExtResource("1_2ty76")]
