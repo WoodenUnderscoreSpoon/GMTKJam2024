@@ -21,7 +21,7 @@ extends Node
 	#"FOOTSTEP_VOLUME" : s_Int.Create(50, 0, 100, Change_Footstep_Volume, Display_Volume),
 	#"TAUNT_VOLUME" : s_Int.Create(50, 0, 100, Change_Taunt_Volume, Display_Volume),
 	#GENERAL
-	"UI_SCALE" : s_Int.Create(50, 0, 150, Change_UI_Scale, Display_UI_Scale, true),
+	"UI_SCALE" : s_Int.Create(50, 25, 75, Change_UI_Scale, Display_UI_Scale, true),
 	#"CAMERA_SENSITIVITY" : s_Int.Create(100, 1, 200, Change_Camera_Sensitivity, Display_Camera_Sensitivity),
 	#"LANGUAGE" : s_Enum.Create("English", ["English"], Change_Language), #s_Language.v_Languages.keys(),
 	"CONTROLLER" : s_Enum.Create("XBox", ["XBox", "Playstation", "Nintendo"], Change_Controller),

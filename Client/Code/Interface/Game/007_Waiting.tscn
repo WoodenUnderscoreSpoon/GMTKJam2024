@@ -21,7 +21,6 @@ func _process(_delta : float) -> void:
 
 func _input(_event : InputEvent) -> void:
 	if (_event.is_action_pressed(\"PAUSE\") or _event.is_action_pressed(\"INTERACT\")):
-		#get_node(\"/root/Main/Scene/Character\").Set_Idle() #TODO add animation where he just stops fishing
 		get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 		s_Sound.Play_Sound(\"Splash\")
 		s_Interface.Return()
