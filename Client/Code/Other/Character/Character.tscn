@@ -231,6 +231,7 @@ _data = {
 }
 
 [node name="Character" type="CharacterBody2D" groups=["Character"]]
+texture_filter = 1
 script = SubResource("GDScript_h3hjh")
 
 [node name="Sprite" type="Sprite2D" parent="."]
