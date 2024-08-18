@@ -17,6 +17,8 @@ func _process(_delta : float) -> void:
 	for _child in get_children():
 		_child.anchor_right  = _anchor
 		_child.anchor_bottom = _anchor
+	#LOGO
+	$\"Margin/HBox/Margin/Center/Control/Logo\".rotation_degrees = sin(Time.get_ticks_msec() / 2000.0) * 3.0
 
 func Play() -> void: s_Scene.Switch(\"Game\")
 func Options() -> void: s_Interface.Add(\"Options\")
@@ -53,9 +55,22 @@ size_flags_vertical = 4
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 80
 
-[node name="Logo" type="TextureRect" parent="Margin/HBox/Margin"]
+[node name="Center" type="CenterContainer" parent="Margin/HBox/Margin"]
 custom_minimum_size = Vector2(900, 508)
 layout_mode = 2
+
+[node name="Control" type="Control" parent="Margin/HBox/Margin/Center"]
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="Margin/HBox/Margin/Center/Control"]
+texture_filter = 2
+custom_minimum_size = Vector2(900, 508)
+layout_mode = 2
+offset_left = -450.0
+offset_top = -254.0
+offset_right = 450.0
+offset_bottom = 254.0
+pivot_offset = Vector2(450, 254)
 texture = ExtResource("1_68cvd")
 expand_mode = 1
 stretch_mode = 4
