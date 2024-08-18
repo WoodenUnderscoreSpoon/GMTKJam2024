@@ -68,8 +68,8 @@ func Move_Fish() -> void:
 func Catch_Fish() -> void:
 	Return()
 	s_Interface.Get_Current().Add_Money(_Fish.Get_Price()) #TODO move this to the end of the catch animation
-	#s_Interface.Get_Current().Catch_Animation(_Fish)
-	#s_Interface.Add(\"Catch\", false)
+	s_Interface.Add(\"Catch\", false)
+	s_Interface.Get_Current().Setup(_Fish)
 "
 
 [sub_resource type="Gradient" id="Gradient_6aqww"]

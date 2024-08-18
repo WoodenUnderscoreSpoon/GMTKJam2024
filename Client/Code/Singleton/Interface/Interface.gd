@@ -62,7 +62,7 @@ func Clear() -> void:
 	_Focused_Interfaces.clear()
 
 func _process(_delta : float) -> void: _Scale = float(min(s_Window.Get().get_size().x+1, s_Window.Get().get_size().y+1)) / 1024
-func Get_Scale() -> float: return 1.0 #_Scale * _Scale_Option
+func Get_Scale() -> float: return 1.0 * _Scale_Option #_Scale * _Scale_Option
 func Get_Anchor() -> float: return 1.0 / Get_Scale()
 func Get_Focused_Widget() -> Node: return get_viewport().gui_get_focus_owner()
 func Get_Current() -> Node: return _Focused_Interfaces.back()
