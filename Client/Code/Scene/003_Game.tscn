@@ -52,12 +52,16 @@ func Unlock_License(_license : int, _price : float) -> void:
 	if _Licenses[license] == 0: _Licenses[license] = 2
 	Set_Active_License(license)
 	Add_Money(-_price)
+	_Savefile.Set(\"SAVE\", \"LICENSES\", _Licenses)
+	_Savefile.Save()
 
 func Set_Active_License(_license : int) -> void:
 	var license = _license - 1 #so that _license can mean license 1 while in index 0
 	if _Licenses[license] != 0:
 		for current_license in _Licenses: if current_license == 2: current_license = 1
 		_Licenses[license] = 2
+		_Savefile.Set(\"SAVE\", \"LICENSES\", _Licenses)
+		_Savefile.Save()
 
 ##Returns true if the upgrade has reached its max level, false if it has not
 func Unlock_Upgrade(_upgrade : int, _price : float) -> bool:

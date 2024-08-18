@@ -15,11 +15,9 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
-	print(s_Scene.Get_Current()._Licenses)
 	var _species = Species._Dictionary.keys()
 	var _avaialble_species = []
 	for _i in _species: if (s_Scene.Get_Current()._Licenses[Species.Get_Permit(_i)] == 2): _avaialble_species.append(_i)
-	print(_avaialble_species)
 	_Fish = Fish.Create(_avaialble_species.pick_random())
 	$\"Margin/Timer\".wait_time = 1.0 - (Species.Get_Speed(_Fish._Species) / 100.0)
 	$\"Margin/HBox/Decoration/Margin/Node/Fish/Fish\".texture = load(Species.Get_Texture(_Fish._Species))
