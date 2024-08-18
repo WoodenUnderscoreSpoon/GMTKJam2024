@@ -9,7 +9,7 @@ script/source = "extends Node2D
 
 var _Savefile : s_Config_File
 var _Money := 0.0
-var _License := 1
+var _License := [0, 0, 0] #0 = locked, 1 = unlocked, 2 = unlocked and equipped
 
 func Setup(_arguments : Array) -> void:
 	s_Sound.Play_Music(\"\", 1.0)
@@ -59,6 +59,7 @@ one_shot = true
 autostart = true
 
 [node name="Character" parent="." instance=ExtResource("1_c47od")]
+position = Vector2(-97, 11)
 
 [node name="Camera" type="Camera2D" parent="Character"]
 offset = Vector2(0, -16)
