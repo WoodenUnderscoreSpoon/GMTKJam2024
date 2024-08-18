@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c1nyohvaxhrft"]
 
-[ext_resource type="Texture2D" uid="uid://jo2gvcb74o6t" path="res://Resource/Texture/Fish/Test1.png" id="1_0gvys"]
+[ext_resource type="Texture2D" path="res://Resource/Texture/Fish/Test1.png" id="1_0gvys"]
 [ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="1_3nbtc"]
 [ext_resource type="Texture2D" uid="uid://fsh3lv4kg2m3" path="res://Resource/Texture/Aura.png" id="1_xv7vf"]
 [ext_resource type="Texture2D" uid="uid://cy0k8ewhgehti" path="res://Resource/Texture/Sparkle.png" id="4_2rgvc"]
@@ -276,8 +276,11 @@ vertical_alignment = 1
 
 [node name="Texture" type="TextureRect" parent="Control/VBox"]
 modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("1_0gvys")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Sparkle" type="CPUParticles2D" parent="Control"]
 modulate = Color(1, 1, 1, 0)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c54hvjvyri6ti"
-path="res://.godot/imported/Test2.png-42e7b8bdea4a12bd07e4bc2b9486427b.ctex"
+uid="uid://ci1m8xqi8m4x7"
+path="res://.godot/imported/Penny.png-664086ae5787cd259357db581b151c38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/Texture/Fish/Test2.png"
-dest_files=["res://.godot/imported/Test2.png-42e7b8bdea4a12bd07e4bc2b9486427b.ctex"]
+source_file="res://Resource/Texture/Fish/Trash/Penny.png"
+dest_files=["res://.godot/imported/Penny.png-664086ae5787cd259357db581b151c38.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jo2gvcb74o6t"
-path="res://.godot/imported/Test1.png-a699b53ceb939ab6ca0ed4752ffb465e.ctex"
+uid="uid://vg4vr3hldwde"
+path="res://.godot/imported/Ancheddar.png-2ecc37de05747ae904282e58e4eeb1e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/Texture/Fish/Test1.png"
-dest_files=["res://.godot/imported/Test1.png-a699b53ceb939ab6ca0ed4752ffb465e.ctex"]
+source_file="res://Resource/Texture/Fish/Small/Ancheddar.png"
+dest_files=["res://.godot/imported/Ancheddar.png-2ecc37de05747ae904282e58e4eeb1e1.ctex"]
 
 [params]
 

@@ -10,7 +10,8 @@ script/source = "extends CanvasLayer
 func _ready() -> void:
 	$\"Margin/VBox/Margin/Return\".grab_focus()
 	var _scene = load(\"res://Code/Other/Widget/Journal/Fish.tscn\")
-	for _i in Species._Dictionary.keys():
+	var _species = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"JOURNAL\", {})
+	for _i in _species.keys():
 		var _widget = _scene.instantiate()
 		_widget.Setup(_i)
 		$\"Margin/VBox/Decoration/Margin/VBox/HFlow\".add_child(_widget)
@@ -51,7 +52,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Decoration" parent="Margin/VBox" instance=ExtResource("1_y6133")]
-custom_minimum_size = Vector2(1060, 750)
+custom_minimum_size = Vector2(980, 750)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://qjs1r60pp375" path="res://Resource/Audio/Sound/Reel.ogg" id="1_axuan"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_cxboc"]
 [ext_resource type="AudioStream" uid="uid://r1aarrqmqnfd" path="res://Resource/Audio/Sound/Tension.ogg" id="2_8s4cv"]
-[ext_resource type="Texture2D" uid="uid://jo2gvcb74o6t" path="res://Resource/Texture/Fish/Test1.png" id="2_m3gfm"]
+[ext_resource type="Texture2D" path="res://Resource/Texture/Fish/Test1.png" id="2_m3gfm"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -187,6 +187,7 @@ offset_right = 60.0
 offset_bottom = 490.0
 
 [node name="Fish" type="TextureRect" parent="Margin/HBox/Decoration/Margin/Node/Fish"]
+modulate = Color(100, 100, 100, 1)
 texture_filter = 2
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
