@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqs7asepx2y56"
-path="res://.godot/imported/Cheese Fish.png-f0478208ecce49c97bb2f74957d04738.ctex"
+uid="uid://b4ocm0j15bofo"
+path="res://.godot/imported/Curdchin.png-cae2f47134eb100dc4b98d1749665a64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/Texture/Fish/Small/Cheese Fish.png"
-dest_files=["res://.godot/imported/Cheese Fish.png-f0478208ecce49c97bb2f74957d04738.ctex"]
+source_file="res://Resource/Texture/Fish/Small/Curdchin.png"
+dest_files=["res://.godot/imported/Curdchin.png-cae2f47134eb100dc4b98d1749665a64.ctex"]
 
 [params]
 

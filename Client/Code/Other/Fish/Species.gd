@@ -39,19 +39,46 @@ const _Dictionary := {
 		"AI" : [-1.0, 1.0, 2.5, -1.0],
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/Briem.png",
 		"SIZE" : 1.0,
+		"PRICE" : 2.0,
+	},
+	"Curdchin" : {
+		"SPEED" : 0.8, #should never be more than like 3
+		"POWER" : 1.1, #should never be more tahn like 1.5
+		"DEFENSE" : 0.9, #should never be more than like 2
+		"AI" : [-1.0, 1.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Small/Curdchin.png",
+		"SIZE" : 1.0,
 		"PRICE" : 1.0,
 	},
-	"Cheese Fish" : {
+	"FettaFish" : {
 		"SPEED" : 1.0, #should never be more than like 3
 		"POWER" : 1.0, #should never be more tahn like 1.5
 		"DEFENSE" : 0.9, #should never be more than like 2
-		"AI" : [-1.0, -1.0, 0.0, 2.5],
-		"TEXTURE" : "res://Resource/Texture/Fish/Small/Cheese Fish.png",
+		"AI" : [-1.0, -1.0, -1.0, 2.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Small/FettaFish.png",
+		"SIZE" : 1.0,
+		"PRICE" : 1.0,
+	},
+	"Sardanish" : {
+		"SPEED" : 1.0, #should never be more than like 3
+		"POWER" : 1.0, #should never be more tahn like 1.5
+		"DEFENSE" : 0.9, #should never be more than like 2
+		"AI" : [-1.5, 1.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Small/Sardanish.png",
 		"SIZE" : 1.0,
 		"PRICE" : 1.0,
 	},
 	#endregion
 	##region Medium
+	"Cheese Fish" : {
+		"SPEED" : 1.0, #should never be more than like 3
+		"POWER" : 1.0, #should never be more tahn like 1.5
+		"DEFENSE" : 1.0, #should never be more than like 2
+		"AI" : [-1.0, -1.0, 0.0, 2.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Cheese Fish.png",
+		"SIZE" : 1.0,
+		"PRICE" : 10.0,
+	},
 	#"Test1" : {
 		#"SPEED" : 1.0, #should never be more than like 3
 		#"POWER" : 1.0, #should never be more tahn like 1.5

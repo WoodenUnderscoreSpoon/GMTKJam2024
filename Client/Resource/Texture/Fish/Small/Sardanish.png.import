@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c54hvjvyri6ti"
-path="res://.godot/imported/Test2.png-42e7b8bdea4a12bd07e4bc2b9486427b.ctex"
+uid="uid://bdi5xmhpyq52"
+path="res://.godot/imported/Sardanish.png-dd2d1007bc35de70ac9440f5f811ad8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/Texture/Fish/Test2.png"
-dest_files=["res://.godot/imported/Test2.png-42e7b8bdea4a12bd07e4bc2b9486427b.ctex"]
+source_file="res://Resource/Texture/Fish/Small/Sardanish.png"
+dest_files=["res://.godot/imported/Sardanish.png-dd2d1007bc35de70ac9440f5f811ad8d.ctex"]
 
 [params]
 
