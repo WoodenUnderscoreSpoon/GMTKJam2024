@@ -60,7 +60,7 @@ const _Dictionary := {
 		"PERMIT" : 1,
 		"DESCRIPTION" : "",
 	},
-	"FettaFish" : {
+	"Fetta Fish" : {
 		"SPEED" : 1.0, #should never be more than like 3
 		"POWER" : 1.0, #should never be more tahn like 1.5
 		"DEFENSE" : 0.9, #should never be more than like 2
@@ -82,31 +82,75 @@ const _Dictionary := {
 		"PERMIT" : 1,
 		"DESCRIPTION" : "",
 	},
-	#endregion
-	##region Medium
 	"Cheese Fish" : {
 		"SPEED" : 1.0, #should never be more than like 3
 		"POWER" : 1.0, #should never be more tahn like 1.5
 		"DEFENSE" : 1.0, #should never be more than like 2
 		"AI" : [-1.0, -1.0, 0.0, 2.5],
 		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Cheese Fish.png",
-		"SIZE" : 1.0,
+		"SIZE" : 100.0,
+		"PRICE" : 5.00,
+		"PERMIT" : 1,
+		"DESCRIPTION" : "",
+	},
+	#endregion
+	#region Medium
+	"Codage Cheese" : {
+		"SPEED" : 1.0, #should never be more than like 3
+		"POWER" : 1.0, #should never be more tahn like 1.5
+		"DEFENSE" : 1.1, #should never be more than like 2
+		"AI" : [-1.0, -1.0, 2.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/CoddageCheese.png",
+		"SIZE" : 863.6,
 		"PRICE" : 10.00,
 		"PERMIT" : 2,
 		"DESCRIPTION" : "",
 	},
-	#"Test1" : {
-		#"SPEED" : 1.0, #should never be more than like 3
-		#"POWER" : 1.0, #should never be more tahn like 1.5
-		#"DEFENSE" : 1.0, #should never be more than like 2
-		#"AI" : [-1.0, -1.0, 2.5],
-		#"TEXTURE" : "res://Resource/Texture/Fish/Test1.png",
-		#"SIZE" : 60.0,
-		#"PRICE" : 1.00,
-		#"PERMIT" : 2,
-		#"DESCRIPTION" : "",
-	#},
-	##endregion
+	"Colby Jackfish" : {
+		"SPEED" : 0.9, #should never be more than like 3
+		"POWER" : 1.2, #should never be more tahn like 1.5
+		"DEFENSE" : 1.1, #should never be more than like 2
+		"AI" : [-1.0, 0.5, 2.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/ColbyJackfish.png",
+		"SIZE" : 1010.0,
+		"PRICE" : 12.00,
+		"PERMIT" : 2,
+		"DESCRIPTION" : "",
+	},
+	"Emmentalapia" : {
+		"SPEED" : 1.2, #should never be more than like 3
+		"POWER" : 1.0, #should never be more tahn like 1.5
+		"DEFENSE" : 1.0, #should never be more than like 2
+		"AI" : [-1.0, -1.0, -1.5, 2.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Emmentalapia.png",
+		"SIZE" : 533.4,
+		"PRICE" : 8.00,
+		"PERMIT" : 2,
+		"DESCRIPTION" : "",
+	},
+	"Raycotta" : {
+		"SPEED" : 1.2, #should never be more than like 3
+		"POWER" : 1.3, #should never be more tahn like 1.5
+		"DEFENSE" : 1.3, #should never be more than like 2
+		"AI" : [-1.0, -1.0, 2.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Raycotta.png",
+		"SIZE" : 3096.0,
+		"PRICE" : 11.00,
+		"PERMIT" : 2,
+		"DESCRIPTION" : "",
+	},
+	"Salmontforte" : {
+		"SPEED" : 1.0, #should never be more than like 3
+		"POWER" : 1.3, #should never be more tahn like 1.5
+		"DEFENSE" : 1.2, #should never be more than like 2
+		"AI" : [-1.0, -1.0, 3.0, -1.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Raycotta.png",
+		"SIZE" : 1473.2,
+		"PRICE" : 15.00,
+		"PERMIT" : 2,
+		"DESCRIPTION" : "",
+	},
+	#endregion
 	##region Large
 	#"Test2" : {
 		#"SPEED" : 2.0,
