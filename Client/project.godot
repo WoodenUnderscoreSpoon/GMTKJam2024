@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GMTKJam2024"
+config/name="Cats Want Me, Fish Fear Me"
 config/description="GMTKJam2024"
 config/version="1.0.0.0"
 run/main_scene="res://Code/Scene/001_Main.tscn"

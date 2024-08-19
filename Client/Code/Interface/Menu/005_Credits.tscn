@@ -68,11 +68,18 @@ theme_override_font_sizes/font_size = 40
 text = "WoodenSpoon"
 horizontal_alignment = 1
 
-[node name="Deep Deep Dish Pizza" type="Label" parent="VBox2/Margin1/VBox"]
+[node name="Saxaurus" type="Label" parent="VBox2/Margin1/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7m2gm")
 theme_override_font_sizes/font_size = 40
-text = "Deep Deep Dish Pizza"
+text = "Saxaurus"
+horizontal_alignment = 1
+
+[node name="Dino" type="Label" parent="VBox2/Margin1/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7m2gm")
+theme_override_font_sizes/font_size = 40
+text = "Dino"
 horizontal_alignment = 1
 
 [node name="KhemBug" type="Label" parent="VBox2/Margin1/VBox"]
@@ -82,13 +89,6 @@ theme_override_font_sizes/font_size = 40
 text = "KhemBug"
 horizontal_alignment = 1
 
-[node name="Saxaurus" type="Label" parent="VBox2/Margin1/VBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_7m2gm")
-theme_override_font_sizes/font_size = 40
-text = "Saxaurus"
-horizontal_alignment = 1
-
 [node name="Yolo Swaggers" type="Label" parent="VBox2/Margin1/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7m2gm")
@@ -96,11 +96,11 @@ theme_override_font_sizes/font_size = 40
 text = "Yolo Swaggers"
 horizontal_alignment = 1
 
-[node name="Dino" type="Label" parent="VBox2/Margin1/VBox"]
+[node name="Deep Deep Dish Pizza" type="Label" parent="VBox2/Margin1/VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_7m2gm")
 theme_override_font_sizes/font_size = 40
-text = "Dino"
+text = "Deep Deep Dish Pizza"
 horizontal_alignment = 1
 
 [node name="Margin2" type="MarginContainer" parent="VBox2"]
