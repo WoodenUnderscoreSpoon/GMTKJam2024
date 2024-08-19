@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddo0exxeu7uxw"]
+[gd_scene load_steps=12 format=3 uid="uid://ddo0exxeu7uxw"]
 
 [ext_resource type="AudioStream" uid="uid://qjs1r60pp375" path="res://Resource/Audio/Sound/Reel.ogg" id="1_axuan"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_cxboc"]
@@ -105,6 +105,20 @@ random_volume_offset_db = 2.0
 streams_count = 1
 stream_0/stream = ExtResource("2_8s4cv")
 
+[sub_resource type="Shader" id="Shader_ja4kg"]
+code = "
+shader_type canvas_item;
+render_mode blend_mix;
+
+void fragment() {
+	COLOR.rgb = vec3(1.0, 1.0, 1.0);
+	COLOR.a = texture(TEXTURE, UV).a;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64paj"]
+shader = SubResource("Shader_ja4kg")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4jq5s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abpl3"]
@@ -188,8 +202,8 @@ offset_right = 60.0
 offset_bottom = 490.0
 
 [node name="Fish" type="TextureRect" parent="Margin/HBox/Decoration/Margin/Node/Fish"]
-modulate = Color(100, 100, 100, 1)
 texture_filter = 1
+material = SubResource("ShaderMaterial_64paj")
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4

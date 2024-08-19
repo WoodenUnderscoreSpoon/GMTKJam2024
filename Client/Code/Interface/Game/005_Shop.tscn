@@ -15,6 +15,7 @@ func _ready() -> void:
 	$\"Margin/VBox/Margin/Return\".grab_focus()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), true)
 	s_Global._Paused = true
+	s_Sound.Play_Sound(\"Open Shop\")
 	scene = s_Scene.Get_Current()
 	Load_Button_States()
 	var _quotes = [
@@ -47,30 +48,38 @@ func Return() -> void:
 	s_Interface.Return()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
 	s_Global._Paused = false
+	s_Sound.Play_Sound(\"Close Shop\")
 	s_Interface.Get_Current().Update_Money()
 
 func Upgrade_Reel() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	if scene.Unlock_Upgrade(0, PRICES[0][scene._Upgrades[0]]): %\"Better Reel\".disabled = true
 	Load_Button_States()
 func Upgrade_Rod() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	if scene.Unlock_Upgrade(1, PRICES[1][scene._Upgrades[1]]): %\"Better Rod\".disabled = true
 	Load_Button_States()
 func Upgrade_Bait() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	if scene.Unlock_Upgrade(2, PRICES[2][scene._Upgrades[2]]): %\"Better Bait\".disabled = true
 	Load_Button_States()
 func Unlock_License_Small() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	scene.Unlock_License(2, PRICES[3][0])
 	%\"License Small\".disabled = true
 	Load_Button_States()
 func Unlock_License_Medium() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	scene.Unlock_License(3, PRICES[3][1])
 	%\"License Medium\".disabled = true
 	Load_Button_States()
 func Unlock_License_Large() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	scene.Unlock_License(4, PRICES[3][2])
 	%\"License Large\".disabled = true
 	Load_Button_States()
 func Unlock_License_Huge() -> void:
+	s_Sound.Play_Sound(\"Buy\")
 	scene.Unlock_License(5, PRICES[3][3])
 	%\"License Huge\".disabled = true
 	Load_Button_States()

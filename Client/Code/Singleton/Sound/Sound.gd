@@ -20,6 +20,11 @@ var c_Dictionary_Sound := { #Array of audio
 	"Line Break" : ["Sound/Line Break.ogg"],
 	"Ding" : ["Sound/Ding.ogg"],
 	"Squeak" : ["Sound/Squeak 1.ogg", "Sound/Squeak 2.ogg"],
+	"Buy" : ["Sound/Buy 1.ogg", "Sound/Buy 2.ogg"],
+	"Open Shop" : ["Sound/Open Shop.ogg"],
+	"Close Shop" : ["Sound/Close Shop.ogg"],
+	"Open Journal" : ["Sound/Open Journal.ogg"],
+	"Close Journal" : ["Sound/Close Journal.ogg"],
 }
 var v_Music := ""
 var v_Ambient := ""

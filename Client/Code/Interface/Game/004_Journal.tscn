@@ -11,6 +11,7 @@ func _ready() -> void:
 	$\"Margin/VBox/Margin/Return\".grab_focus()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), true)
 	s_Global._Paused = true
+	s_Sound.Play_Sound(\"Open Journal\")
 	var _scene = load(\"res://Code/Other/Widget/Journal/Fish.tscn\")
 	var _species = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"JOURNAL\", {})
 	for _i in _species.keys():
@@ -36,6 +37,7 @@ func Return() -> void:
 	s_Interface.Return()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
 	s_Global._Paused = false
+	s_Sound.Play_Sound(\"Close Journal\")
 "
 
 [node name="Journal" type="CanvasLayer"]

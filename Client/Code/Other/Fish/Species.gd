@@ -25,6 +25,17 @@ const _Dictionary := {
 		"PERMIT" : 0,
 		"DESCRIPTION" : "",
 	},
+	"Cheese Fish" : {
+		"SPEED" : 0.7, #should never be more than like 3
+		"POWER" : 0.7, #should never be more tahn like 1.5
+		"DEFENSE" : 1.0, #should never be more than like 2
+		"AI" : [-1.0, -1.0, 0.0, 2.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Cheese Fish.png",
+		"SIZE" : 100.0,
+		"PRICE" : 1.50,
+		"PERMIT" : 0,
+		"DESCRIPTION" : "",
+	},
 	#endregion
 	#region Small
 	"Ancheddar" : {
@@ -79,17 +90,6 @@ const _Dictionary := {
 		"TEXTURE" : "res://Resource/Texture/Fish/Small/Sardanish.png",
 		"SIZE" : 220.0,
 		"PRICE" : 4.75,
-		"PERMIT" : 1,
-		"DESCRIPTION" : "",
-	},
-	"Cheese Fish" : {
-		"SPEED" : 1.0, #should never be more than like 3
-		"POWER" : 1.0, #should never be more tahn like 1.5
-		"DEFENSE" : 1.0, #should never be more than like 2
-		"AI" : [-1.0, -1.0, 0.0, 2.5],
-		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Cheese Fish.png",
-		"SIZE" : 100.0,
-		"PRICE" : 5.00,
 		"PERMIT" : 1,
 		"DESCRIPTION" : "",
 	},

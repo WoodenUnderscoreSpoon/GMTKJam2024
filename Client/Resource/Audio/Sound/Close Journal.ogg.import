@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://qtliyh4jl3gj"
+path="res://.godot/imported/Close Journal.ogg-ee600efd833e0706ddc48f781ce1e5f2.oggvorbisstr"
+
+[deps]
+
+source_file="res://Resource/Audio/Sound/Close Journal.ogg"
+dest_files=["res://.godot/imported/Close Journal.ogg-ee600efd833e0706ddc48f781ce1e5f2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

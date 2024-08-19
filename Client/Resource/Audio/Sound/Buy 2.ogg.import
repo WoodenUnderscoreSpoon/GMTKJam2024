@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b4spe6ev352ql"
+path="res://.godot/imported/Buy 2.ogg-2a05430fab8bb6d34791ac583c003df6.oggvorbisstr"
+
+[deps]
+
+source_file="res://Resource/Audio/Sound/Buy 2.ogg"
+dest_files=["res://.godot/imported/Buy 2.ogg-2a05430fab8bb6d34791ac583c003df6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
