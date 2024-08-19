@@ -209,7 +209,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Decoration" parent="Margin/VBox/HBox" instance=ExtResource("1_3i6iv")]
-custom_minimum_size = Vector2(1300, 750)
+custom_minimum_size = Vector2(800, 750)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -249,58 +249,56 @@ theme_override_font_sizes/font_size = 45
 text = "Scruggs' Feed and Seed"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox"]
+[node name="Margin2" type="MarginContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2"]
 layout_mode = 2
 theme_override_constants/separation = 5
-alignment = 1
 
-[node name="Upgrades" type="VBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer"]
+[node name="License Small" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
+
+[node name="License Medium" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
+
+[node name="License Large" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
+
+[node name="License Huge" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
+
+[node name="Better Reel" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 40
 
-[node name="Better Reel" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+[node name="Better Rod" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="Better Rod" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+[node name="Better Bait" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox" instance=ExtResource("1_2ty76")]
 unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_k7xat")
-theme_override_font_sizes/font_size = 40
-
-[node name="Better Bait" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_k7xat")
-theme_override_font_sizes/font_size = 40
-
-[node name="Licenses" type="VBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="License Small" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_k7xat")
-theme_override_font_sizes/font_size = 40
-
-[node name="License Medium" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_k7xat")
-theme_override_font_sizes/font_size = 40
-
-[node name="License Large" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_k7xat")
-theme_override_font_sizes/font_size = 40
-
-[node name="License Huge" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
-unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
@@ -318,11 +316,11 @@ size_flags_horizontal = 4
 focus_neighbor_bottom = NodePath("../../Margin1/HBox/Audio/Button")
 text = "Return"
 
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel" to="." method="Upgrade_Reel"]
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod" to="." method="Upgrade_Rod"]
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait" to="." method="Upgrade_Bait"]
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small" to="." method="Unlock_License_Small"]
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium" to="." method="Unlock_License_Medium"]
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large" to="." method="Unlock_License_Large"]
-[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge" to="." method="Unlock_License_Huge"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/License Small" to="." method="Unlock_License_Small"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/License Medium" to="." method="Unlock_License_Medium"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/License Large" to="." method="Unlock_License_Large"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/License Huge" to="." method="Unlock_License_Huge"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/Better Reel" to="." method="Upgrade_Reel"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/Better Rod" to="." method="Upgrade_Rod"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/Margin2/VBox/Better Bait" to="." method="Upgrade_Bait"]
 [connection signal="pressed" from="Margin/VBox/Margin/Return" to="." method="Return"]

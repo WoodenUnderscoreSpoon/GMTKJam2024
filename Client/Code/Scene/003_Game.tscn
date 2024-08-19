@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=19 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
 [ext_resource type="Texture2D" uid="uid://dgujymthln2nu" path="res://Resource/Texture/Game/WorldBackground1.png" id="1_gkobv"]
+[ext_resource type="Texture2D" uid="uid://b5ybbvf5bf4dh" path="res://Resource/Texture/Game/WorldBackground5.png" id="1_h1stu"]
 [ext_resource type="PackedScene" uid="uid://bhlvkit3rx2d3" path="res://Code/Other/Zone/Zone.tscn" id="2_05tr2"]
 [ext_resource type="Texture2D" uid="uid://1kv7p6fnsdg3" path="res://Resource/Texture/Game/WorldBackground2.png" id="2_raqer"]
 [ext_resource type="Texture2D" uid="uid://bolndbls66v7r" path="res://Resource/Texture/Sky.png" id="5_ca4dm"]
@@ -125,8 +126,11 @@ size = Vector2(57, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vyspl"]
 size = Vector2(635, 55)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60r5v"]
+size = Vector2(152, 338)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfjl3"]
-size = Vector2(152, 174)
+size = Vector2(152, 338)
 
 [sub_resource type="Animation" id="Animation_e7xsv"]
 length = 0.001
@@ -448,6 +452,8 @@ _data = {
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
@@ -461,6 +467,14 @@ motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(308, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(154, 79)
+texture = ExtResource("1_h1stu")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(308, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(154, 79)
 texture = ExtResource("1_gkobv")
 
@@ -522,11 +536,11 @@ position = Vector2(119.5, 172)
 shape = SubResource("RectangleShape2D_vyspl")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(363, 113)
-shape = SubResource("RectangleShape2D_dfjl3")
+position = Vector2(363, 29)
+shape = SubResource("RectangleShape2D_60r5v")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-123, 113)
+position = Vector2(-123, 31)
 shape = SubResource("RectangleShape2D_dfjl3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
