@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu4x6q3tsa2re"]
+[gd_scene load_steps=10 format=3 uid="uid://bu4x6q3tsa2re"]
 
 [ext_resource type="PackedScene" uid="uid://c1nyohvaxhrft" path="res://Code/Other/Fish/Catch_Effect.tscn" id="1_1k1mb"]
+[ext_resource type="Texture2D" uid="uid://bolndbls66v7r" path="res://Resource/Texture/Sky.png" id="1_4vnay"]
+[ext_resource type="Texture2D" uid="uid://5bougnw5acme" path="res://Resource/Texture/Space.png" id="2_8nlfe"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
@@ -10,15 +12,12 @@ var _Ready := false
 
 func Setup(_fish : Fish) -> void:
 	_Fish = _fish
-	s_Sound.Play_Sound(\"Splash\")
 	$\"Margin/Center/Catch_Effect\".Set_Fish(_fish)
 	if (_fish.Get_Size() > 1000000.0):
-		$\"Margin/Texture\".texture = load(\"res://Resource/Texture/Space.png\")
-		$\"Margin/Animation\".play(\"Large\")
+		Play_Space_Zoom_Animation()
 	elif (_fish.Get_Size() > 1000.0):
-		$\"Margin/Texture\".texture = load(\"res://Resource/Texture/Sky.png\")
-		$\"Margin/Animation\".play(\"Medium\")
-	else: $\"Margin/Animation\".play(\"Small\")
+		Play_Sky_Zoom_Animation()
+	else: Play_Small_Zoom_Animation()
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -38,30 +37,35 @@ func Return() -> void:
 	s_Interface.Return()
 	s_Scene.Get_Current().Stop_Fishing()
 	s_Scene.Get_Current().Add_Money(_Fish.Get_Price())
+	s_Scene.Get_Current().Reset_Zoom()
+
+func Play_Small_Zoom_Animation() -> void:
+	s_Sound.Play_Sound(\"Splash\")
+	$\"Margin/Animation\".play(\"Small\")
+
+func Play_Sky_Zoom_Animation() -> void:
+	s_Sound.Play_Sound(\"Splash\")
+	#$\"Margin/SkyTexture\".texture = load(\"res://Resource/Texture/Sky.png\")
+	$\"Margin/Animation\".play(\"Medium\")
+	s_Scene.Get_Current().Play_Sky_Zoom_Animation()
+
+func Play_Space_Zoom_Animation() -> void:
+	s_Sound.Play_Sound(\"Splash\")
+	#$\"Margin/SpaceTexture\".texture = load(\"res://Resource/Texture/Space.png\")
+	$\"Margin/Animation\".play(\"Large\")
+	s_Scene.Get_Current().Play_Space_Zoom_Animation()
 "
 
 [sub_resource type="Animation" id="Animation_140cm"]
 resource_name = "Large"
 length = 4.0
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Color:color")
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.03333, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(3.96667),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -69,25 +73,13 @@ tracks/1/keys = {
 "method": &"Ready_To_Quit"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Texture:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Center/Catch_Effect")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Center/Catch_Effect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(2.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -99,25 +91,13 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_ghjxq"]
 resource_name = "Medium"
 length = 4.0
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Color:color")
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(3.96667),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -125,25 +105,13 @@ tracks/1/keys = {
 "method": &"Ready_To_Quit"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Texture:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Center/Catch_Effect")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Center/Catch_Effect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(2.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -154,30 +122,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_retgh"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Texture:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_105ro"]
 resource_name = "Small"
@@ -242,13 +186,16 @@ libraries = {
 "": SubResource("AnimationLibrary_lnyig")
 }
 
-[node name="Texture" type="TextureRect" parent="Margin"]
+[node name="SkyTexture" type="TextureRect" parent="Margin"]
 visible = false
 layout_mode = 2
+texture = ExtResource("1_4vnay")
 
-[node name="Color" type="ColorRect" parent="Margin"]
+[node name="SpaceTexture" type="TextureRect" parent="Margin"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-color = Color(1, 1, 1, 0)
+texture = ExtResource("2_8nlfe")
 
 [node name="Center" type="CenterContainer" parent="Margin"]
 layout_mode = 2

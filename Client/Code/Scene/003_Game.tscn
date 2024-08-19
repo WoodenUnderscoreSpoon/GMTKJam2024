@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=17 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
 [ext_resource type="Texture2D" uid="uid://dgujymthln2nu" path="res://Resource/Texture/Game/WorldBackground1.png" id="1_gkobv"]
 [ext_resource type="PackedScene" uid="uid://bhlvkit3rx2d3" path="res://Code/Other/Zone/Zone.tscn" id="2_05tr2"]
 [ext_resource type="Texture2D" uid="uid://1kv7p6fnsdg3" path="res://Resource/Texture/Game/WorldBackground2.png" id="2_raqer"]
+[ext_resource type="Texture2D" uid="uid://bolndbls66v7r" path="res://Resource/Texture/Sky.png" id="5_ca4dm"]
+[ext_resource type="Texture2D" uid="uid://5bougnw5acme" path="res://Resource/Texture/Space.png" id="6_y5rll"]
 
 [sub_resource type="GDScript" id="GDScript_fmrx4"]
 script/source = "extends Node2D
@@ -75,6 +77,43 @@ func Unlock_Upgrade(_upgrade : int, _price : float) -> bool:
 func Is_Upgrade_Max_Level(_upgrade : int) -> bool:
 	if _Upgrades[_upgrade] == MAX_UPGRADE_LEVELS[_upgrade]: return true
 	else: return false
+
+func Play_Sky_Zoom_Animation() -> void:
+	var visible_area = get_viewport_rect().size / 4
+	var image_orig_dimensions = $Character/Catch_Backgrounds/Sky.texture.get_size()
+	var image_scale = Vector2(visible_area.x / image_orig_dimensions.x, visible_area.y / image_orig_dimensions.y)
+	var image_new_scale : float
+	if image_scale.x > image_scale.y: image_new_scale = image_scale.x + 0.01
+	else: image_new_scale = image_scale.y + 0.01
+	
+	var zoom_sky = $AnimationPlayer.get_animation(\"zoom_sky\")
+	zoom_sky.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
+	$AnimationPlayer.play(\"zoom_sky\")
+
+func Play_Space_Zoom_Animation() -> void:
+#	var visible_area = get_viewport_rect().size / 4
+#	var image_orig_dimensions = $Character/Catch_Backgrounds/Sky.texture.get_size()
+#	var image_scale = Vector2(visible_area.x / image_orig_dimensions.x, visible_area.y / image_orig_dimensions.y)
+#	var image_new_scale : float
+#	if image_scale.x > image_scale.y: image_new_scale = image_scale.x + 0.01
+#	else: image_new_scale = image_scale.y + 0.01
+#	
+#	var zoom_space = $AnimationPlayer.get_animation(\"zoom_space\")
+#	zoom_space.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
+	
+	var visible_area = get_viewport_rect().size / 4
+	var image_orig_dimensions = $Character/Catch_Backgrounds/Space.texture.get_size()
+	var image_scale = Vector2(visible_area.x / image_orig_dimensions.x, visible_area.y / image_orig_dimensions.y)
+	var image_new_scale : float
+	if image_scale.x > image_scale.y: image_new_scale = image_scale.x + 0.01
+	else: image_new_scale = image_scale.y + 0.01
+	
+	var zoom_space = $AnimationPlayer.get_animation(\"zoom_space\")
+	zoom_space.track_set_key_value(7, 1, Vector2(image_new_scale, image_new_scale))
+	$AnimationPlayer.play(\"zoom_space\")
+
+func Reset_Zoom() -> void:
+	$AnimationPlayer.play(\"RESET\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73eib"]
@@ -88,6 +127,324 @@ size = Vector2(635, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfjl3"]
 size = Vector2(152, 174)
+
+[sub_resource type="Animation" id="Animation_e7xsv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Character/Camera:limit_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-100]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Character/Camera:limit_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [340]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Character/Catch_Backgrounds/Sky:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Character/Catch_Backgrounds/Sky:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Character/Catch_Backgrounds/Sky:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Character/Catch_Backgrounds/Space:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Character/Catch_Backgrounds/Space:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 5)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Character/Catch_Backgrounds/Space:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5f20w"]
+resource_name = "zoom_sky"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(7, 7), Vector2(4, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Character/Camera:limit_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-10000000]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Character/Camera:limit_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10000000]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Character/Catch_Backgrounds/Sky:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Character/Catch_Backgrounds/Sky:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(0.5, 0.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Character/Catch_Backgrounds/Sky:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(650, -750), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Character/Catch_Backgrounds/Space:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_em5m0"]
+resource_name = "zoom_space"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(7, 7), Vector2(4, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Character/Camera:limit_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-10000000]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Character/Camera:limit_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10000000]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Character/Catch_Backgrounds/Sky:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.2),
+"transitions": PackedFloat32Array(1, 2.25),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Character/Catch_Backgrounds/Sky:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.8),
+"transitions": PackedFloat32Array(0.466516, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(0.3, 0.3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/path = NodePath("Character/Catch_Backgrounds/Sky:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8, 1.26667, 1.8),
+"transitions": PackedFloat32Array(2.25, 0.250001, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Character/Catch_Backgrounds/Space:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Character/Catch_Backgrounds/Space:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(15, 15), Vector2(5, 5)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Character/Catch_Backgrounds/Space:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mrbxs"]
+_data = {
+"RESET": SubResource("Animation_e7xsv"),
+"zoom_sky": SubResource("Animation_5f20w"),
+"zoom_space": SubResource("Animation_em5m0")
+}
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
@@ -126,9 +483,22 @@ position = Vector2(65, 130)
 offset = Vector2(0, -32)
 zoom = Vector2(7, 7)
 limit_left = -100
-limit_right = 340
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
+
+[node name="Catch_Backgrounds" type="Node2D" parent="Character"]
+
+[node name="Sky" type="Sprite2D" parent="Character/Catch_Backgrounds"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("5_ca4dm")
+offset = Vector2(0, -32)
+
+[node name="Space" type="Sprite2D" parent="Character/Catch_Backgrounds"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("6_y5rll")
+offset = Vector2(0, -32)
 
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
 position = Vector2(0, 2)
@@ -158,6 +528,11 @@ shape = SubResource("RectangleShape2D_dfjl3")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-123, 113)
 shape = SubResource("RectangleShape2D_dfjl3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mrbxs")
+}
 
 [editable path="Zone_Fishing"]
 [editable path="Zone_Shop"]
