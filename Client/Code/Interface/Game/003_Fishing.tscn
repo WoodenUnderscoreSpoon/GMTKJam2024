@@ -15,6 +15,7 @@ var _Fish_Target := 0.0
 var _Fish_AI_Position := 0
 
 func _ready() -> void:
+	#s_Global._Paused = true
 	var _species = Species._Dictionary.keys()
 	var _avaialble_species = []
 	for _i in _species: if (s_Scene.Get_Current()._Licenses[Species.Get_Permit(_i)] == 2): _avaialble_species.append(_i)
@@ -61,6 +62,7 @@ func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\"
 
 func Return() -> void:
 	s_Interface.Return()
+	#s_Global._Paused = false
 	s_Scene.Get_Current().Stop_Fishing()
 
 func Move_Fish() -> void:

@@ -9,7 +9,7 @@ script/source = "extends CanvasLayer
 func _ready() -> void:
 	$\"Margin/VBox/Resume\".grab_focus()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), true)
-	#s_Global._Paused = true
+	s_Global._Paused = true
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -26,7 +26,7 @@ func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\"
 func Return() -> void:
 	s_Interface.Return()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), false)
-	#s_Global._Paused = false
+	s_Global._Paused = false
 
 func Options() -> void:
 	s_Interface.Add(\"Options\")

@@ -8,9 +8,10 @@ script/source = "extends Node
 @warning_ignore(\"unused_private_class_variable\") @export var _Gradient_Transparent : Gradient
 var _Time := 12.0
 var _Raining := false
+var _Paused := false
 
 func _process(_delta : float) -> void:
-	if (s_Scene.Get_Current() is Node2D):
+	if (s_Scene.Get_Current() is Node2D and !_Paused):
 		var _time = _Time
 		var _rain = s_Scene.Get_Current().get_node(\"Weather/Rain\")
 		var _sound_rain = s_Scene.Get_Current().get_node(\"Weather/Sound_Rain\")
@@ -20,23 +21,23 @@ func _process(_delta : float) -> void:
 		_sound_cricket.volume_db = 15.0 * _Gradient_Transparent.sample(_Time / 24.0).a
 		#END OF DAY
 		if (_Time < _time):
-			var _raining = randf_range(0.0, 1.0)
+			var _raining = randf_range(0.5, 1.0)
 			var _windy = randf_range(0, 1.0)
-			var _cloudy = randi() % 3
+			var _cloudy = randi() % 4
 			_Gradient.set_color(4, [Color(\"59baff\"), Color(\"b1b0b3\")][int(_cloudy > 0)])
 			_Gradient.set_color(5, [Color(\"59baff\"), Color(\"b1b0b3\")][int(_cloudy > 0)])
 			var _tween = get_tree().create_tween()
 			_tween.tween_property(_sound_wind, \"volume_db\", 5.0 * _windy, 5.0)
-			if (_cloudy > 0 and !_Raining):
+			if (_cloudy > 1 and !_Raining):
 				_Raining = true
-				_rain.amount = 200.0 * _raining
+				_rain.amount = 300.0 * _raining
 				_rain.direction.x = 60.0 * _windy
 				_rain.emitting = true
-				_tween.tween_property(_sound_rain, \"volume_db\", 10.0 + (10.0 * _raining), 5.0)
+				_tween.tween_property(_sound_rain, \"volume_db\", 10.0 + (10.0 * _raining), 2.0)
 			else:
 				_Raining = false
 				_rain.emitting = false
-				_tween.tween_property(_sound_rain, \"volume_db\", 0.0, 5.0)
+				_tween.tween_property(_sound_rain, \"volume_db\", 0.0, 2.0)
 
 func Get_Highlight_Color() -> Color : return Color(\"80b9ff\")
 "

@@ -4,6 +4,7 @@
 script/source = "extends CanvasLayer
 
 func _ready() -> void:
+	#s_Global._Paused = true
 	get_node(\"/root/Main/Scene/Character\").Set_Animation(3)
 	$\"Margin/Timer\".wait_time = randf_range(2.0, 7.0)
 	$\"Margin/Timer\".start()
@@ -23,6 +24,7 @@ func _input(_event : InputEvent) -> void:
 		get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 		s_Sound.Play_Sound(\"Splash\")
 		s_Interface.Return()
+		#s_Global._Paused = false
 
 #Called when a fish is caught, plays the reeling-in animation and starts the StartFishingDelayTimer to give the anim time to play before opening the minigame
 func Start_Fishing() -> void:
