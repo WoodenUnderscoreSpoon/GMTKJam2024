@@ -6,9 +6,9 @@
 script/source = "extends CharacterBody2D
 
 const MOVEMENT_STATE_FUNCTIONS = [\"Set_Idle\", \"Set_Walk\", \"Set_Jump\", \"Set_Wait\", \"Set_Reel\"]
-@export var SPEED = 50.0
-@export var JUMP_VELOCITY = -500.0
-@export var gravity = 20.0
+@export var SPEED = 75.0
+@export var JUMP_VELOCITY = -200.0
+@export var gravity = 700.0
 var direction
 var anim_direction = 1
 var ready_to_move : bool = true
@@ -235,9 +235,6 @@ size = Vector2(9, 15)
 [node name="Character" type="CharacterBody2D" groups=["Character"]]
 texture_filter = 1
 script = SubResource("GDScript_h3hjh")
-SPEED = 75.0
-JUMP_VELOCITY = -200.0
-gravity = 700.0
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
