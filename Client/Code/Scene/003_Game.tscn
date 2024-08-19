@@ -20,18 +20,20 @@ var _Upgrades := [0, 0, 0] #[reel, rod, bait], number is the upgrade level
 const MAX_UPGRADE_LEVELS := [3, 3, 3] #[reel, rod, bait]
 
 func Setup(_arguments : Array) -> void:
-	s_Sound.Play_Music(\"\", 1.0)
-	s_Sound.Play_Ambient(\"Wind\", 1.0)
+	s_Sound.Play_Music(\"Game\", 1.0)
+	#s_Sound.Play_Ambient(\"Wind\", 1.0)
 	$\"Zone_Fishing\"._Function = Start_Fishing
 	$\"Zone_Shop\"._Function = Start_Shop
-	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\") #TODO encrypt savefiles
-	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
+	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\")
+	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
 	_Money = _Savefile.Get(\"SAVE\", \"MONEY\", _Money)
 	_Journal = _Savefile.Get(\"SAVE\", \"JOURNAL\", _Journal)
 	_Licenses = _Savefile.Get(\"SAVE\", \"LICENSES\", _Licenses)
 	_Upgrades = _Savefile.Get(\"SAVE\", \"UPGRADES\", _Upgrades)
 	s_Interface.Switch(\"Nothing\")
 	s_Interface.Get_Current().Update_Money()
+
+#func _input(event: InputEvent) -> void: print(event)
 
 func _process(_delta : float) -> void:
 	#SKY COLOR

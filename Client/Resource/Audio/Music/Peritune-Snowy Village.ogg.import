@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dh8aof2otss8l"
+path="res://.godot/imported/Peritune-Snowy Village.ogg-647188f6d01ab0af6cec6cbd91bbbe2d.oggvorbisstr"
+
+[deps]
+
+source_file="res://Resource/Audio/Music/Peritune-Snowy Village.ogg"
+dest_files=["res://.godot/imported/Peritune-Snowy Village.ogg-647188f6d01ab0af6cec6cbd91bbbe2d.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

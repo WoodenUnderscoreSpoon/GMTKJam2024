@@ -217,6 +217,10 @@ _Option = "MOVE_RIGHT"
 layout_mode = 2
 _Option = "JUMP"
 
+[node name="Squeak" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
+layout_mode = 2
+_Option = "SQUEAK"
+
 [node name="Interact" parent="VBox/Margin2/Scroll/Margin/Controls" instance=ExtResource("9_5d5vo")]
 layout_mode = 2
 _Option = "INTERACT"

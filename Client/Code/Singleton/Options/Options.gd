@@ -29,9 +29,10 @@ extends Node
 @onready var _Keybinds : Dictionary = {
 	"MOVE_LEFT" : [[0, 65], [0, 4194319], [2, 13]],
 	"MOVE_RIGHT" : [[0, 68], [0, 4194321], [2, 14]],
-	"JUMP" : [[0, 32], null, [2, 0]],
+	"JUMP" : [[0, 87], [0, 32], [2, 0]],
+	"SQUEAK" : [[0, 83], [0, 4194322], [2, 3]],
 	"INTERACT" : [[0, 69], null, [2, 1]],
-	"OPEN_JOURNAL" : [[0, 74], null, [2, 10]],
+	"OPEN_JOURNAL" : [[0, 74], null, [2, 2]],
 }
 
 func _ready() -> void:

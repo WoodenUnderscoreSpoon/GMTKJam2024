@@ -6,7 +6,9 @@
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
 
-func _ready() -> void: $\"Margin/HBox/VBox/Play\".grab_focus()
+func _ready() -> void:
+	s_Sound.Play_Music(\"Menu\", 1.0)
+	$\"Margin/HBox/VBox/Play\".grab_focus()
 
 func _process(_delta : float) -> void:
 	#SCALE
