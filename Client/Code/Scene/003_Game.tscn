@@ -59,7 +59,10 @@ func Add_Money(_price : float) -> void:
 	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
 	_Savefile.Set(\"SAVE\", \"MONEY\", _Money)
 	_Savefile.Save()
-	if s_Interface.Get_Current().has_method(\"Update_Money\"): s_Interface.Get_Current().Update_Money()
+	for interface in s_Interface._Focused_Interfaces:
+		if interface.has_method(\"Update_Money\"):
+			interface.Update_Money()
+			pass
 
 func Add_Fish(_fish : Fish) -> void:
 	if (!_Journal.has(_fish._Species)):
