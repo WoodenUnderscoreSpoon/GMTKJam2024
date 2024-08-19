@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b08yicsn0peat"]
+[gd_scene load_steps=6 format=3 uid="uid://b08yicsn0peat"]
 
 [ext_resource type="PackedScene" uid="uid://83j0rog4x1no" path="res://Code/Other/Widget/Basic/Button/Button.tscn" id="1_2ty76"]
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_3i6iv"]
+[ext_resource type="Texture2D" uid="uid://dx6lbuac80r75" path="res://Resource/Texture/Possum.png" id="2_1n773"]
 [ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="2_k7xat"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
@@ -14,6 +15,17 @@ func _ready() -> void:
 	scene = s_Scene.Get_Current()
 	$\"Margin/VBox/Margin/Return\".grab_focus()
 	Load_Button_States()
+	var _quotes = [
+		\"I hope you like cheese. The lake is full of the stuff for some reason.\",
+		\"I wonder what pop is up to right now...\",
+		\"I sell garbage at affordable prices.\",
+		\"Hey, what do you call a fish with no legs? ... A fish.\",
+		\"Catch anything good?\",
+		\"You got a loicense for that?\",
+		\"And I thought normal fish smelled bad.\",
+		\"Pops went fishing for the great Mobrie Dick... That was 2 years ago now.\",
+	]
+	$\"Margin/VBox/HBox/VBox/Decoration2/Margin/Margin/VBox/Label2\".text = _quotes.pick_random()
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -36,55 +48,55 @@ func Return() -> void:
 	#s_Global._Paused = false
 
 func Upgrade_Reel() -> void:
-	if scene.Unlock_Upgrade(0, PRICES[0][scene._Upgrades[0]]): $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel\".disabled = true
+	if scene.Unlock_Upgrade(0, PRICES[0][scene._Upgrades[0]]): %\"Better Reel\".disabled = true
 	Load_Button_States()
 func Upgrade_Rod() -> void:
-	if scene.Unlock_Upgrade(1, PRICES[1][scene._Upgrades[1]]): $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod\".disabled = true
+	if scene.Unlock_Upgrade(1, PRICES[1][scene._Upgrades[1]]): %\"Better Rod\".disabled = true
 	Load_Button_States()
 func Upgrade_Bait() -> void:
-	if scene.Unlock_Upgrade(2, PRICES[2][scene._Upgrades[2]]): $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait\".disabled = true
+	if scene.Unlock_Upgrade(2, PRICES[2][scene._Upgrades[2]]): %\"Better Bait\".disabled = true
 	Load_Button_States()
 func Unlock_License_Small() -> void:
 	scene.Unlock_License(2, PRICES[3][0])
-	$\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small\".disabled = true
+	%\"License Small\".disabled = true
 	Load_Button_States()
 func Unlock_License_Medium() -> void:
 	scene.Unlock_License(3, PRICES[3][1])
-	$\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium\".disabled = true
+	%\"License Medium\".disabled = true
 	Load_Button_States()
 func Unlock_License_Large() -> void:
 	scene.Unlock_License(4, PRICES[3][2])
-	$\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large\".disabled = true
+	%\"License Large\".disabled = true
 	Load_Button_States()
 func Unlock_License_Huge() -> void:
 	scene.Unlock_License(5, PRICES[3][3])
-	$\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge\".disabled = true
+	%\"License Huge\".disabled = true
 	Load_Button_States()
 
 func Load_Button_States() -> void:
-	if scene.Is_Upgrade_Max_Level(0): $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel\".disabled = true
-	if scene.Is_Upgrade_Max_Level(1): $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod\".disabled = true
-	if scene.Is_Upgrade_Max_Level(2): $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait\".disabled = true
-	if scene._Licenses[1] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small\".disabled = true
-	if scene._Licenses[2] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium\".disabled = true
-	if scene._Licenses[3] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large\".disabled = true
-	if scene._Licenses[4] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge\".disabled = true
+	if scene.Is_Upgrade_Max_Level(0): %\"Better Reel\".disabled = true
+	if scene.Is_Upgrade_Max_Level(1): %\"Better Rod\".disabled = true
+	if scene.Is_Upgrade_Max_Level(2): %\"Better Bait\".disabled = true
+	if scene._Licenses[1] > 0: %\"License Small\".disabled = true
+	if scene._Licenses[2] > 0: %\"License Medium\".disabled = true
+	if scene._Licenses[3] > 0: %\"License Large\".disabled = true
+	if scene._Licenses[4] > 0: %\"License Huge\".disabled = true
 	
-	if PRICES[0][scene.Get_Upgrade_Level(0)] == null: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel\".set_text(\"Better Reel: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel\".set_text(str(\"Better Reel: $\", PRICES[0][scene.Get_Upgrade_Level(0)]))
-	if PRICES[1][scene.Get_Upgrade_Level(1)] == null: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod\".set_text(\"Better Rod: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod\".set_text(str(\"Better Rod: $\", PRICES[1][scene.Get_Upgrade_Level(1)]))
-	if PRICES[2][scene.Get_Upgrade_Level(2)] == null: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait\".set_text(\"Better Bait: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait\".set_text(str(\"Better Bait: $\", PRICES[2][scene.Get_Upgrade_Level(2)]))
+	if PRICES[0][scene.Get_Upgrade_Level(0)] == null: %\"Better Reel\".set_text(\"Better Reel: SOLD OUT\")
+	else: %\"Better Reel\".set_text(str(\"Better Reel: %\", PRICES[0][scene.Get_Upgrade_Level(0)]))
+	if PRICES[1][scene.Get_Upgrade_Level(1)] == null: %\"Better Rod\".set_text(\"Better Rod: SOLD OUT\")
+	else: %\"Better Rod\".set_text(str(\"Better Rod: %\", PRICES[1][scene.Get_Upgrade_Level(1)]))
+	if PRICES[2][scene.Get_Upgrade_Level(2)] == null: %\"Better Bait\".set_text(\"Better Bait: SOLD OUT\")
+	else: %\"Better Bait\".set_text(str(\"Better Bait: %\", PRICES[2][scene.Get_Upgrade_Level(2)]))
 	
-	if scene._Licenses[1] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small\".set_text(\"Small License: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small\".set_text(str(\"Small License: $\", PRICES[3][0]))
-	if scene._Licenses[2] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium\".set_text(\"Medium License: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium\".set_text(str(\"Medium License: $\", PRICES[3][1]))
-	if scene._Licenses[3] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large\".set_text(\"Large License: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large\".set_text(str(\"Large License: $\", PRICES[3][2]))
-	if scene._Licenses[4] > 0: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge\".set_text(\"Huge License: SOLD OUT\")
-	else: $\"Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge\".set_text(str(\"Huge License: $\", PRICES[3][3]))
+	if scene._Licenses[1] > 0: %\"License Small\".set_text(\"Small License: SOLD OUT\")
+	else: %\"License Small\".set_text(str(\"Small License: %\", PRICES[3][0]))
+	if scene._Licenses[2] > 0: %\"License Medium\".set_text(\"Medium License: SOLD OUT\")
+	else: %\"License Medium\".set_text(str(\"Medium License: %\", PRICES[3][1]))
+	if scene._Licenses[3] > 0: %\"License Large\".set_text(\"Large License: SOLD OUT\")
+	else: %\"License Large\".set_text(str(\"Large License: %\", PRICES[3][2]))
+	if scene._Licenses[4] > 0: %\"License Huge\".set_text(\"Huge License: SOLD OUT\")
+	else: %\"License Huge\".set_text(str(\"Huge License: %\", PRICES[3][3]))
 "
 
 [node name="Shop" type="CanvasLayer"]
@@ -110,13 +122,99 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Decoration" parent="Margin/VBox" instance=ExtResource("1_3i6iv")]
+[node name="HBox" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Decoration1" parent="Margin/VBox/HBox/VBox" instance=ExtResource("1_3i6iv")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/VBox/Decoration1"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Color" type="ColorRect" parent="Margin/VBox/HBox/VBox/Decoration1/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.186667, 0.148336, 0.142443, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Margin/VBox/HBox/VBox/Decoration1/Margin"]
+texture_filter = 2
+layout_mode = 2
+texture = ExtResource("2_1n773")
+expand_mode = 1
+
+[node name="Decoration2" parent="Margin/VBox/HBox/VBox" instance=ExtResource("1_3i6iv")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/VBox/Decoration2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Color" type="ColorRect" parent="Margin/VBox/HBox/VBox/Decoration2/Margin"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.270588, 0.219608, 0.211765, 1)
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/VBox/Decoration2/Margin"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/HBox/VBox/Decoration2/Margin/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Margin/VBox/HBox/VBox/Decoration2/Margin/Margin/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 45
+text = "Scruggs:"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Margin/VBox/HBox/VBox/Decoration2/Margin/Margin/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k7xat")
+theme_override_font_sizes/font_size = 29
+text = "I'm a possum"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Decoration" parent="Margin/VBox/HBox" instance=ExtResource("1_3i6iv")]
 custom_minimum_size = Vector2(1300, 750)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration"]
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/Decoration"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -130,72 +228,79 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="Color" type="ColorRect" parent="Margin/VBox/Decoration/Margin"]
+[node name="Color" type="ColorRect" parent="Margin/VBox/HBox/Decoration/Margin"]
 layout_mode = 2
 mouse_filter = 2
 color = Color(0.270588, 0.219608, 0.211765, 1)
 
-[node name="VBox" type="VBoxContainer" parent="Margin/VBox/Decoration/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration/Margin/VBox"]
+[node name="Margin" type="MarginContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="Margin/VBox/Decoration/Margin/VBox/Margin"]
+[node name="Label" type="Label" parent="Margin/VBox/HBox/Decoration/Margin/VBox/Margin"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 45
 text = "Scruggs' Feed and Seed"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBox/Decoration/Margin/VBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="Upgrades" type="VBoxContainer" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer"]
+[node name="Upgrades" type="VBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Better Reel" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+[node name="Better Reel" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="Better Rod" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+[node name="Better Rod" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="Better Bait" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+[node name="Better Bait" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="Licenses" type="VBoxContainer" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer"]
+[node name="Licenses" type="VBoxContainer" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="License Small" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+[node name="License Small" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="License Medium" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+[node name="License Medium" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="License Large" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+[node name="License Large" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
 
-[node name="License Huge" parent="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+[node name="License Huge" parent="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses" instance=ExtResource("1_2ty76")]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_k7xat")
 theme_override_font_sizes/font_size = 40
@@ -213,11 +318,11 @@ size_flags_horizontal = 4
 focus_neighbor_bottom = NodePath("../../Margin1/HBox/Audio/Button")
 text = "Return"
 
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel" to="." method="Upgrade_Reel"]
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod" to="." method="Upgrade_Rod"]
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait" to="." method="Upgrade_Bait"]
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small" to="." method="Unlock_License_Small"]
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium" to="." method="Unlock_License_Medium"]
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large" to="." method="Unlock_License_Large"]
-[connection signal="pressed" from="Margin/VBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge" to="." method="Unlock_License_Huge"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Reel" to="." method="Upgrade_Reel"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Rod" to="." method="Upgrade_Rod"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Upgrades/Better Bait" to="." method="Upgrade_Bait"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Small" to="." method="Unlock_License_Small"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Medium" to="." method="Unlock_License_Medium"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Large" to="." method="Unlock_License_Large"]
+[connection signal="pressed" from="Margin/VBox/HBox/Decoration/Margin/VBox/HBoxContainer/Licenses/License Huge" to="." method="Unlock_License_Huge"]
 [connection signal="pressed" from="Margin/VBox/Margin/Return" to="." method="Return"]
