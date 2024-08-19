@@ -8,7 +8,7 @@
 script/source = "extends CanvasLayer
 
 var scene : Node
-const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, 4]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
+const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [5, 50, 500, 5000]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
 
 func _ready() -> void: 
 	scene = s_Scene.Get_Current()
@@ -103,7 +103,7 @@ grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Margin"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.52549)
+color = Color(0, 0, 0, 0.5)
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2

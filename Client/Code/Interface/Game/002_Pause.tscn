@@ -55,7 +55,7 @@ theme_override_constants/margin_bottom = 0
 
 [node name="ColorRect" type="ColorRect" parent="Margin"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.52549)
+color = Color(0, 0, 0, 0.5)
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2

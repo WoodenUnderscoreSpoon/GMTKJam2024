@@ -12,10 +12,10 @@ func Setup(_fish : Fish) -> void:
 	_Fish = _fish
 	s_Sound.Play_Sound(\"Splash\")
 	$\"Margin/Center/Catch_Effect\".Set_Fish(_fish)
-	if (_fish.Get_Size() > 90.0):
+	if (_fish.Get_Size() > 1000000.0):
 		$\"Margin/Texture\".texture = load(\"res://Resource/Texture/Space.png\")
 		$\"Margin/Animation\".play(\"Large\")
-	elif (_fish.Get_Size() > 40.0):
+	elif (_fish.Get_Size() > 1000.0):
 		$\"Margin/Texture\".texture = load(\"res://Resource/Texture/Sky.png\")
 		$\"Margin/Animation\".play(\"Medium\")
 	else: $\"Margin/Animation\".play(\"Small\")
