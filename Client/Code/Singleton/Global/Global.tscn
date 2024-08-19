@@ -7,24 +7,53 @@ script/source = "extends Node
 @warning_ignore(\"unused_private_class_variable\") @export var _Gradient : Gradient
 @warning_ignore(\"unused_private_class_variable\") @export var _Gradient_Transparent : Gradient
 var _Time := 12.0
+var _Raining := false
 
-func _process(_delta : float) -> void: _Time = fposmod(_Time + _delta / 20.0, 24.0)
+func _process(_delta : float) -> void:
+	if (s_Scene.Get_Current() is Node2D):
+		var _time = _Time
+		var _rain = s_Scene.Get_Current().get_node(\"Weather/Rain\")
+		var _sound_rain = s_Scene.Get_Current().get_node(\"Weather/Sound_Rain\")
+		var _sound_wind = s_Scene.Get_Current().get_node(\"Weather/Sound_Wind\")
+		var _sound_cricket = s_Scene.Get_Current().get_node(\"Weather/Sound_Cricket\")
+		_Time = fposmod(_Time + _delta / 10.0, 24.0)
+		_sound_cricket.volume_db = 15.0 * _Gradient_Transparent.sample(_Time / 24.0).a
+		#END OF DAY
+		if (_Time < _time):
+			var _raining = randf_range(0.0, 1.0)
+			var _windy = randf_range(0, 1.0)
+			var _cloudy = randi() % 3
+			_Gradient.set_color(4, [Color(\"59baff\"), Color(\"b1b0b3\")][int(_cloudy > 0)])
+			_Gradient.set_color(5, [Color(\"59baff\"), Color(\"b1b0b3\")][int(_cloudy > 0)])
+			var _tween = get_tree().create_tween()
+			_tween.tween_property(_sound_wind, \"volume_db\", 5.0 * _windy, 5.0)
+			if (_cloudy > 0 and !_Raining):
+				_Raining = true
+				_rain.amount = 200.0 * _raining
+				_rain.direction.x = 60.0 * _windy
+				_rain.emitting = true
+				_tween.tween_property(_sound_rain, \"volume_db\", 10.0 + (10.0 * _raining), 5.0)
+			else:
+				_Raining = false
+				_rain.emitting = false
+				_tween.tween_property(_sound_rain, \"volume_db\", 0.0, 5.0)
+
 func Get_Highlight_Color() -> Color : return Color(\"80b9ff\")
 "
 
 [sub_resource type="Gradient" id="Gradient_fwtsj"]
 offsets = PackedFloat32Array(0.125, 0.21875, 0.25, 0.28125, 0.375, 0.625, 0.71875, 0.75, 0.78125, 0.875)
-colors = PackedColorArray(0.0745098, 0.113725, 0.231373, 1, 0.404647, 0.000634893, 0.523016, 1, 1, 0.0929522, 0.234501, 1, 1, 0.835294, 0.431373, 1, 0.34773, 0.727614, 1, 1, 0.34902, 0.729412, 1, 1, 1, 0.836017, 0.429645, 1, 1, 0.0941176, 0.235294, 1, 0.403922, 0, 0.521569, 1, 0.0740122, 0.11427, 0.232669, 1)
+colors = PackedColorArray(0.0745098, 0.113725, 0.231373, 1, 0.404647, 0.000634893, 0.523016, 1, 1, 0.0929522, 0.234501, 1, 1, 0.835294, 0.431373, 1, 0.34902, 0.729412, 1, 1, 0.34902, 0.729412, 1, 1, 1, 0.836017, 0.429645, 1, 1, 0.0941176, 0.235294, 1, 0.403922, 0, 0.521569, 1, 0.0740122, 0.11427, 0.232669, 1)
 metadata/_snap_enabled = true
 metadata/_snap_count = 32
 
 [sub_resource type="Gradient" id="Gradient_vfgyu"]
-offsets = PackedFloat32Array(0.125, 0.375, 0.625, 0.875)
+offsets = PackedFloat32Array(0.15625, 0.28125, 0.71875, 0.84375)
 colors = PackedColorArray(0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.6)
 metadata/_snap_enabled = true
-metadata/_snap_count = 16
+metadata/_snap_count = 32
 
-[node name="Gradient" type="Node"]
+[node name="Global" type="Node"]
 script = SubResource("GDScript_3jch1")
 _Gradient = SubResource("Gradient_fwtsj")
 _Gradient_Transparent = SubResource("Gradient_vfgyu")

@@ -1,11 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=25 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
 [ext_resource type="Texture2D" uid="uid://dgujymthln2nu" path="res://Resource/Texture/Game/WorldBackground1.png" id="1_gkobv"]
 [ext_resource type="Texture2D" uid="uid://b5ybbvf5bf4dh" path="res://Resource/Texture/Game/WorldBackground5.png" id="1_h1stu"]
+[ext_resource type="AudioStream" uid="uid://ctimwtwkhbgt0" path="res://Resource/Audio/Ambient/Rain.ogg" id="1_q57q4"]
 [ext_resource type="PackedScene" uid="uid://bhlvkit3rx2d3" path="res://Code/Other/Zone/Zone.tscn" id="2_05tr2"]
+[ext_resource type="AudioStream" uid="uid://doh4tvofa2f12" path="res://Resource/Audio/Ambient/Wind.ogg" id="2_8knr8"]
 [ext_resource type="Texture2D" uid="uid://1kv7p6fnsdg3" path="res://Resource/Texture/Game/WorldBackground2.png" id="2_raqer"]
+[ext_resource type="AudioStream" uid="uid://ducbrrtaqm0hg" path="res://Resource/Audio/Ambient/Cricket.ogg" id="3_dot2y"]
 [ext_resource type="Texture2D" uid="uid://bolndbls66v7r" path="res://Resource/Texture/Sky.png" id="5_ca4dm"]
 [ext_resource type="Texture2D" uid="uid://5bougnw5acme" path="res://Resource/Texture/Space.png" id="6_y5rll"]
 
@@ -37,6 +40,7 @@ func Setup(_arguments : Array) -> void:
 
 func _process(_delta : float) -> void:
 	#SKY COLOR
+	$\"Weather/Rain\".color = s_Global._Gradient.sample(s_Global._Time / 24.0)
 	$\"Water\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
 	$\"Canvas/Color\".color = s_Global._Gradient.sample(s_Global._Time / 24.0)
 	$\"Canvas/Color\".color.a = s_Global._Gradient_Transparent.sample(s_Global._Time / 24.0).a
@@ -126,6 +130,12 @@ func Play_Space_Zoom_Animation() -> void:
 func Reset_Zoom() -> void:
 	$AnimationPlayer.play(\"RESET\")
 "
+
+[sub_resource type="Gradient" id="Gradient_cwpl2"]
+offsets = PackedFloat32Array(0, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 5
 
 [sub_resource type="Gradient" id="Gradient_hq7ua"]
 offsets = PackedFloat32Array(0.00892857, 1)
@@ -469,13 +479,51 @@ _data = {
 
 [node name="Scene" type="Node2D"]
 script = SubResource("GDScript_fmrx4")
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 autostart = true
+
+[node name="Weather" type="Node2D" parent="."]
+
+[node name="Rain" type="CPUParticles2D" parent="Weather"]
+self_modulate = Color(0.419608, 0.556863, 0.698039, 1)
+z_index = 1
+position = Vector2(111, -146)
+emitting = false
+amount = 200
+lifetime = 1.5
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(300, 1)
+direction = Vector2(0, 100)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+color_ramp = SubResource("Gradient_cwpl2")
+
+[node name="Sound_Rain" type="AudioStreamPlayer" parent="Weather"]
+stream = ExtResource("1_q57q4")
+autoplay = true
+bus = &"Ambient"
+parameters/looping = true
+
+[node name="Sound_Wind" type="AudioStreamPlayer" parent="Weather"]
+stream = ExtResource("2_8knr8")
+autoplay = true
+bus = &"Ambient"
+parameters/looping = true
+
+[node name="Sound_Cricket" type="AudioStreamPlayer2D" parent="Weather"]
+position = Vector2(284, 115)
+stream = ExtResource("3_dot2y")
+autoplay = true
+max_distance = 300.0
+attenuation = 0.659754
+bus = &"Ambient"
+parameters/looping = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

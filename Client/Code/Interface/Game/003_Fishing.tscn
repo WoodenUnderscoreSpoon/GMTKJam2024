@@ -187,7 +187,7 @@ offset_bottom = 490.0
 
 [node name="Fish" type="TextureRect" parent="Margin/HBox/Decoration/Margin/Node/Fish"]
 modulate = Color(100, 100, 100, 1)
-texture_filter = 2
+texture_filter = 1
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4

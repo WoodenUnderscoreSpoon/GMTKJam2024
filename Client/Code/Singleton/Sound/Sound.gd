@@ -2,11 +2,13 @@ extends Node
 #class_name s_Sound
 
 var c_Dictionary_Music := { #Layer, Volume, Audio
-	"Menu" : [0, 0.7, "Music/Peritune-Snowy Village.ogg"],
-	"Game" : [1, 1.0, "Music/Peritune-Rain Drop.ogg"],
+	"Menu" : [0, 0.5, "Music/Peritune-Snowy Village.ogg"],
+	"Game" : [1, 0.5, "Music/Peritune-Rain Drop.ogg"],
 }
 var c_Dictionary_Ambient := { #Audio
 	"Wind" : "Ambient/Wind.ogg",
+	"Rain" : "Ambient/Rain.ogg",
+	"Cricket" : "Ambient/Cricket.ogg",
 }
 var c_Dictionary_Sound := { #Array of audio
 	"Button" : ["Sound/Button.ogg"],

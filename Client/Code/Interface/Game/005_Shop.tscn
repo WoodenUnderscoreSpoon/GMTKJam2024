@@ -83,20 +83,20 @@ func Load_Button_States() -> void:
 	if scene._Licenses[4] > 0: %\"License Huge\".disabled = true
 	
 	if PRICES[0][scene.Get_Upgrade_Level(0)] == null: %\"Better Reel\".set_text(\"Better Reel: SOLD OUT\")
-	else: %\"Better Reel\".set_text(str(\"Better Reel: %\", PRICES[0][scene.Get_Upgrade_Level(0)]))
+	else: %\"Better Reel\".set_text(str(\"Better Reel: $\", PRICES[0][scene.Get_Upgrade_Level(0)]))
 	if PRICES[1][scene.Get_Upgrade_Level(1)] == null: %\"Better Rod\".set_text(\"Better Rod: SOLD OUT\")
-	else: %\"Better Rod\".set_text(str(\"Better Rod: %\", PRICES[1][scene.Get_Upgrade_Level(1)]))
+	else: %\"Better Rod\".set_text(str(\"Better Rod: $\", PRICES[1][scene.Get_Upgrade_Level(1)]))
 	if PRICES[2][scene.Get_Upgrade_Level(2)] == null: %\"Better Bait\".set_text(\"Better Bait: SOLD OUT\")
-	else: %\"Better Bait\".set_text(str(\"Better Bait: %\", PRICES[2][scene.Get_Upgrade_Level(2)]))
+	else: %\"Better Bait\".set_text(str(\"Better Bait: $\", PRICES[2][scene.Get_Upgrade_Level(2)]))
 	
 	if scene._Licenses[1] > 0: %\"License Small\".set_text(\"Small License: SOLD OUT\")
-	else: %\"License Small\".set_text(str(\"Small License: %\", PRICES[3][0]))
+	else: %\"License Small\".set_text(str(\"Small License: $\", PRICES[3][0]))
 	if scene._Licenses[2] > 0: %\"License Medium\".set_text(\"Medium License: SOLD OUT\")
-	else: %\"License Medium\".set_text(str(\"Medium License: %\", PRICES[3][1]))
+	else: %\"License Medium\".set_text(str(\"Medium License: $\", PRICES[3][1]))
 	if scene._Licenses[3] > 0: %\"License Large\".set_text(\"Large License: SOLD OUT\")
-	else: %\"License Large\".set_text(str(\"Large License: %\", PRICES[3][2]))
+	else: %\"License Large\".set_text(str(\"Large License: $\", PRICES[3][2]))
 	if scene._Licenses[4] > 0: %\"License Huge\".set_text(\"Huge License: SOLD OUT\")
-	else: %\"License Huge\".set_text(str(\"Huge License: %\", PRICES[3][3]))
+	else: %\"License Huge\".set_text(str(\"Huge License: $\", PRICES[3][3]))
 "
 
 [node name="Shop" type="CanvasLayer"]
