@@ -113,7 +113,6 @@ theme_override_constants/margin_bottom = 25
 [node name="Return" parent="Margin/VBox/Margin" instance=ExtResource("3_x450f")]
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_bottom = NodePath("../../Margin1/HBox/Audio/Button")
 text = "Return"
 
 [connection signal="pressed" from="Margin/VBox/Margin/Return" to="." method="Return"]

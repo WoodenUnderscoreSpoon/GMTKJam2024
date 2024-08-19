@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=21 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
@@ -32,6 +32,14 @@ func Setup(_arguments : Array) -> void:
 	_Upgrades = _Savefile.Get(\"SAVE\", \"UPGRADES\", _Upgrades)
 	s_Interface.Switch(\"Nothing\")
 	s_Interface.Get_Current().Update_Money()
+
+func _process(_delta : float) -> void:
+	#SKY COLOR
+	$\"Water\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
+	$\"Canvas/Color\".color = s_Global._Gradient.sample(s_Global._Time / 24.0)
+	$\"Canvas/Color\".color.a = s_Global._Gradient_Transparent.sample(s_Global._Time / 24.0).a
+	$\"ParallaxBackground/ParallaxLayer/Sprite2D\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
+	$\"ParallaxBackground/ParallaxLayer2/Sprite2D\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0).lightened(0.66)
 
 func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Shop\", false)
 func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Waiting\", false)
@@ -116,6 +124,13 @@ func Play_Space_Zoom_Animation() -> void:
 func Reset_Zoom() -> void:
 	$AnimationPlayer.play(\"RESET\")
 "
+
+[sub_resource type="Gradient" id="Gradient_hq7ua"]
+offsets = PackedFloat32Array(0.00892857, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8gw28"]
+gradient = SubResource("Gradient_hq7ua")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73eib"]
 size = Vector2(23, 20)
@@ -485,6 +500,23 @@ motion_mirroring = Vector2(308, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(154, 96)
 texture = ExtResource("2_raqer")
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Color" type="ColorRect" parent="Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Water" type="Sprite2D" parent="."]
+self_modulate = Color(0.418862, 0.555325, 0.697865, 1)
+position = Vector2(291, 137)
+scale = Vector2(1.72, 1)
+texture = SubResource("GradientTexture2D_8gw28")
 
 [node name="World" type="Sprite2D" parent="."]
 position = Vector2(106, -45)

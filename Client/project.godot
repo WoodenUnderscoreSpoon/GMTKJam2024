@@ -38,7 +38,7 @@ s_Scene="*res://Code/Singleton/Scene/Scene.tscn"
 s_Sound="*res://Code/Singleton/Sound/Sound.gd"
 s_Tooltip="*res://Code/Singleton/Tooltip/Tooltip.tscn"
 s_Window="*res://Code/Singleton/Window/Window.gd"
-s_Global="*res://Code/Singleton/Global/Global.gd"
+s_Global="*res://Code/Singleton/Global/Global.tscn"
 
 [debug]
 

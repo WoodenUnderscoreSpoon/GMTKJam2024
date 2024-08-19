@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvtwa8x3wjo8f"]
+
+[sub_resource type="GDScript" id="GDScript_3jch1"]
+script/source = "extends Node
+#class_name s_Global
+
+@warning_ignore(\"unused_private_class_variable\") @export var _Gradient : Gradient
+@warning_ignore(\"unused_private_class_variable\") @export var _Gradient_Transparent : Gradient
+var _Time := 12.0
+
+func _process(_delta : float) -> void: _Time = fposmod(_Time + _delta / 20.0, 24.0)
+func Get_Highlight_Color() -> Color : return Color(\"80b9ff\")
+"
+
+[sub_resource type="Gradient" id="Gradient_fwtsj"]
+offsets = PackedFloat32Array(0.125, 0.21875, 0.25, 0.28125, 0.375, 0.625, 0.71875, 0.75, 0.78125, 0.875)
+colors = PackedColorArray(0.0745098, 0.113725, 0.231373, 1, 0.404647, 0.000634893, 0.523016, 1, 1, 0.0929522, 0.234501, 1, 1, 0.835294, 0.431373, 1, 0.34773, 0.727614, 1, 1, 0.34902, 0.729412, 1, 1, 1, 0.836017, 0.429645, 1, 1, 0.0941176, 0.235294, 1, 0.403922, 0, 0.521569, 1, 0.0740122, 0.11427, 0.232669, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 32
+
+[sub_resource type="Gradient" id="Gradient_vfgyu"]
+offsets = PackedFloat32Array(0.125, 0.375, 0.625, 0.875)
+colors = PackedColorArray(0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.6)
+metadata/_snap_enabled = true
+metadata/_snap_count = 16
+
+[node name="Gradient" type="Node"]
+script = SubResource("GDScript_3jch1")
+_Gradient = SubResource("Gradient_fwtsj")
+_Gradient_Transparent = SubResource("Gradient_vfgyu")

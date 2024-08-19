@@ -144,7 +144,7 @@ const _Dictionary := {
 		"POWER" : 1.3, #should never be more tahn like 1.5
 		"DEFENSE" : 1.2, #should never be more than like 2
 		"AI" : [-1.0, -1.0, 3.0, -1.0],
-		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Raycotta.png",
+		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Salmontforte.png",
 		"SIZE" : 1473.2,
 		"PRICE" : 15.00,
 		"PERMIT" : 2,
