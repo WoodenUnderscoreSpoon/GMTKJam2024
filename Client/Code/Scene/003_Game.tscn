@@ -39,6 +39,8 @@ func Setup(_arguments : Array) -> void:
 #func _input(event: InputEvent) -> void: print(event)
 
 func _process(_delta : float) -> void:
+	#CLOUDS
+	$\"ParallaxBackground/ParallaxLayer3\".motion_offset.x += (_delta * 2.0) + (_delta * 10.0 * s_Global._Windy)
 	#SKY COLOR
 	$\"Weather/Rain\".color = s_Global._Gradient.sample(s_Global._Time / 24.0)
 	$\"Water\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
