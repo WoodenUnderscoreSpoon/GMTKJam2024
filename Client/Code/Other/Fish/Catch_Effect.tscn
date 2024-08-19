@@ -7,16 +7,24 @@
 [sub_resource type="GDScript" id="GDScript_41r31"]
 script/source = "extends Control
 
-func Set_Fish(_fish : Fish) -> void:
+func Set_Fish(_fish : Fish, _size : int) -> void:
 	$\"Control/VBox/Texture\".texture = load(Species.Get_Texture(_fish._Species))
 	$\"Control/VBox/Name\".text = _fish._Species
 	$\"Control/VBox/Size\".text = str(floor(_fish.Get_Size() * 10.0) / 10.0) + \"mm\"
+	if (_size == 0):
+		$\"Control/VBox/Texture\".custom_minimum_size = Vector2.ONE * 3.0 * _fish.Get_Size()
+	elif (_size == 1):
+		$\"Control/VBox/Texture\".custom_minimum_size = Vector2.ONE * 3.0 * _fish.Get_Size() / 1000.0
+	elif (_size == 2):
+		$\"Control/VBox/Texture\".custom_minimum_size = Vector2.ONE * 3.0 * _fish.Get_Size() / 1000000.0
+	$\"Control/Aura\".scale = $\"Control/VBox/Texture\".custom_minimum_size / 333
+	$\"Control/Sparkle\".scale = $\"Control/VBox/Texture\".custom_minimum_size / 333
 
 func Play() -> void: $\"Animation\".play(\"Animation\")
 func Ding() -> void: pass #s_Sound.Play_Sound(\"Ding\")
 
 func _process(_delta: float) -> void:
-	$\"Control/Aura\".position.y = -60
+	$\"Control/Aura\".position.y = -44
 	$\"Control/Sparkle\".position = $\"Control/Aura\".position
 "
 

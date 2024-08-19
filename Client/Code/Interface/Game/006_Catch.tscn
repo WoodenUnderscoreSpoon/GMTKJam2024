@@ -13,12 +13,15 @@ var _Ready := false
 func Setup(_fish : Fish) -> void:
 	#s_Global._Paused = true
 	_Fish = _fish
-	$\"Margin/Center/Catch_Effect\".Set_Fish(_fish)
 	if (_fish.Get_Size() > 1000000.0):
 		Play_Space_Zoom_Animation()
+		$\"Margin/Center/Catch_Effect\".Set_Fish(_fish, 2)
 	elif (_fish.Get_Size() > 1000.0):
 		Play_Sky_Zoom_Animation()
-	else: Play_Small_Zoom_Animation()
+		$\"Margin/Center/Catch_Effect\".Set_Fish(_fish, 1)
+	else:
+		Play_Small_Zoom_Animation()
+		$\"Margin/Center/Catch_Effect\".Set_Fish(_fish, 0)
 
 func _process(_delta : float) -> void:
 	#SCALE

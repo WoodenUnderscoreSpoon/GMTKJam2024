@@ -27,8 +27,8 @@ func Setup(_arguments : Array) -> void:
 	#s_Sound.Play_Ambient(\"Wind\", 1.0)
 	$\"Zone_Fishing\"._Function = Start_Fishing
 	$\"Zone_Shop\"._Function = Start_Shop
-	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\")
-	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
+	_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile.txt\")
+	#_Savefile = s_Filesystem.Get_Config_File(\"Save/Savefile\", \"THE_ENCRYPT_KEEPER_2024\")
 	_Money = _Savefile.Get(\"SAVE\", \"MONEY\", _Money)
 	_Journal = _Savefile.Get(\"SAVE\", \"JOURNAL\", _Journal)
 	_Licenses = _Savefile.Get(\"SAVE\", \"LICENSES\", _Licenses)
