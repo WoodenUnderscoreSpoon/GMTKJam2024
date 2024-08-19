@@ -86,12 +86,19 @@ func Unlock_License_Huge() -> void:
 
 func Load_Button_States() -> void:
 	if scene.Is_Upgrade_Max_Level(0): %\"Better Reel\".disabled = true
+	elif scene._Money < PRICES[0][scene.Get_Upgrade_Level(0)]: %\"Better Reel\".disabled = true
 	if scene.Is_Upgrade_Max_Level(1): %\"Better Rod\".disabled = true
+	elif scene._Money < PRICES[1][scene.Get_Upgrade_Level(1)]: %\"Better Rod\".disabled = true
 	if scene.Is_Upgrade_Max_Level(2): %\"Better Bait\".disabled = true
+	elif scene._Money < PRICES[2][scene.Get_Upgrade_Level(2)]: %\"Better Bait\".disabled = true
 	if scene._Licenses[1] > 0: %\"License Small\".disabled = true
+	elif scene._Money < PRICES[3][0]: %\"License Small\".disabled = true
 	if scene._Licenses[2] > 0: %\"License Medium\".disabled = true
+	elif scene._Money < PRICES[3][1]: %\"License Medium\".disabled = true
 	if scene._Licenses[3] > 0: %\"License Large\".disabled = true
+	elif scene._Money < PRICES[3][2]: %\"License Large\".disabled = true
 	if scene._Licenses[4] > 0: %\"License Huge\".disabled = true
+	elif scene._Money < PRICES[3][3]: %\"License Huge\".disabled = true
 
 	if PRICES[0][scene.Get_Upgrade_Level(0)] == null: %\"Better Reel\".Set_Text(\"Better Reel: SOLD OUT\")
 	else: %\"Better Reel\".Set_Text(str(\"Better Reel: $\", PRICES[0][scene.Get_Upgrade_Level(0)]))
