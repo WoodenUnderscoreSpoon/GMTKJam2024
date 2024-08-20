@@ -457,6 +457,7 @@ shape = SubResource("RectangleShape2D_qnji1")
 
 [node name="BobberSprite" type="Sprite2D" parent="."]
 position = Vector2(36, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_e2m1u")
 hframes = 2
 
