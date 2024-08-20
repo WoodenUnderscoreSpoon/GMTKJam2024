@@ -6,7 +6,7 @@ script/source = "extends CanvasLayer
 func _ready() -> void:
 	#s_Global._Paused = true
 	get_node(\"/root/Main/Scene/Character\").Set_Animation(3)
-	$\"Margin/Timer\".wait_time = randf_range(2.0, 7.0)
+	$\"Margin/Timer\".wait_time = randf_range(2.5, 10.0)
 	$\"Margin/Timer\".start()
 
 func _process(_delta : float) -> void:
