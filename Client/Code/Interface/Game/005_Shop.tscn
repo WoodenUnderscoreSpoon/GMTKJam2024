@@ -27,6 +27,7 @@ func _ready() -> void:
 		\"You got a loicense for that?\",
 		\"And I thought normal fish smelled bad.\",
 		\"Pops went fishing for the great Mobay Dick... That was 2 years ago now.\",
+		\"I'm actually an Opossum. See, my grandad was Irish.\",
 		\"The only thing that'll be committed after this jam is me to the hospital.\"
 	]
 	$\"Margin/VBox/HBox/VBox/Decoration2/Margin/Margin/VBox/Label2\".text = _quotes.pick_random()
