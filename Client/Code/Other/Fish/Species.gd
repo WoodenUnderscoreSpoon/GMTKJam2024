@@ -220,7 +220,7 @@ const _Dictionary := {
 		"PERMIT" : 4,
 		"DESCRIPTION" : "",
 	},
-	"BlueCheeseWhale" : {
+	"Bleu Whale" : {
 		"SPEED" : 1.5,
 		"POWER" : 1.8,
 		"DEFENSE" : 1.9,
@@ -242,17 +242,17 @@ const _Dictionary := {
 		"PERMIT" : 4,
 		"DESCRIPTION" : "",
 	},
-	#"Sea Meunster" : {
-		#"SPEED" : 3.0,
-		#"POWER" : 1.5,
-		#"DEFENSE" : 2.0,
-		#"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, 1.0],
-		#"TEXTURE" : "res://Resource/Texture/Fish/Huge/SeaMeunster.png",
-		#"SIZE" : 40486400.0,
-		#"PRICE" : 5000.00,
-		#"PERMIT" : 4,
-		#"DESCRIPTION" : "",
-	#},
+	"Sea Meunster" : {
+		"SPEED" : 3.0,
+		"POWER" : 1.0,
+		"DEFENSE" : 2.0,
+		"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, -2.0, 1.0, 2.0, -1.0, -1.5, 1.0, 1.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Huge/SeaMeunster.png",
+		"SIZE" : 100486400.0,
+		"PRICE" : 15000.00,
+		"PERMIT" : 4,
+		"DESCRIPTION" : "",
+	},
 	#endregion
 }
 
