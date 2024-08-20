@@ -8,6 +8,9 @@
 script/source = "extends CanvasLayer
 
 func _ready() -> void: $\"Margin/Journal\".custom_minimum_size.x = 100
+func Add_Effect(_effect : Node) -> void: $\"Margin\".add_child(_effect)
+func Start_Journal() -> void: s_Interface.Add(\"Journal\", false)
+func Update_Money() -> void: $\"Margin/Money\".text = \"Money: \" + str(\"%0*.*f\" % [0, 2, s_Scene.Get_Current()._Money]) + \"$\"
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -23,9 +26,6 @@ func _input(_event : InputEvent) -> void:
 	if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
 	elif (_event.is_action_pressed(\"OPEN_JOURNAL\")): s_Interface.Add(\"Journal\", false)
 	elif (_event.is_action_pressed(\"SQUEAK\")): s_Sound.Play_Sound(\"Squeak\")
-
-func Start_Journal() -> void: s_Interface.Add(\"Journal\", false)
-func Update_Money() -> void: $\"Margin/Money\".text = \"Money: \" + str(\"%0*.*f\" % [0, 2, s_Scene.Get_Current()._Money]) + \"$\"
 "
 
 [node name="Nothing" type="CanvasLayer"]

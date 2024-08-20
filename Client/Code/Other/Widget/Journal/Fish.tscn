@@ -10,7 +10,7 @@ func Setup(_name : String) -> void:
 	$\"VBox/Decoration/Margin/Margin/Texture\".texture = load(Species.Get_Texture(_name))
 	$\"VBox/Name\".text = _name
 	var _dictionary = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"JOURNAL\", {})
-	$\"VBox/Size\".text = str(floor(_dictionary[_name][0] * 10.0) / 10.0) + \"mm\"
+	$\"VBox/Size\".text = str(floor(_dictionary[_name][0] * 10.0) / 10.0) + \"cm\"
 	$\"VBox/Number\".text = str(_dictionary[_name][1]) + \"x\"
 "
 

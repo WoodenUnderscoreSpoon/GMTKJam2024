@@ -55,6 +55,8 @@ func Stop_Fishing() -> void: $\"Timer\".start()
 func Get_Upgrade_Level(_upgrade : int) -> int: return _Upgrades[_upgrade]
 
 func Add_Money(_price : float) -> void:
+	var _effect = load(\"res://Code/Other/Effect/Money.tscn\").instantiate()
+	_effect.Setup(_price)
 	_Money += _price
 	_Money = round(_Money * pow(10.0, 2)) / pow(10.0, 2)
 	_Savefile.Set(\"SAVE\", \"MONEY\", _Money)
@@ -62,7 +64,7 @@ func Add_Money(_price : float) -> void:
 	for interface in s_Interface._Focused_Interfaces:
 		if interface.has_method(\"Update_Money\"):
 			interface.Update_Money()
-			pass
+			interface.Add_Effect(_effect)
 
 func Add_Fish(_fish : Fish) -> void:
 	if (!_Journal.has(_fish._Species)):
