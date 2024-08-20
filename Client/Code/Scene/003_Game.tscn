@@ -102,13 +102,15 @@ func Is_Upgrade_Max_Level(_upgrade : int) -> bool:
 
 func Play_Sky_Zoom_Animation() -> void:
 	var visible_area = get_viewport_rect().size / 7
-	var image_orig_dimensions = $Character/Camera/Catch_Backgrounds/Sky.texture.get_size()
+	var image_orig_dimensions = $Character/Camera/Catch_Backgrounds/Sky1.texture.get_size()
 	var image_scale = Vector2(visible_area.x / image_orig_dimensions.x, visible_area.y / image_orig_dimensions.y)
 	var image_new_scale : float
 	if image_scale.x > image_scale.y: image_new_scale = image_scale.x
 	else: image_new_scale = image_scale.y
+	
 	var zoom_sky = $Animation.get_animation(\"zoom_sky\")
 	zoom_sky.track_set_key_value(1, 1, Vector2(image_new_scale, image_new_scale))
+	zoom_sky.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
 	$Animation.play(\"zoom_sky\")
 
 func Play_Space_Zoom_Animation() -> void:
@@ -123,7 +125,7 @@ func Play_Space_Zoom_Animation() -> void:
 #	zoom_space.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
 	
 	var visible_area = get_viewport_rect().size / 7
-	var image_orig_dimensions = $Character/Camera/Catch_Backgrounds/Space.texture.get_size()
+	var image_orig_dimensions = $Character/Camera/Catch_Backgrounds/Space1.texture.get_size()
 	var image_scale = Vector2(visible_area.x / image_orig_dimensions.x, visible_area.y / image_orig_dimensions.y)
 	var image_new_scale : float
 	if image_scale.x > image_scale.y: image_new_scale = image_scale.x
@@ -169,7 +171,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Camera/Catch_Backgrounds/Sky:modulate")
+tracks/0/path = NodePath("Character/Camera/Catch_Backgrounds/Sky1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -181,10 +183,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Character/Camera/Catch_Backgrounds/Space:modulate")
+tracks/1/path = NodePath("Character/Camera/Catch_Backgrounds/Space1:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Character/Camera/Catch_Backgrounds/Sky2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Character/Camera/Catch_Backgrounds/Space2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -197,7 +223,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Camera/Catch_Backgrounds/Sky:modulate")
+tracks/0/path = NodePath("Character/Camera/Catch_Backgrounds/Sky1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -209,7 +235,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Character/Camera/Catch_Backgrounds/Sky:scale")
+tracks/1/path = NodePath("Character/Camera/Catch_Backgrounds/Sky1:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -221,7 +247,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Character/Camera/Catch_Backgrounds/Sky:position")
+tracks/2/path = NodePath("Character/Camera/Catch_Backgrounds/Sky1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -233,10 +259,58 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Character/Camera/Catch_Backgrounds/Space:modulate")
+tracks/3/path = NodePath("Character/Camera/Catch_Backgrounds/Sky2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Character/Camera/Catch_Backgrounds/Sky2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(50, 50)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Character/Camera/Catch_Backgrounds/Sky2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Character/Camera/Catch_Backgrounds/Space1:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Character/Camera/Catch_Backgrounds/Space2:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -249,7 +323,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Camera/Catch_Backgrounds/Space:modulate")
+tracks/0/path = NodePath("Character/Camera/Catch_Backgrounds/Space1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -261,7 +335,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Character/Camera/Catch_Backgrounds/Space:scale")
+tracks/1/path = NodePath("Character/Camera/Catch_Backgrounds/Space1:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -273,7 +347,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Character/Camera/Catch_Backgrounds/Space:position")
+tracks/2/path = NodePath("Character/Camera/Catch_Backgrounds/Space1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -285,10 +359,58 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Character/Camera/Catch_Backgrounds/Sky:modulate")
+tracks/3/path = NodePath("Character/Camera/Catch_Backgrounds/Space2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Character/Camera/Catch_Backgrounds/Space2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(5, 5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Character/Camera/Catch_Backgrounds/Space2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8, 1.5),
+"transitions": PackedFloat32Array(2.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Character/Camera/Catch_Backgrounds/Sky1:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Character/Camera/Catch_Backgrounds/Sky2:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -416,17 +538,24 @@ position_smoothing_speed = 4.0
 [node name="Catch_Backgrounds" type="Node2D" parent="Character/Camera"]
 position = Vector2(0, -50)
 
-[node name="Sky" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+[node name="Sky1" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("5_ca4dm")
 
-[node name="Space" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+[node name="Sky2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+scale = Vector2(10, 10)
+
+[node name="Space1" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("6_y5rll")
+
+[node name="Space2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(10, 10)
 
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
 position = Vector2(0, 2)
