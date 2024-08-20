@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://isaqp1as5awk"]
+[gd_scene load_steps=27 format=3 uid="uid://isaqp1as5awk"]
 
 [ext_resource type="Texture2D" uid="uid://dg78ujxd7d1x4" path="res://Resource/Texture/Game/WorldForeground.png" id="1_8dohq"]
 [ext_resource type="PackedScene" uid="uid://b7b7a5vlbqden" path="res://Code/Other/Character/Character.tscn" id="1_c47od"]
@@ -9,9 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://doh4tvofa2f12" path="res://Resource/Audio/Ambient/Wind.ogg" id="2_8knr8"]
 [ext_resource type="Texture2D" uid="uid://1kv7p6fnsdg3" path="res://Resource/Texture/Game/WorldBackground2.png" id="2_raqer"]
 [ext_resource type="AudioStream" uid="uid://ducbrrtaqm0hg" path="res://Resource/Audio/Ambient/Cricket.ogg" id="3_dot2y"]
-[ext_resource type="Texture2D" uid="uid://5bougnw5acme" path="res://Resource/Texture/Space.png" id="6_y5rll"]
 [ext_resource type="Texture2D" uid="uid://cregirrygbkxr" path="res://Resource/Texture/Sky1.png" id="9_uhpu6"]
 [ext_resource type="Texture2D" uid="uid://dm4vwdw0p7mns" path="res://Resource/Texture/Sky2.png" id="10_y3ati"]
+[ext_resource type="Texture2D" uid="uid://b72fa6kdl2rt5" path="res://Resource/Texture/Space2.png" id="11_kc8jd"]
+[ext_resource type="Texture2D" uid="uid://5bougnw5acme" path="res://Resource/Texture/Space1.png" id="12_tkgnc"]
 
 [sub_resource type="GDScript" id="GDScript_fmrx4"]
 script/source = "extends Node2D
@@ -49,7 +50,8 @@ func _process(_delta : float) -> void:
 	$\"Canvas/Color\".color.a = s_Global._Gradient_Transparent.sample(s_Global._Time / 24.0).a
 	$\"ParallaxBackground/ParallaxLayer/Sprite2D\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
 	$\"ParallaxBackground/ParallaxLayer2/Sprite2D\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0).lightened(0.66)
-	$\"Character/Camera/Catch_Backgrounds/Sky2\".modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
+	$\"Character/Camera/Catch_Backgrounds/Sky2\".self_modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
+	$\"Character/Camera/Catch_Backgrounds/Space2\".self_modulate = s_Global._Gradient.sample(s_Global._Time / 24.0)
 
 func Start_Shop() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Shop\", false)
 func Start_Fishing() -> void: if (s_Interface.Get_Current().name == \"Nothing\" and $\"Timer\".is_stopped()): s_Interface.Add(\"Waiting\", false)
@@ -204,7 +206,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -540,25 +542,27 @@ position_smoothing_speed = 4.0
 [node name="Catch_Backgrounds" type="Node2D" parent="Character/Camera"]
 position = Vector2(0, -50)
 
+[node name="Sky2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(10, 10)
+texture = ExtResource("10_y3ati")
+
 [node name="Sky1" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 scale = Vector2(10, 10)
 texture = ExtResource("9_uhpu6")
 
-[node name="Sky2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+[node name="Space2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
+modulate = Color(1, 1, 1, 0)
 scale = Vector2(10, 10)
-texture = ExtResource("10_y3ati")
+texture = ExtResource("11_kc8jd")
 
 [node name="Space1" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 scale = Vector2(10, 10)
-texture = ExtResource("6_y5rll")
-
-[node name="Space2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
-modulate = Color(1, 1, 1, 0)
-scale = Vector2(10, 10)
+texture = ExtResource("12_tkgnc")
 
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]
 position = Vector2(0, 2)
