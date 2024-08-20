@@ -131,10 +131,9 @@ func Play_Space_Zoom_Animation() -> void:
 	
 	var zoom_space = $AnimationPlayer.get_animation(\"zoom_space\")
 	zoom_space.track_set_key_value(7, 1, Vector2(image_new_scale, image_new_scale))
-	$AnimationPlayer.play(\"zoom_space\")
+	$Animation.play(\"zoom_space\")
 
-func Reset_Zoom() -> void:
-	$AnimationPlayer.play(\"RESET\")
+func Reset_Zoom() -> void: $Animation.play(\"RESET\")
 "
 
 [sub_resource type="Gradient" id="Gradient_cwpl2"]
