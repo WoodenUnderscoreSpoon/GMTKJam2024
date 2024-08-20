@@ -244,7 +244,7 @@ const _Dictionary := {
 	},
 	"Sea Meunster" : {
 		"SPEED" : 3.0,
-		"POWER" : 1.0,
+		"POWER" : 1.2,
 		"DEFENSE" : 2.0,
 		"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, -2.0, 1.0, 2.0, -1.0, -1.5, 1.0, 1.5],
 		"TEXTURE" : "res://Resource/Texture/Fish/Huge/SeaMeunster.png",
