@@ -30,7 +30,7 @@ const _Dictionary := {
 		"POWER" : 0.7,
 		"DEFENSE" : 1.0,
 		"AI" : [-1.0, -1.0, 0.0, 2.5],
-		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Cheese Fish.png",
+		"TEXTURE" : "res://Resource/Texture/Fish/Trash/Cheese Fish.png",
 		"SIZE" : 10.0,
 		"PRICE" : 2.00,
 		"PERMIT" : 0,
@@ -164,7 +164,7 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	"Gouna" : {
-		"SPEED" : 1.7,
+		"SPEED" : 1.6,
 		"POWER" : 1.7,
 		"DEFENSE" : 1.6,
 		"AI" : [3.0, -1.0, -1.0, -1.0],
@@ -242,12 +242,12 @@ const _Dictionary := {
 		"PERMIT" : 4,
 		"DESCRIPTION" : "",
 	},
-	#"Cthulu" : {
+	#"Sea Meunster" : {
 		#"SPEED" : 3.0,
 		#"POWER" : 1.5,
 		#"DEFENSE" : 2.0,
 		#"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, 1.0],
-		#"TEXTURE" : "res://Resource/Texture/Fish/Huge/MobayDick.png",
+		#"TEXTURE" : "res://Resource/Texture/Fish/Huge/SeaMeunster.png",
 		#"SIZE" : 40486400.0,
 		#"PRICE" : 5000.00,
 		#"PERMIT" : 4,
