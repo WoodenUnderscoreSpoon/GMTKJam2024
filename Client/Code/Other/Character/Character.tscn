@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7b7a5vlbqden"]
+[gd_scene load_steps=21 format=3 uid="uid://b7b7a5vlbqden"]
 
 [ext_resource type="Texture2D" uid="uid://c1mbipb6jmamn" path="res://Resource/Texture/Mouse/MouseSpriteSheet.png" id="1_sreby"]
 [ext_resource type="Texture2D" uid="uid://dsnt73ay8d4fw" path="res://Resource/Texture/Mouse/Bobber.png" id="2_e2m1u"]
@@ -54,16 +54,7 @@ func Set_Reel() -> void:
 	$\"Animation\".play(\"reel_line\")
 	$\"Animation\".queue(\"reel_stagger\")
 
-func Cast_Bobber() -> void:
-	print(\"bobber cast\")
-	$Bobber.set_position(Vector2(9, -9))
-	$Bobber.set_sleeping(false)
-	#$Bobber.apply_impulse(Vector2(0,0))
-
-func _on_bobber_body_entered(body):
-	print(\"bobber collided with \", body.get_name())
-	$Bobber.set_sleeping(true)
-	s_Sound.Play_Sound(\"Plop\")
+func Cast_Bobber() -> void: $\"AnimationBobber\".play(\"cast_bobber\")
 "
 
 [sub_resource type="Animation" id="Animation_m7lof"]
@@ -144,18 +135,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Bobber:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.9),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_c0usb"]
@@ -279,7 +258,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_0w3ct"]
 resource_name = "wait"
-length = 12.0
+length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -300,10 +279,10 @@ tracks/1/path = NodePath("Bobber/BobberSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3, 6.03333, 9.03333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 0, 1]
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_3dnrq"]
@@ -385,6 +364,67 @@ size = Vector2(9, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbd4w"]
 size = Vector2(1, 1)
 
+[sub_resource type="Animation" id="Animation_wv261"]
+resource_name = "cast_bobber"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bobber:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.2, 0.266667, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(9, -9), Vector2(12, -9), Vector2(18, -8), Vector2(27, -6), Vector2(33, -3), Vector2(36, 0), Vector2(42, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bobber:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_g2p8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bobber:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bobber:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(36, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m0ww0"]
+_data = {
+"RESET": SubResource("Animation_g2p8k"),
+"cast_bobber": SubResource("Animation_wv261")
+}
+
 [node name="Character" type="CharacterBody2D" groups=["Character"]]
 texture_filter = 1
 script = SubResource("GDScript_h3hjh")
@@ -407,7 +447,8 @@ position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_qnji1")
 
 [node name="Bobber" type="RigidBody2D" parent="."]
-visible = false
+position = Vector2(36, 0)
+collision_layer = 2
 collision_mask = 2
 lock_rotation = true
 
@@ -419,4 +460,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_e2m1u")
 hframes = 2
 
-[connection signal="body_entered" from="Bobber" to="." method="_on_bobber_body_entered"]
+[node name="AnimationBobber" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m0ww0")
+}
