@@ -385,7 +385,7 @@ autostart = true
 [node name="Weather" type="Node2D" parent="."]
 
 [node name="Rain" type="CPUParticles2D" parent="Weather"]
-self_modulate = Color(0.477305, 0.612226, 0.751604, 1)
+self_modulate = Color(0.477, 0.612, 0.752, 0.75)
 z_index = 1
 position = Vector2(111, -146)
 emitting = false
@@ -400,8 +400,8 @@ spread = 5.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 200.0
 initial_velocity_max = 200.0
-scale_amount_min = 2.0
-scale_amount_max = 2.0
+scale_amount_min = 1.25
+scale_amount_max = 1.75
 color_ramp = SubResource("Gradient_cwpl2")
 
 [node name="Sound_Rain" type="AudioStreamPlayer" parent="Weather"]
