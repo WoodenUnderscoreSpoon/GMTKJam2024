@@ -6,7 +6,7 @@ script/source = "extends Node
 
 @warning_ignore(\"unused_private_class_variable\") @export var _Gradient : Gradient
 @warning_ignore(\"unused_private_class_variable\") @export var _Gradient_Transparent : Gradient
-var _Time := 12.0
+var _Time := 10.0
 var _Raining := false
 var _Paused := false
 @warning_ignore(\"unused_private_class_variable\") var _Windy := 0.0
@@ -18,7 +18,7 @@ func _process(_delta : float) -> void:
 		var _sound_rain = s_Scene.Get_Current().get_node(\"Weather/Sound_Rain\")
 		var _sound_wind = s_Scene.Get_Current().get_node(\"Weather/Sound_Wind\")
 		var _sound_cricket = s_Scene.Get_Current().get_node(\"Weather/Sound_Cricket\")
-		_Time = fposmod(_Time + _delta / 10.0, 24.0)
+		_Time = fposmod(_Time + _delta / 15.0, 24.0)
 		_sound_cricket.volume_db = 15.0 * _Gradient_Transparent.sample(_Time / 24.0).a
 		#END OF DAY
 		if (_Time < _time):

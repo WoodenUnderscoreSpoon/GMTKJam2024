@@ -9,9 +9,9 @@
 script/source = "extends CanvasLayer
 
 var scene : Node
-const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [5, 50, 500, 5000]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
+const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [5, 40, 200, 3000]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
 
-func _ready() -> void: 
+func _ready() -> void:
 	$\"Margin/VBox/Margin/Return\".grab_focus()
 	s_Pause.Pause_Tree(s_Scene.Get_Current(), true)
 	s_Global._Paused = true
@@ -29,6 +29,7 @@ func _ready() -> void:
 		\"Pops went fishing for the great Mobay Dick... That was 2 years ago now.\",
 		\"I'm actually an Opossum. See, my grandad was Irish.\",
 		\"Don't bother trying to complete your journal... You won't catch 'it'.\",
+		\"There are 22 species in the lake. Including some change I lost.\",
 	]
 	$\"Margin/VBox/HBox/VBox/Decoration2/Margin/Margin/VBox/Label2\".text = _quotes.pick_random()
 
