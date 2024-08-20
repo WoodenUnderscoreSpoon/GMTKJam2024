@@ -96,7 +96,7 @@ const _Dictionary := {
 	#endregion
 	#region Medium
 	"Codage Cheese" : {
-		"SPEED" : 1.0,
+		"SPEED" : 1.1,
 		"POWER" : 1.0,
 		"DEFENSE" : 1.1,
 		"AI" : [-1.0, -1.0, 2.5],
@@ -107,8 +107,8 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	"Colby Jackfish" : {
-		"SPEED" : 0.9,
-		"POWER" : 1.2,
+		"SPEED" : 1.0,
+		"POWER" : 1.3,
 		"DEFENSE" : 1.1,
 		"AI" : [-1.0, 0.5, 2.5],
 		"TEXTURE" : "res://Resource/Texture/Fish/Medium/ColbyJackfish.png",
@@ -118,8 +118,8 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	"Emmentalapia" : {
-		"SPEED" : 1.2,
-		"POWER" : 1.0,
+		"SPEED" : 1.3,
+		"POWER" : 1.1,
 		"DEFENSE" : 1.0,
 		"AI" : [-1.0, -1.0, -1.5, 2.0],
 		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Emmentalapia.png",
@@ -129,8 +129,8 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	"Raycotta" : {
-		"SPEED" : 1.2,
-		"POWER" : 1.3,
+		"SPEED" : 1.25,
+		"POWER" : 1.35,
 		"DEFENSE" : 1.3,
 		"AI" : [-1.0, -1.0, 2.5],
 		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Raycotta.png",
@@ -140,8 +140,8 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	"Salmontforte" : {
-		"SPEED" : 1.0,
-		"POWER" : 1.3,
+		"SPEED" : 1.1,
+		"POWER" : 1.35,
 		"DEFENSE" : 1.2,
 		"AI" : [-1.0, -1.0, 3.0, -1.0],
 		"TEXTURE" : "res://Resource/Texture/Fish/Medium/Salmontforte.png",
@@ -151,19 +151,52 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	#endregion
-	##region Large
-	#"Test2" : {
-		#"SPEED" : 2.0,
-		#"POWER" : 1.5,
-		#"DEFENSE" : 1.5,
-		#"AI" : [1.0, -1.0, 1.5, -1.5],
-		#"TEXTURE" : "res://Resource/Texture/Fish/Test2.png",
-		#"SIZE" : 120.0,
-		#"PRICE" : 10.00,
-		#"PERMIT" : 3,
-		#"DESCRIPTION" : "",
-	#},
-	##endregion
+	#region Large
+	"Asiagar" : {
+		"SPEED" : 2.0,
+		"POWER" : 1.5,
+		"DEFENSE" : 1.5,
+		"AI" : [1.0, -1.0, 1.5, -1.5],
+		"TEXTURE" : "res://Resource/Texture/Fish/Large/Asiagar.png",
+		"SIZE" : 4600.0,
+		"PRICE" : 150.00,
+		"PERMIT" : 3,
+		"DESCRIPTION" : "",
+	},
+	"Gouna" : {
+		"SPEED" : 1.7,
+		"POWER" : 1.7,
+		"DEFENSE" : 1.6,
+		"AI" : [3.0, -1.0, -1.0, -1.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Large/Gouna.png",
+		"SIZE" : 3048.0,
+		"PRICE" : 200.00,
+		"PERMIT" : 3,
+		"DESCRIPTION" : "",
+	},
+	"Marlimberger" : {
+		"SPEED" : 1.5,
+		"POWER" : 2.0,
+		"DEFENSE" : 1.5,
+		"AI" : [1.0, -1.0, 2.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Large/Marlimberger.png",
+		"SIZE" : 3657.6,
+		"PRICE" : 250.00,
+		"PERMIT" : 3,
+		"DESCRIPTION" : "",
+	},
+	"Mozzamola" : {
+		"SPEED" : 1.8,
+		"POWER" : 1.8,
+		"DEFENSE" : 1.5,
+		"AI" : [1.0, 1.5, -1.0, -2.0],
+		"TEXTURE" : "res://Resource/Texture/Fish/Large/Mozzamola.png",
+		"SIZE" : 4267.2,
+		"PRICE" : 210.00,
+		"PERMIT" : 3,
+		"DESCRIPTION" : "",
+	},
+	#endregion
 	##region Huge
 	#"Test3" : {
 		#"SPEED" : 3.0,
