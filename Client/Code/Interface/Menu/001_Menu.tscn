@@ -55,10 +55,10 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_left = 0
-theme_override_constants/margin_right = 80
+theme_override_constants/margin_right = 120
 
 [node name="Center" type="CenterContainer" parent="Margin/HBox/Margin"]
-custom_minimum_size = Vector2(900, 508)
+custom_minimum_size = Vector2(800, 508)
 layout_mode = 2
 
 [node name="Control" type="Control" parent="Margin/HBox/Margin/Center"]
@@ -66,12 +66,11 @@ layout_mode = 2
 
 [node name="Logo" type="TextureRect" parent="Margin/HBox/Margin/Center/Control"]
 texture_filter = 2
-custom_minimum_size = Vector2(900, 508)
 layout_mode = 2
-offset_left = -450.0
-offset_top = -254.0
-offset_right = 450.0
-offset_bottom = 254.0
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
 pivot_offset = Vector2(450, 254)
 texture = ExtResource("1_68cvd")
 expand_mode = 1
