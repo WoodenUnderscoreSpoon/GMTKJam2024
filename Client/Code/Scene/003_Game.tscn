@@ -107,9 +107,9 @@ func Play_Sky_Zoom_Animation() -> void:
 	var image_new_scale : float
 	if image_scale.x > image_scale.y: image_new_scale = image_scale.x
 	else: image_new_scale = image_scale.y
-	var zoom_sky = $Animation.get_animation(\"zoom_sky\")
+	var zoom_sky = $\"Animation\".get_animation(\"zoom_sky\")
 	zoom_sky.track_set_key_value(1, 1, Vector2(image_new_scale, image_new_scale))
-	$Animation.play(\"zoom_sky\")
+	$\"Animation\".play(\"zoom_sky\")
 
 func Play_Space_Zoom_Animation() -> void:
 #	var visible_area = get_viewport_rect().size / 4
@@ -129,11 +129,11 @@ func Play_Space_Zoom_Animation() -> void:
 	if image_scale.x > image_scale.y: image_new_scale = image_scale.x
 	else: image_new_scale = image_scale.y
 	
-	var zoom_space = $AnimationPlayer.get_animation(\"zoom_space\")
+	var zoom_space = $\"Animation\".get_animation(\"zoom_space\")
 	zoom_space.track_set_key_value(3, 1, Vector2(image_new_scale, image_new_scale))
-	$Animation.play(\"zoom_space\")
+	$\"Animation\".play(\"zoom_space\")
 
-func Reset_Zoom() -> void: $Animation.play(\"RESET\")
+func Reset_Zoom() -> void: $\"Animation\".play(\"RESET\")
 "
 
 [sub_resource type="Gradient" id="Gradient_cwpl2"]
