@@ -137,7 +137,6 @@ func Play_Space_Zoom_Animation() -> void:
 	
 	var zoom_space = $Animation.get_animation(\"zoom_space\")
 	zoom_space.track_set_key_value(1, 1, Vector2(image_new_scale, image_new_scale))
-	zoom_space.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
 	$Animation.play(\"zoom_space\")
 
 func Reset_Zoom() -> void: $Animation.play(\"RESET\")
@@ -247,7 +246,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.8, 1.5),
 "transitions": PackedFloat32Array(2.25, 1),
 "update": 0,
-"values": [Vector2(10, 10), Vector2(0.5, 0.5)]
+"values": [Vector2(10, 10), Vector2(50, 50)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -283,7 +282,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.8, 1.5),
 "transitions": PackedFloat32Array(2.25, 1),
 "update": 0,
-"values": [Vector2(10, 10), Vector2(0.5, 0.5)]
+"values": [Vector2(10, 10), Vector2(50, 50)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -347,7 +346,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.8, 1.5),
 "transitions": PackedFloat32Array(2.25, 1),
 "update": 0,
-"values": [Vector2(10, 10), Vector2(0.5, 0.5)]
+"values": [Vector2(10, 10), Vector2(5, 5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -383,7 +382,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.8, 1.5),
 "transitions": PackedFloat32Array(2.25, 1),
 "update": 0,
-"values": [Vector2(10, 10), Vector2(0.5, 0.5)]
+"values": [Vector2(10, 10), Vector2(5, 5)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -545,24 +544,24 @@ position = Vector2(0, -50)
 
 [node name="Sky2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(10, 10)
 texture = ExtResource("10_y3ati")
 
 [node name="Sky1" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(10, 10)
 texture = ExtResource("9_uhpu6")
 
 [node name="Space2" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(10, 10)
 texture = ExtResource("11_kc8jd")
 
 [node name="Space1" type="Sprite2D" parent="Character/Camera/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-scale = Vector2(0.5, 0.5)
+scale = Vector2(10, 10)
 texture = ExtResource("12_tkgnc")
 
 [node name="Zone_Fishing" parent="." instance=ExtResource("2_05tr2")]

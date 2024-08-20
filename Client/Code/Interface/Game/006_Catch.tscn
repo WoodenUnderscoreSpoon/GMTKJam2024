@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bu4x6q3tsa2re"]
 
 [ext_resource type="PackedScene" uid="uid://c1nyohvaxhrft" path="res://Code/Other/Fish/Catch_Effect.tscn" id="1_1k1mb"]
-[ext_resource type="Texture2D" path="res://Resource/Texture/Sky.png" id="1_4vnay"]
-[ext_resource type="Texture2D" path="res://Resource/Texture/Space.png" id="2_8nlfe"]
+[ext_resource type="Texture2D" uid="uid://bolndbls66v7r" path="res://Resource/Texture/Sky.png" id="1_4vnay"]
+[ext_resource type="Texture2D" uid="uid://5bougnw5acme" path="res://Resource/Texture/Space.png" id="2_8nlfe"]
 
 [sub_resource type="GDScript" id="GDScript_ub5eq"]
 script/source = "extends CanvasLayer
