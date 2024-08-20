@@ -41,7 +41,7 @@ func Set_Walk() -> void: $\"Animation\".play([\"walk_right\", \"walk_left\"][int
 func Set_Jump() -> void: $\"Animation\".play([\"jump_right\", \"jump_left\"][int(anim_direction > 0)]) #TODO add jump animations
 func Set_Animation(animation : int) -> void: call(MOVEMENT_STATE_FUNCTIONS[animation])
 func Fishing_Animation_Complete(): ready_to_move = true
-#func Plop_Sound() -> void: s_Sound.Play_Sound(\"Plop\")
+func Plop_Sound() -> void: s_Sound.Play_Sound(\"Plop\")
 
 func Set_Wait() -> void:
 	ready_to_move = false
@@ -427,6 +427,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Plop_Sound"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m0ww0"]
 _data = {
@@ -456,7 +470,7 @@ position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_qnji1")
 
 [node name="BobberSprite" type="Sprite2D" parent="."]
-position = Vector2(36, 0)
+position = Vector2(42, 0)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_e2m1u")
 hframes = 2
