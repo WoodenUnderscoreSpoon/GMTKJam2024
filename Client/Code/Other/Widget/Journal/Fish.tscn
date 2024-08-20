@@ -10,8 +10,13 @@ func Setup(_name : String) -> void:
 	$\"VBox/Decoration/Margin/Margin/Texture\".texture = load(Species.Get_Texture(_name))
 	$\"VBox/Name\".text = _name
 	var _dictionary = s_Scene.Get_Current()._Savefile.Get(\"SAVE\", \"JOURNAL\", {})
-	$\"VBox/Size\".text = str(floor(_dictionary[_name][0] * 10.0) / 10.0) + \"cm\"
-	$\"VBox/Number\".text = str(_dictionary[_name][1]) + \"x\"
+	$\"VBox/Decoration/Margin/Margin/Number\".text = str(_dictionary[_name][1]) + \"x\"
+	#SIZE
+	var _size = \"\"
+	if (_dictionary[_name][0] > 1000000.0): _size = str(floor(_dictionary[_name][0] / 10000000.0 * 10.0) / 10.0) + \"km\"
+	elif (_dictionary[_name][0] > 1000.0): _size = str(floor(_dictionary[_name][0] / 1000.0 * 10.0) / 10.0) + \"m\"
+	else: _size = str(floor(_dictionary[_name][0] * 10.0) / 10.0) + \"cm\"
+	$\"VBox/Size\".text = _size
 "
 
 [node name="Fish" type="MarginContainer"]
@@ -57,6 +62,15 @@ layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Number" type="Label" parent="VBox/Decoration/Margin/Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_6t144")
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [node name="Name" type="Label" parent="VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6t144")
@@ -64,12 +78,6 @@ theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
 [node name="Size" type="Label" parent="VBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6t144")
-theme_override_font_sizes/font_size = 20
-horizontal_alignment = 1
-
-[node name="Number" type="Label" parent="VBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_6t144")
 theme_override_font_sizes/font_size = 20

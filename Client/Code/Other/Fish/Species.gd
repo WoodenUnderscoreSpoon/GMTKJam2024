@@ -197,19 +197,52 @@ const _Dictionary := {
 		"DESCRIPTION" : "",
 	},
 	#endregion
-	##region Huge
+	#region Huge
+	#"Test3" : {
+		#"SPEED" : 2.0,
+		#"POWER" : 1.5,
+		#"DEFENSE" : 1.9,
+		#"AI" : [-0.5, -1.0, -1.5, 3.0],
+		#"TEXTURE" : "res://Resource/Texture/Fish/Test3.png",
+		#"SIZE" : 1500000.0,
+		#"PRICE" : 2000.00,
+		#"PERMIT" : 4,
+		#"DESCRIPTION" : "",
+	#},
+	#"Test3" : {
+		#"SPEED" : 1.9,
+		#"POWER" : 1.7,
+		#"DEFENSE" : 1.9,
+		#"AI" : [1.0, -1.0, -1.0],
+		#"TEXTURE" : "res://Resource/Texture/Fish/Test3.png",
+		#"SIZE" : 2000000.0,
+		#"PRICE" : 2200.00,
+		#"PERMIT" : 4,
+		#"DESCRIPTION" : "",
+	#},
+	#"Test3" : {
+		#"SPEED" : 1.5,
+		#"POWER" : 1.8,
+		#"DEFENSE" : 1.9,
+		#"AI" : [1.0, -1.0],
+		#"TEXTURE" : "res://Resource/Texture/Fish/Test3.png",
+		#"SIZE" : 2200000.0,
+		#"PRICE" : 2400.00,
+		#"PERMIT" : 4,
+		#"DESCRIPTION" : "",
+	#},
 	#"Test3" : {
 		#"SPEED" : 3.0,
 		#"POWER" : 1.5,
 		#"DEFENSE" : 2.0,
-		#"AI" : [1.0, -1.0, -1.0, 1.0],
+		#"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, 1.0],
 		#"TEXTURE" : "res://Resource/Texture/Fish/Test3.png",
-		#"SIZE" : 101.0,
-		#"PRICE" : 50.00,
+		#"SIZE" : 4000000.0,
+		#"PRICE" : 4000.00,
 		#"PERMIT" : 4,
 		#"DESCRIPTION" : "",
 	#},
-	##endregion
+	#endregion
 }
 
 static func Get_Speed(_name : String) -> float: return _Dictionary[_name]["SPEED"]

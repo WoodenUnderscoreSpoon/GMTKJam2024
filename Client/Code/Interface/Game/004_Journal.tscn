@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cinjpbbrpaqk5"]
+[gd_scene load_steps=8 format=3 uid="uid://cinjpbbrpaqk5"]
 
 [ext_resource type="PackedScene" uid="uid://bujfjq43vuyk4" path="res://Code/Other/Widget/Basic/Decoration/Decoration.tscn" id="1_y6133"]
 [ext_resource type="FontFile" uid="uid://jai7khjtwk5a" path="res://Resource/Font/Pixeloid/PixeloidSansBold-PKnYd.ttf" id="2_jewdd"]
@@ -17,7 +17,7 @@ func _ready() -> void:
 	for _i in _species.keys():
 		var _widget = _scene.instantiate()
 		_widget.Setup(_i)
-		$\"Margin/VBox/Decoration/Margin/VBox/HFlow\".add_child(_widget)
+		%\"HFlow\".add_child(_widget)
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -40,6 +40,42 @@ func Return() -> void:
 	s_Sound.Play_Sound(\"Close Journal\")
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_684vn"]
+bg_color = Color(0.742702, 0.44767, 0.191447, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwa35"]
+content_margin_left = 25.0
+content_margin_top = 0.0
+content_margin_right = 25.0
+content_margin_bottom = 0.0
+bg_color = Color(0.458225, 0.263836, 0.0915039, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_u2lj5"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_684vn")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_684vn")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_684vn")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_cwa35")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_cwa35")
+
 [node name="Journal" type="CanvasLayer"]
 script = SubResource("GDScript_ub5eq")
 
@@ -60,10 +96,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Decoration" parent="Margin/VBox" instance=ExtResource("1_y6133")]
-custom_minimum_size = Vector2(1050, 665)
+custom_minimum_size = Vector2(1100, 600)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Margin" type="MarginContainer" parent="Margin/VBox/Decoration"]
 show_behind_parent = true
@@ -100,10 +134,24 @@ theme_override_font_sizes/font_size = 45
 text = "Journal"
 horizontal_alignment = 1
 
-[node name="HFlow" type="HFlowContainer" parent="Margin/VBox/Decoration/Margin/VBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Margin/VBox/Decoration/Margin/VBox"]
 layout_mode = 2
-theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 4
+size_flags_vertical = 3
+theme = SubResource("Theme_u2lj5")
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBox/Decoration/Margin/VBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 10
+
+[node name="HFlow" type="HFlowContainer" parent="Margin/VBox/Decoration/Margin/VBox/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
 alignment = 1
 last_wrap_alignment = 1
 
