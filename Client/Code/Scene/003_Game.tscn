@@ -137,6 +137,7 @@ func Play_Space_Zoom_Animation() -> void:
 	
 	var zoom_space = $Animation.get_animation(\"zoom_space\")
 	zoom_space.track_set_key_value(1, 1, Vector2(image_new_scale, image_new_scale))
+	zoom_space.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
 	$Animation.play(\"zoom_space\")
 
 func Reset_Zoom() -> void: $Animation.play(\"RESET\")
