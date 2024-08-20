@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b7b7a5vlbqden"]
+[gd_scene load_steps=20 format=3 uid="uid://b7b7a5vlbqden"]
 
 [ext_resource type="Texture2D" uid="uid://c1mbipb6jmamn" path="res://Resource/Texture/Mouse/MouseSpriteSheet.png" id="1_sreby"]
 [ext_resource type="Texture2D" uid="uid://dsnt73ay8d4fw" path="res://Resource/Texture/Mouse/Bobber.png" id="2_e2m1u"]
@@ -74,7 +74,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber/BobberSprite:frame")
+tracks/1/path = NodePath("BobberSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -86,7 +86,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Bobber:visible")
+tracks/2/path = NodePath("BobberSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -124,18 +124,6 @@ tracks/1/keys = {
 "method": &"Cast_Bobber"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Bobber/BobberSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_c0usb"]
 resource_name = "idle_left"
@@ -156,7 +144,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber:visible")
+tracks/1/path = NodePath("BobberSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -185,7 +173,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber:visible")
+tracks/1/path = NodePath("BobberSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -218,7 +206,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber/BobberSprite:frame")
+tracks/1/path = NodePath("BobberSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -226,6 +214,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 1, 41]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BobberSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_vo155"]
@@ -246,7 +246,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber/BobberSprite:frame")
+tracks/1/path = NodePath("BobberSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -254,6 +254,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BobberSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_0w3ct"]
@@ -275,7 +287,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber/BobberSprite:frame")
+tracks/1/path = NodePath("BobberSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -283,6 +295,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BobberSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_3dnrq"]
@@ -304,7 +328,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber:visible")
+tracks/1/path = NodePath("BobberSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -333,7 +357,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber:visible")
+tracks/1/path = NodePath("BobberSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -361,16 +385,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnji1"]
 size = Vector2(9, 15)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbd4w"]
-size = Vector2(1, 1)
-
 [sub_resource type="Animation" id="Animation_wv261"]
 resource_name = "cast_bobber"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Bobber:position")
+tracks/0/path = NodePath("BobberSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -382,7 +403,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber:visible")
+tracks/1/path = NodePath("BobberSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -397,7 +418,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Bobber:visible")
+tracks/0/path = NodePath("BobberSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -405,18 +426,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Bobber:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(36, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m0ww0"]
@@ -446,16 +455,8 @@ vframes = 8
 position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_qnji1")
 
-[node name="Bobber" type="RigidBody2D" parent="."]
+[node name="BobberSprite" type="Sprite2D" parent="."]
 position = Vector2(36, 0)
-collision_layer = 2
-collision_mask = 2
-lock_rotation = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bobber"]
-shape = SubResource("RectangleShape2D_nbd4w")
-
-[node name="BobberSprite" type="Sprite2D" parent="Bobber"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_e2m1u")
 hframes = 2
