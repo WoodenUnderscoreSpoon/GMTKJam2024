@@ -242,17 +242,17 @@ const _Dictionary := {
 		"PERMIT" : 4,
 		"DESCRIPTION" : "",
 	},
-	"Cthulu" : {
-		"SPEED" : 3.0,
-		"POWER" : 1.5,
-		"DEFENSE" : 2.0,
-		"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, 1.0],
-		"TEXTURE" : "res://Resource/Texture/Fish/Huge/MobayDick.png",
-		"SIZE" : 40486400.0,
-		"PRICE" : 5000.00,
-		"PERMIT" : 4,
-		"DESCRIPTION" : "",
-	},
+	#"Cthulu" : {
+		#"SPEED" : 3.0,
+		#"POWER" : 1.5,
+		#"DEFENSE" : 2.0,
+		#"AI" : [-1.0, -1.5, 1.0, 1.5, -1.0, 1.0],
+		#"TEXTURE" : "res://Resource/Texture/Fish/Huge/MobayDick.png",
+		#"SIZE" : 40486400.0,
+		#"PRICE" : 5000.00,
+		#"PERMIT" : 4,
+		#"DESCRIPTION" : "",
+	#},
 	#endregion
 }
 
