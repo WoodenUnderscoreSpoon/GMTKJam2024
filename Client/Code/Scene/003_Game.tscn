@@ -107,10 +107,9 @@ func Play_Sky_Zoom_Animation() -> void:
 	var image_new_scale : float
 	if image_scale.x > image_scale.y: image_new_scale = image_scale.x + 0.01
 	else: image_new_scale = image_scale.y + 0.01
-	
-	var zoom_sky = $AnimationPlayer.get_animation(\"zoom_sky\")
+	var zoom_sky = $Animation.get_animation(\"zoom_sky\")
 	zoom_sky.track_set_key_value(4, 1, Vector2(image_new_scale, image_new_scale))
-	$AnimationPlayer.play(\"zoom_sky\")
+	$Animation.play(\"zoom_sky\")
 
 func Play_Space_Zoom_Animation() -> void:
 #	var visible_area = get_viewport_rect().size / 4
@@ -491,12 +490,14 @@ position_smoothing_speed = 4.0
 
 [node name="Sky" type="Sprite2D" parent="Character/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
+texture_filter = 1
 scale = Vector2(5, 5)
 texture = ExtResource("5_ca4dm")
 offset = Vector2(0, -32)
 
 [node name="Space" type="Sprite2D" parent="Character/Catch_Backgrounds"]
 modulate = Color(1, 1, 1, 0)
+texture_filter = 1
 scale = Vector2(5, 5)
 texture = ExtResource("6_y5rll")
 offset = Vector2(0, -32)
@@ -530,7 +531,7 @@ shape = SubResource("RectangleShape2D_60r5v")
 position = Vector2(-158, 31)
 shape = SubResource("RectangleShape2D_dfjl3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_mrbxs")
 }
