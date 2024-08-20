@@ -15,13 +15,13 @@ func Setup(_fish : Fish) -> void:
 	_Fish = _fish
 	if (_fish.Get_Size() > 1000000.0):
 		Play_Space_Zoom_Animation()
-		$\"Margin/Center/Catch_Effect\".Set_Fish(_fish, 2)
+		$\"Margin/Catch_Effect\".Set_Fish(_fish, 2)
 	elif (_fish.Get_Size() > 1000.0):
 		Play_Sky_Zoom_Animation()
-		$\"Margin/Center/Catch_Effect\".Set_Fish(_fish, 1)
+		$\"Margin/Catch_Effect\".Set_Fish(_fish, 1)
 	else:
 		Play_Small_Zoom_Animation()
-		$\"Margin/Center/Catch_Effect\".Set_Fish(_fish, 0)
+		$\"Margin/Catch_Effect\".Set_Fish(_fish, 0)
 
 func _process(_delta : float) -> void:
 	#SCALE
@@ -38,6 +38,7 @@ func Ready_To_Quit() -> void: _Ready = true
 
 func Return() -> void:
 	#s_Global._Paused = false
+	s_Sound.Play_Sound(\"Buy\")
 	get_node(\"/root/Main/Scene/Character\").Fishing_Animation_Complete()
 	s_Interface.Return()
 	s_Scene.Get_Current().Stop_Fishing()
@@ -81,7 +82,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Center/Catch_Effect")
+tracks/1/path = NodePath("Catch_Effect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -113,7 +114,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Center/Catch_Effect")
+tracks/1/path = NodePath("Catch_Effect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -148,7 +149,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Center/Catch_Effect")
+tracks/1/path = NodePath("Catch_Effect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -202,8 +203,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 texture = ExtResource("2_8nlfe")
 
-[node name="Center" type="CenterContainer" parent="Margin"]
+[node name="Catch_Effect" parent="Margin" instance=ExtResource("1_1k1mb")]
 layout_mode = 2
-
-[node name="Catch_Effect" parent="Margin/Center" instance=ExtResource("1_1k1mb")]
-layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
