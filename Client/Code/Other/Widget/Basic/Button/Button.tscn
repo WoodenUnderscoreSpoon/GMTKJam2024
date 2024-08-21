@@ -25,7 +25,7 @@ func _process(_delta : float) -> void:
 	#$\"Decoration\".pivot_offset = $\"Decoration\".size / 2
 	if (_Focused): modulate = s_Global.Get_Highlight_Color()
 	else: modulate = Color.WHITE
-	if (disabled): modulate = Color(0.66, 0.66, 0.66)
+	if (disabled): modulate *= Color(0.66, 0.66, 0.66)
 	match get_draw_mode():
 		DRAW_NORMAL: $\"Decoration/Margin/Color\".modulate = Color(0.66, 0.66, 0.66)
 		DRAW_HOVER: $\"Decoration/Margin/Color\".modulate = Color.WHITE
