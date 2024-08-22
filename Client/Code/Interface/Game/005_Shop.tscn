@@ -9,7 +9,7 @@
 script/source = "extends CanvasLayer
 
 var scene : Node
-const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [5, 40, 200, 3000]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
+const PRICES := [[1, 2, 3, null], [1, 2, 3, null], [1, 2, 3, null], [5, 40, 200, 2500]] #[reel, rod, bait, license], interior arrays are the prices to get each upgrade at each level [lvl1, lvl2, lvl3, sold out]
 
 func _ready() -> void:
 	$\"Margin/VBox/Margin/Return\".grab_focus()

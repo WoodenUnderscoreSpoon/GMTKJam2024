@@ -58,11 +58,12 @@ func _physics_process(_delta : float) -> void:
 	if (_Progress <= 0.0): Lose_Fish()
 	elif (_Progress >= 100.0): Catch_Fish()
 
-func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): s_Interface.Add(\"Pause\", false)
+func _input(_event : InputEvent) -> void: if (_event.is_action_pressed(\"PAUSE\")): Return()
 
 func Return() -> void:
 	s_Interface.Return()
-	#s_Global._Paused = false
+	s_Global._Paused = false
+	s_Scene.Get_Current().get_node(\"Character\").Fishing_Animation_Complete()
 	s_Scene.Get_Current().Stop_Fishing()
 
 func Move_Fish() -> void:
