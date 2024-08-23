@@ -2,7 +2,7 @@ extends Node
 #class_name s_Game
 
 @onready var _Name : String = ProjectSettings.get_setting("application/config/name")
-@onready var _Path : String = [OS.get_executable_path().get_base_dir() + "/", ProjectSettings.globalize_path("res://Build/")][int(Is_Editor())]
+@onready var _Path : String = ProjectSettings.globalize_path("user://") #[OS.get_executable_path().get_base_dir() + "/", ProjectSettings.globalize_path("res://Build/")][int(Is_Editor())]
 @onready var _Mode : String = "Editor" if (Is_Editor()) else ["Release", "Debug"][int(Is_Debug())]
 @onready var _Version : String = ProjectSettings.get_setting("application/config/version")
 
